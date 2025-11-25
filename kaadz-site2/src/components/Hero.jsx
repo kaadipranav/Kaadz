@@ -211,10 +211,11 @@ const Hero = () => {
           variants={nameVariants}
           initial="hidden"
           animate="visible"
-          className="text-4xl sm:text-5xl md:text-6xl font-bold text-center mb-4 sm:mb-6
-                     tracking-tight font-display"
+          className="text-5xl sm:text-6xl md:text-7xl font-bold text-center mb-4 sm:mb-6
+                     tracking-tight"
           style={{
             color: '#ffffff',
+            fontFamily: 'Space Grotesk, sans-serif',
             textShadow: '0 0 30px rgba(0, 255, 65, 0.5), 0 0 60px rgba(0, 255, 65, 0.3)'
           }}
         >

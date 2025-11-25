@@ -3,11 +3,11 @@ import { motion, AnimatePresence } from 'framer-motion';
 
 const statusMessages = [
   { text: 'Online', icon: '●' },
-  { text: 'Building', icon: '⚡' },
-  { text: 'Shipping', icon: '🚀' },
-  { text: 'Creating', icon: '✨' },
-  { text: 'Coding', icon: '💻' },
-  { text: 'Designing', icon: '🎨' },
+  { text: 'Building', icon: '●' },
+  { text: 'Shipping', icon: '●' },
+  { text: 'Creating', icon: '●' },
+  { text: 'Coding', icon: '●' },
+  { text: 'Designing', icon: '●' },
 ];
 
 const HackerStatus = () => {

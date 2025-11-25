@@ -83,11 +83,11 @@ function App() {
             <p className="text-white/30 text-sm mb-4">
               Made with{' '}
               <motion.span 
-                className="text-red-400 inline-block"
-                animate={{ scale: [1, 1.2, 1] }}
-                transition={{ duration: 1.5, repeat: Infinity }}
+                className="text-matrix-green inline-block"
+                animate={{ opacity: [0.5, 1, 0.5] }}
+                transition={{ duration: 2, repeat: Infinity }}
               >
-                ♥
+                passion
               </motion.span>
               {' '}by{' '}
               <span className="text-white/60 font-semibold">Kaadz</span>
