@@ -27,11 +27,12 @@ const LinkButton = ({ title, url, delay = 0 }) => {
       }}
       onHoverStart={() => setIsHovered(true)}
       onHoverEnd={() => setIsHovered(false)}
-      className="neon-button relative block w-full px-8 py-4 
+      className="neon-button relative block w-full px-6 sm:px-8 py-3 sm:py-4 min-h-[44px]
                  border-2 border-matrix-green/40 rounded-full
                  text-white font-medium text-center font-mono
                  bg-transparent overflow-hidden
-                 transition-all duration-300 group"
+                 transition-all duration-300 group
+                 touch-manipulation active:scale-95"
       style={{
         boxShadow: isHovered 
           ? '0 0 20px rgba(0, 255, 65, 0.6), 0 0 40px rgba(0, 255, 65, 0.4), inset 0 0 20px rgba(0, 255, 65, 0.1)'
@@ -119,7 +120,7 @@ const LinkButton = ({ title, url, delay = 0 }) => {
       />
 
       {/* Button text */}
-      <span className="relative z-10 tracking-wide uppercase text-sm">
+      <span className="relative z-10 tracking-wide uppercase text-xs sm:text-sm">
         {title}
       </span>
 

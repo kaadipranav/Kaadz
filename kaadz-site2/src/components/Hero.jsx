@@ -128,8 +128,8 @@ const Hero = () => {
   };
 
   return (
-    <div className="relative z-10 min-h-screen flex items-center justify-center p-6 scanlines">
-      <div className="max-w-md w-full">
+    <div className="relative z-10 min-h-screen flex items-center justify-center p-4 sm:p-6 scanlines">
+      <div className="max-w-md w-full px-2 sm:px-0">
         {/* Avatar with glow pulse */}
         <motion.div
           variants={avatarVariants}
@@ -151,8 +151,8 @@ const Hero = () => {
             <img 
               src="/avatar.png" 
               alt="Kaadz Avatar" 
-              className="w-40 h-40 md:w-48 md:h-48 rounded-full object-cover
-                         border-4 border-matrix-green/30 shadow-neon-green"
+              className="w-32 h-32 sm:w-40 sm:h-40 md:w-48 md:h-48 rounded-full object-cover
+                         border-2 sm:border-4 border-matrix-green/30 shadow-neon-green"
             />
             {/* Rotating ring effect */}
             <motion.div
@@ -185,8 +185,8 @@ const Hero = () => {
           variants={nameVariants}
           initial="hidden"
           animate={glitchControls}
-          className="text-5xl md:text-6xl font-bold text-matrix-green text-center mb-6
-                     tracking-[0.3em] font-mono relative"
+          className="text-4xl sm:text-5xl md:text-6xl font-bold text-matrix-green text-center mb-4 sm:mb-6
+                     tracking-[0.2em] sm:tracking-[0.3em] font-mono relative"
           style={{
             textShadow: '0 0 20px rgba(0, 255, 65, 0.5)'
           }}
@@ -233,9 +233,9 @@ const Hero = () => {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 1.3, duration: 0.6 }}
-          className="text-center mb-8 min-h-[4rem] px-4"
+          className="text-center mb-6 sm:mb-8 min-h-[3.5rem] sm:min-h-[4rem] px-2 sm:px-4"
         >
-          <p className="text-sm md:text-base text-gray-300 whitespace-pre-line leading-relaxed
+          <p className="text-xs sm:text-sm md:text-base text-gray-300 whitespace-pre-line leading-relaxed
                         font-mono">
             {displayedText}
             {isTyping && (
@@ -251,7 +251,7 @@ const Hero = () => {
         </motion.div>
 
         {/* Social Icons */}
-        <div className="mb-10">
+        <div className="mb-6 sm:mb-10">
           <SocialIcons 
             instagramUrl="https://instagram.com/kaad__zz"
             twitterUrl="https://twitter.com/kaad__zz"

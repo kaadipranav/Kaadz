@@ -44,7 +44,7 @@ const SocialIcons = ({ instagramUrl, twitterUrl, delay = 0 }) => {
       variants={containerVariants}
       initial="hidden"
       animate="visible"
-      className="flex gap-6 justify-center"
+      className="flex gap-4 sm:gap-6 justify-center"
     >
       {instagramUrl && (
         <motion.a
@@ -54,12 +54,14 @@ const SocialIcons = ({ instagramUrl, twitterUrl, delay = 0 }) => {
           rel="noopener noreferrer"
           whileHover={{ scale: 1.15, rotate: 5 }}
           whileTap={{ scale: 0.9 }}
-          className="p-3 rounded-full border-2 border-matrix-green/40 
+          className="p-2.5 sm:p-3 rounded-full border-2 border-matrix-green/40 
                      hover:border-matrix-green hover:bg-matrix-green/10
-                     transition-all duration-300 hover:shadow-neon-green"
+                     transition-all duration-300 hover:shadow-neon-green
+                     min-w-[44px] min-h-[44px] flex items-center justify-center
+                     touch-manipulation active:scale-95"
           aria-label="Instagram"
         >
-          <Instagram size={24} className="text-matrix-green" />
+          <Instagram size={20} className="text-matrix-green sm:w-6 sm:h-6" />
         </motion.a>
       )}
       
@@ -71,12 +73,14 @@ const SocialIcons = ({ instagramUrl, twitterUrl, delay = 0 }) => {
           rel="noopener noreferrer"
           whileHover={{ scale: 1.15, rotate: -5 }}
           whileTap={{ scale: 0.9 }}
-          className="p-3 rounded-full border-2 border-matrix-green/40 
+          className="p-2.5 sm:p-3 rounded-full border-2 border-matrix-green/40 
                      hover:border-matrix-green hover:bg-matrix-green/10
-                     transition-all duration-300 hover:shadow-neon-green"
+                     transition-all duration-300 hover:shadow-neon-green
+                     min-w-[44px] min-h-[44px] flex items-center justify-center
+                     touch-manipulation active:scale-95"
           aria-label="X (Twitter)"
         >
-          <div className="text-matrix-green">
+          <div className="text-matrix-green w-5 h-5 sm:w-6 sm:h-6">
             <XIcon />
           </div>
         </motion.a>

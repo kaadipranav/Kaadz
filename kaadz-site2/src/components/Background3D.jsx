@@ -1,9 +1,18 @@
 import { Canvas, useFrame } from '@react-three/fiber';
-import { useRef, useMemo } from 'react';
+import { useRef, useMemo, useState, useEffect } from 'react';
 import * as THREE from 'three';
 
 const MatrixRain = () => {
-  const count = 100;
+  const [isMobile, setIsMobile] = useState(false);
+  
+  useEffect(() => {
+    const checkMobile = () => setIsMobile(window.innerWidth < 768);
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+    return () => window.removeEventListener('resize', checkMobile);
+  }, []);
+  
+  const count = isMobile ? 40 : 100; // Reduce particles on mobile
   const meshRef = useRef();
   const materialRef = useRef();
   
@@ -120,17 +129,50 @@ const MatrixRain = () => {
 
 // Camera animation component
 const CameraRig = () => {
+  const [isMobile, setIsMobile] = useState(false);
+  
+  useEffect(() => {
+    setIsMobile(window.innerWidth < 768);
+  }, []);
+  
   useFrame((state) => {
-    const t = state.clock.elapsedTime;
-    // Subtle camera movement
-    state.camera.position.x = Math.sin(t * 0.1) * 0.5;
-    state.camera.position.y = Math.cos(t * 0.15) * 0.3;
-    state.camera.lookAt(0, 0, 0);
+    if (!isMobile) {
+      const t = state.clock.elapsedTime;
+      // Subtle camera movement (disabled on mobile)
+      state.camera.position.x = Math.sin(t * 0.1) * 0.5;
+      state.camera.position.y = Math.cos(t * 0.15) * 0.3;
+      state.camera.lookAt(0, 0, 0);
+    }
   });
   return null;
 };
 
 const Background3D = () => {
+  const [isMobile, setIsMobile] = useState(false);
+  
+  useEffect(() => {
+    const checkMobile = () => setIsMobile(window.innerWidth < 768);
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+    return () => window.removeEventListener('resize', checkMobile);
+  }, []);
+  
+  // Show simplified version on mobile
+  if (isMobile) {
+    return (
+      <div style={{ 
+        position: 'fixed', 
+        top: 0, 
+        left: 0, 
+        width: '100%', 
+        height: '100%', 
+        zIndex: 0,
+        background: 'linear-gradient(180deg, #0a0a0a 0%, #0d1a0d 50%, #0a0a0a 100%)',
+        opacity: 0.8
+      }} />
+    );
+  }
+  
   return (
     <div style={{ 
       position: 'fixed', 
@@ -144,6 +186,7 @@ const Background3D = () => {
       <Canvas
         camera={{ position: [0, 0, 15], fov: 75 }}
         style={{ background: 'transparent' }}
+        dpr={[1, 2]} // Limit pixel ratio for performance
       >
         <CameraRig />
         <MatrixRain />
