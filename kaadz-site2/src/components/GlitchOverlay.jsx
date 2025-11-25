@@ -6,17 +6,17 @@ const GlitchOverlay = () => {
   
   useEffect(() => {
     const triggerGlitch = () => {
-      // Random chance to glitch (15% every 3 seconds)
-      if (Math.random() > 0.85) {
+      // Random chance to glitch (10% every 5 seconds for better performance)
+      if (Math.random() > 0.90) {
         const glitchType = Math.floor(Math.random() * 4);
         setGlitch(glitchType);
         
         // Clear after short duration
-        setTimeout(() => setGlitch(null), 100 + Math.random() * 150);
+        setTimeout(() => setGlitch(null), 100 + Math.random() * 100);
       }
     };
     
-    const interval = setInterval(triggerGlitch, 3000);
+    const interval = setInterval(triggerGlitch, 5000);
     return () => clearInterval(interval);
   }, []);
   

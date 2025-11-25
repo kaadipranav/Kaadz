@@ -9,8 +9,9 @@ const Hero = () => {
   const glitchControls = useAnimation();
   
   const bio = [
-    "solo founder · AuthorStack, BookHunt & 7 more",
-    "apps shipped with AI · typescript demon @kaad__zz"
+    "solo founder · building in public · shipping fast",
+    "AuthorStack · ScriptBoost · 7+ apps deployed",
+    "AI-powered dev · TypeScript enjoyer · @kaad__zz"
   ];
   const fullBio = bio.join('\n');
 
@@ -76,23 +77,41 @@ const Hero = () => {
   const links = [
     {
       title: "Instagram",
-      url: "https://instagram.com/kaad__zz",
+      url: "https://instagram.com/k.aadz",
+      icon: "instagram"
     },
     {
-      title: "Personal Website",
-      url: "https://kaadz.me",
+      title: "X (Twitter)",
+      url: "https://x.com/kaad_zz",
+      icon: "x"
     },
     {
-      title: "X",
-      url: "https://twitter.com/kaad__zz",
+      title: "AuthorStack",
+      url: "https://authorstack.vercel.app",
+      icon: "app"
+    },
+    {
+      title: "ScriptBoost",
+      url: "https://scriptboost.vercel.app",
+      icon: "app"
+    },
+    {
+      title: "GitHub",
+      url: "https://github.com/kaadipranav",
+      icon: "github"
+    },
+    {
+      title: "LinkedIn",
+      url: "#",
+      icon: "linkedin",
+      comingSoon: true
     },
   ];
 
   const socials = {
-    instagram: "https://instagram.com/kaad__zz",
-    twitter: "https://twitter.com/kaad__zz",
-    github: "https://github.com/kaadz",
-    linkedin: "https://linkedin.com/in/kaadz",
+    instagram: "https://instagram.com/k.aadz",
+    twitter: "https://x.com/kaad_zz",
+    github: "https://github.com/kaadipranav",
   };
 
   // Avatar variants with pulse animation
@@ -187,52 +206,19 @@ const Hero = () => {
           </motion.div>
         </motion.div>
 
-        {/* Name with advanced glitch effect */}
+        {/* Name - clean and visible */}
         <motion.h1
           variants={nameVariants}
           initial="hidden"
-          animate={glitchControls}
-          className="text-4xl sm:text-5xl md:text-6xl font-bold text-matrix-green text-center mb-4 sm:mb-6
-                     tracking-[0.2em] sm:tracking-[0.3em] font-mono relative"
+          animate="visible"
+          className="text-4xl sm:text-5xl md:text-6xl font-bold text-center mb-4 sm:mb-6
+                     tracking-tight font-display"
           style={{
-            textShadow: '0 0 20px rgba(0, 255, 65, 0.5)'
+            color: '#ffffff',
+            textShadow: '0 0 30px rgba(0, 255, 65, 0.5), 0 0 60px rgba(0, 255, 65, 0.3)'
           }}
         >
-          <span className="relative inline-block">
-            KAADZ
-            {/* Glitch layers */}
-            <motion.span
-              className="absolute inset-0 text-red-500"
-              animate={{
-                x: [-2, 2, -2],
-                opacity: [0, 0.7, 0]
-              }}
-              transition={{
-                duration: 0.3,
-                repeat: Infinity,
-                repeatDelay: 5
-              }}
-              style={{ mixBlendMode: 'screen' }}
-            >
-              KAADZ
-            </motion.span>
-            <motion.span
-              className="absolute inset-0 text-cyan-500"
-              animate={{
-                x: [2, -2, 2],
-                opacity: [0, 0.7, 0]
-              }}
-              transition={{
-                duration: 0.3,
-                repeat: Infinity,
-                repeatDelay: 5,
-                delay: 0.1
-              }}
-              style={{ mixBlendMode: 'screen' }}
-            >
-              KAADZ
-            </motion.span>
-          </span>
+          KAADZ
         </motion.h1>
 
         {/* Bio with typing effect */}
@@ -240,10 +226,9 @@ const Hero = () => {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 1.3, duration: 0.6 }}
-          className="text-center mb-6 sm:mb-8 min-h-[3.5rem] sm:min-h-[4rem] px-2 sm:px-4"
+          className="text-center mb-6 sm:mb-8 min-h-[4.5rem] sm:min-h-[5rem] px-2 sm:px-4"
         >
-          <p className="text-xs sm:text-sm md:text-base text-gray-300 whitespace-pre-line leading-relaxed
-                        font-mono">
+          <p className="text-sm sm:text-base md:text-lg text-gray-300 whitespace-pre-line leading-relaxed">
             {displayedText}
             {isTyping && (
               <motion.span 
@@ -266,13 +251,15 @@ const Hero = () => {
         </div>
 
         {/* Link Buttons */}
-        <div className="space-y-4">
+        <div className="space-y-3">
           {links.map((link, index) => (
             <LinkButton
               key={link.title}
               title={link.title}
               url={link.url}
-              delay={2.2 + (index * 0.1)}
+              icon={link.icon}
+              comingSoon={link.comingSoon}
+              delay={2.2 + (index * 0.08)}
             />
           ))}
         </div>

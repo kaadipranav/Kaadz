@@ -19,8 +19,8 @@ const CursorTrail = () => {
     let particleId = 0;
     
     const handleMouseMove = (e) => {
-      // Throttle particle creation
-      if (Math.random() > 0.3) return;
+      // More aggressive throttle for better performance (only 20% of moves create particles)
+      if (Math.random() > 0.2) return;
       
       const newParticle = {
         id: particleId++,
@@ -33,7 +33,8 @@ const CursorTrail = () => {
         }
       };
       
-      setParticles(prev => [...prev.slice(-20), newParticle]);
+      // Keep max 12 particles for performance
+      setParticles(prev => [...prev.slice(-12), newParticle]);
       
       // Remove particle after animation
       setTimeout(() => {

@@ -12,7 +12,7 @@ const MatrixRain = () => {
     return () => window.removeEventListener('resize', checkMobile);
   }, []);
   
-  const count = isMobile ? 40 : 100; // Reduce particles on mobile
+  const count = isMobile ? 30 : 70; // Optimized particle count for 60fps
   const meshRef = useRef();
   const materialRef = useRef();
   

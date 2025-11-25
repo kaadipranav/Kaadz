@@ -4,6 +4,10 @@ import ProjectShowcase from './components/ProjectShowcase'
 import CursorTrail from './components/CursorTrail'
 import KonamiCode from './components/KonamiCode'
 import GlitchOverlay from './components/GlitchOverlay'
+import WildBackground from './components/WildBackground'
+import HackerStatus from './components/HackerStatus'
+import ClickRipple from './components/ClickRipple'
+import { motion } from 'framer-motion'
 import './App.css'
 
 function App() {
@@ -11,24 +15,24 @@ function App() {
     {
       title: "AuthorStack",
       description: "The ultimate platform for indie authors to discover tools, share resources, and build their writing empire. Like Product Hunt, but for writers.",
-      url: "https://authorstack.com",
+      url: "https://authorstack.vercel.app",
       type: "SaaS Platform",
       icon: "sparkles",
       tech: ["TypeScript", "Next.js", "AI", "Prisma"],
-      status: "Active"
+      status: "Live"
     },
     {
-      title: "BookHunt",
-      description: "Discover your next favorite read through AI-powered recommendations. Swipe right on books that match your vibe.",
-      url: "https://bookhunt.app",
-      type: "Mobile App",
+      title: "ScriptBoost",
+      description: "AI-powered script generator for content creators. Generate video scripts, hooks, and storylines in seconds. A fun hobby project that actually works!",
+      url: "https://scriptboost.vercel.app",
+      type: "AI Tool",
       icon: "zap",
-      tech: ["React Native", "OpenAI", "Firebase"],
-      status: "Active"
+      tech: ["React", "OpenAI", "Vercel"],
+      status: "Hobby Project"
     },
     {
       title: "More Projects",
-      description: "7 more apps shipped and counting. Building in public, breaking things in private. Each failure is just a feature in disguise.",
+      description: "7+ apps shipped and counting. Building in public, breaking things in private. Each failure is just a feature in disguise.",
       url: "https://github.com/kaadz",
       type: "Portfolio",
       icon: "code",
@@ -39,16 +43,21 @@ function App() {
 
   return (
     <div className="relative min-h-screen bg-cyber-black overflow-x-hidden">
+      {/* Top status bar */}
+      <HackerStatus />
+      
       {/* Easter eggs and effects */}
       <CursorTrail />
       <KonamiCode />
       <GlitchOverlay />
+      <ClickRipple />
       
-      {/* Background */}
+      {/* Backgrounds */}
       <Background3D />
+      <WildBackground />
       
       {/* Main content */}
-      <div className="relative z-10">
+      <div className="relative z-10 pt-12">
         <Hero />
         
         {/* Project Showcase Section */}
@@ -57,14 +66,45 @@ function App() {
         </div>
         
         {/* Footer */}
-        <footer className="py-8 text-center">
-          <p className="text-matrix-green/40 text-xs font-mono">
-            <span className="text-matrix-green/60">&#60;/&#62;</span> with{' '}
-            <span className="text-red-500 animate-pulse">♥</span> by kaadz
-          </p>
-          <p className="text-matrix-green/20 text-[10px] font-mono mt-2">
-            try the konami code ↑↑↓↓←→←→BA
-          </p>
+        <footer className="py-10 sm:py-16 text-center relative">
+          {/* Decorative line */}
+          <motion.div 
+            className="w-24 h-px bg-gradient-to-r from-transparent via-white/20 to-transparent mx-auto mb-8"
+            initial={{ scaleX: 0 }}
+            whileInView={{ scaleX: 1 }}
+            transition={{ duration: 1 }}
+          />
+          
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5 }}
+          >
+            <p className="text-white/30 text-sm mb-4">
+              Made with{' '}
+              <motion.span 
+                className="text-red-400 inline-block"
+                animate={{ scale: [1, 1.2, 1] }}
+                transition={{ duration: 1.5, repeat: Infinity }}
+              >
+                ♥
+              </motion.span>
+              {' '}by{' '}
+              <span className="text-white/60 font-semibold">Kaadz</span>
+            </p>
+            
+            <p className="text-white/20 text-xs">
+              © {new Date().getFullYear()} · All rights reserved
+            </p>
+            
+            <motion.p 
+              className="text-white/10 text-[10px] mt-4"
+              animate={{ opacity: [0.1, 0.2, 0.1] }}
+              transition={{ duration: 3, repeat: Infinity }}
+            >
+              ↑↑↓↓←→←→BA
+            </motion.p>
+          </motion.div>
         </footer>
       </div>
     </div>
