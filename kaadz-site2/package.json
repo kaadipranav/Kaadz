@@ -1,5 +1,5 @@
 {
-  "name": "kaadz-site",
+  "name": "kaadz-site2",
   "private": true,
   "version": "0.0.0",
   "type": "module",
@@ -10,11 +10,14 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@react-three/drei": "^10.7.7",
+    "@react-three/fiber": "^9.4.0",
     "framer-motion": "^12.23.24",
     "lucide-react": "^0.554.0",
     "prop-types": "^15.8.1",
     "react": "^19.2.0",
     "react-dom": "^19.2.0",
+    "three": "^0.181.2",
     "vanilla-tilt": "^1.8.1"
   },
   "devDependencies": {
