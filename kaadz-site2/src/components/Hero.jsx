@@ -1,4 +1,4 @@
-import { motion } from 'framer-motion';
+import { motion, useAnimation } from 'framer-motion';
 import { useEffect, useState } from 'react';
 import SocialIcons from './SocialIcons';
 import LinkButton from './LinkButton';
@@ -6,6 +6,7 @@ import LinkButton from './LinkButton';
 const Hero = () => {
   const [displayedText, setDisplayedText] = useState('');
   const [isTyping, setIsTyping] = useState(false);
+  const glitchControls = useAnimation();
   
   const bio = [
     "solo founder · AuthorStack, BookHunt & 7 more",
@@ -13,6 +14,45 @@ const Hero = () => {
   ];
   const fullBio = bio.join('\n');
 
+  // Glitch animation sequence for the name
+  useEffect(() => {
+    const triggerGlitch = async () => {
+      await glitchControls.start({
+        x: [0, -2, 3, -1, 2, 0],
+        y: [0, 2, -3, 1, -2, 0],
+        textShadow: [
+          '0 0 0 rgba(255,0,0,0)',
+          '2px 2px 0 rgba(255,0,0,0.8), -2px -2px 0 rgba(0,255,0,0.8)',
+          '-2px 2px 0 rgba(255,0,0,0.8), 2px -2px 0 rgba(0,0,255,0.8)',
+          '0 0 0 rgba(255,0,0,0)',
+        ],
+        transition: {
+          duration: 0.5,
+          times: [0, 0.2, 0.5, 1],
+        }
+      });
+    };
+
+    // Initial glitch at 1.2s
+    const initialGlitch = setTimeout(() => {
+      triggerGlitch();
+    }, 1200);
+
+    // Random glitches every 10-15 seconds
+    const randomGlitch = setInterval(() => {
+      const randomDelay = Math.random() * 5000 + 10000; // 10-15 seconds
+      setTimeout(() => {
+        triggerGlitch();
+      }, randomDelay);
+    }, 15000);
+
+    return () => {
+      clearTimeout(initialGlitch);
+      clearInterval(randomGlitch);
+    };
+  }, [glitchControls]);
+
+  // Typing animation for bio
   useEffect(() => {
     const typingDelay = setTimeout(() => {
       setIsTyping(true);
@@ -48,40 +88,144 @@ const Hero = () => {
     },
   ];
 
+  // Avatar variants with pulse animation
+  const avatarVariants = {
+    hidden: { 
+      opacity: 0, 
+      scale: 0.5,
+      filter: 'blur(10px)'
+    },
+    visible: { 
+      opacity: 1, 
+      scale: 1,
+      filter: 'blur(0px)',
+      transition: {
+        delay: 0.5,
+        duration: 0.8,
+        type: "spring",
+        stiffness: 100
+      }
+    }
+  };
+
+  // Name glitch variants
+  const nameVariants = {
+    hidden: { 
+      opacity: 0, 
+      y: 20,
+      filter: 'blur(10px)'
+    },
+    visible: { 
+      opacity: 1, 
+      y: 0,
+      filter: 'blur(0px)',
+      transition: {
+        delay: 0.8,
+        duration: 0.6,
+        ease: [0.25, 0.46, 0.45, 0.94]
+      }
+    }
+  };
+
   return (
     <div className="relative z-10 min-h-screen flex items-center justify-center p-6 scanlines">
       <div className="max-w-md w-full">
-        {/* Avatar */}
+        {/* Avatar with glow pulse */}
         <motion.div
-          initial={{ opacity: 0, scale: 0.5 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ 
-            delay: 0.5, 
-            duration: 0.8,
-            type: "spring",
-            stiffness: 100 
-          }}
+          variants={avatarVariants}
+          initial="hidden"
+          animate="visible"
           className="flex justify-center mb-8"
         >
-          <div className="avatar-glow">
+          <motion.div 
+            className="avatar-glow relative"
+            animate={{
+              scale: [1, 1.02, 1],
+            }}
+            transition={{
+              duration: 3,
+              repeat: Infinity,
+              ease: "easeInOut"
+            }}
+          >
             <img 
               src="/avatar.png" 
               alt="Kaadz Avatar" 
               className="w-40 h-40 md:w-48 md:h-48 rounded-full object-cover
-                         border-4 border-matrix-green/30"
+                         border-4 border-matrix-green/30 shadow-neon-green"
             />
-          </div>
+            {/* Rotating ring effect */}
+            <motion.div
+              className="absolute inset-0 rounded-full border-2 border-matrix-green/20"
+              animate={{
+                rotate: 360,
+                scale: [1, 1.1, 1],
+              }}
+              transition={{
+                rotate: {
+                  duration: 20,
+                  repeat: Infinity,
+                  ease: "linear"
+                },
+                scale: {
+                  duration: 2,
+                  repeat: Infinity,
+                  ease: "easeInOut"
+                }
+              }}
+              style={{
+                boxShadow: '0 0 20px rgba(0, 255, 65, 0.3)'
+              }}
+            />
+          </motion.div>
         </motion.div>
 
-        {/* Name with glitch effect */}
+        {/* Name with advanced glitch effect */}
         <motion.h1
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.8, duration: 0.6 }}
-          className="glitch text-5xl md:text-6xl font-bold text-white text-center mb-6
-                     tracking-wider"
+          variants={nameVariants}
+          initial="hidden"
+          animate={glitchControls}
+          className="text-5xl md:text-6xl font-bold text-matrix-green text-center mb-6
+                     tracking-[0.3em] font-mono relative"
+          style={{
+            textShadow: '0 0 20px rgba(0, 255, 65, 0.5)'
+          }}
         >
-          KAADZ
+          <span className="relative inline-block">
+            KAADZ
+            {/* Glitch layers */}
+            <motion.span
+              className="absolute inset-0 text-red-500"
+              animate={{
+                x: [-2, 2, -2],
+                opacity: [0, 0.7, 0]
+              }}
+              transition={{
+                duration: 0.3,
+                repeat: Infinity,
+                repeatDelay: 5
+              }}
+              style={{ mixBlendMode: 'screen' }}
+            >
+              KAADZ
+            </motion.span>
+            <motion.span
+              className="absolute inset-0 text-cyan-500"
+              animate={{
+                x: [2, -2, 2],
+                opacity: [0, 0.7, 0]
+              }}
+              transition={{
+                duration: 0.3,
+                repeat: Infinity,
+                repeatDelay: 5,
+                delay: 0.1
+              }}
+              style={{ mixBlendMode: 'screen' }}
+            >
+              KAADZ
+            </motion.span>
+          </span>
         </motion.h1>
 
         {/* Bio with typing effect */}
@@ -89,11 +233,20 @@ const Hero = () => {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 1.3, duration: 0.6 }}
-          className="text-center mb-8 min-h-[4rem]"
+          className="text-center mb-8 min-h-[4rem] px-4"
         >
-          <p className="text-sm md:text-base text-gray-300 whitespace-pre-line leading-relaxed">
+          <p className="text-sm md:text-base text-gray-300 whitespace-pre-line leading-relaxed
+                        font-mono">
             {displayedText}
-            {isTyping && <span className="typing-cursor text-matrix-green">|</span>}
+            {isTyping && (
+              <motion.span 
+                className="text-matrix-green ml-1"
+                animate={{ opacity: [1, 0] }}
+                transition={{ duration: 0.8, repeat: Infinity }}
+              >
+                █
+              </motion.span>
+            )}
           </p>
         </motion.div>
 

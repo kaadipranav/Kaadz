@@ -3,25 +3,55 @@ import { useRef, useMemo } from 'react';
 import * as THREE from 'three';
 
 const MatrixRain = () => {
-  const count = 80;
-  const mesh = useRef();
+  const count = 100;
+  const meshRef = useRef();
+  const materialRef = useRef();
   
-  // Create random positions and speeds for falling characters
+  // Matrix characters to display
+  const characters = '01アイウエオカキクケコサシスセソタチツテトナニヌネノハヒフヘホマミムメモヤユヨラリルレロワヲン0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+  
+  // Create texture with characters
+  const texture = useMemo(() => {
+    const canvas = document.createElement('canvas');
+    const size = 64;
+    canvas.width = size;
+    canvas.height = size;
+    const ctx = canvas.getContext('2d');
+    
+    ctx.fillStyle = '#000000';
+    ctx.fillRect(0, 0, size, size);
+    ctx.fillStyle = '#00ff41';
+    ctx.font = 'bold 48px monospace';
+    ctx.textAlign = 'center';
+    ctx.textBaseline = 'middle';
+    
+    const char = characters[Math.floor(Math.random() * characters.length)];
+    ctx.fillText(char, size / 2, size / 2);
+    
+    const texture = new THREE.CanvasTexture(canvas);
+    texture.needsUpdate = true;
+    return texture;
+  }, [characters]);
+
+  // Create particles with random positions and speeds
   const particles = useMemo(() => {
     const temp = [];
     for (let i = 0; i < count; i++) {
       const x = Math.random() * 40 - 20;
       const y = Math.random() * 40;
-      const z = Math.random() * 40 - 20;
-      const speed = Math.random() * 0.05 + 0.02;
-      temp.push({ x, y, z, speed });
+      const z = Math.random() * 20 - 10;
+      const speed = Math.random() * 0.08 + 0.03;
+      const rotationSpeed = Math.random() * 0.02 - 0.01;
+      temp.push({ x, y, z, speed, rotationSpeed });
     }
     return temp;
   }, [count]);
 
-  useFrame(() => {
-    if (mesh.current) {
-      const positions = mesh.current.geometry.attributes.position.array;
+  // Animate falling characters
+  useFrame((state) => {
+    if (meshRef.current) {
+      const positions = meshRef.current.geometry.attributes.position.array;
+      const rotations = meshRef.current.geometry.attributes.rotation?.array;
       
       for (let i = 0; i < count; i++) {
         const i3 = i * 3;
@@ -29,13 +59,27 @@ const MatrixRain = () => {
         // Move particle down
         positions[i3 + 1] -= particles[i].speed;
         
+        // Rotate particles
+        if (rotations) {
+          rotations[i3 + 2] += particles[i].rotationSpeed;
+        }
+        
         // Reset to top when reaches bottom
         if (positions[i3 + 1] < -20) {
           positions[i3 + 1] = 20;
+          positions[i3] = Math.random() * 40 - 20;
         }
       }
       
-      mesh.current.geometry.attributes.position.needsUpdate = true;
+      meshRef.current.geometry.attributes.position.needsUpdate = true;
+      if (rotations) {
+        meshRef.current.geometry.attributes.rotation.needsUpdate = true;
+      }
+    }
+    
+    // Update material opacity for fade effect
+    if (materialRef.current) {
+      materialRef.current.opacity = 0.6 + Math.sin(state.clock.elapsedTime * 0.5) * 0.1;
     }
   });
 
@@ -50,7 +94,7 @@ const MatrixRain = () => {
   }, [particles]);
 
   return (
-    <points ref={mesh}>
+    <points ref={meshRef}>
       <bufferGeometry>
         <bufferAttribute
           attach="attributes-position"
@@ -60,23 +104,48 @@ const MatrixRain = () => {
         />
       </bufferGeometry>
       <pointsMaterial
-        size={0.15}
+        ref={materialRef}
+        size={0.5}
         color="#00ff41"
+        map={texture}
         transparent
-        opacity={0.8}
+        opacity={0.7}
         sizeAttenuation
+        depthWrite={false}
+        blending={THREE.AdditiveBlending}
       />
     </points>
   );
 };
 
+// Camera animation component
+const CameraRig = () => {
+  useFrame((state) => {
+    const t = state.clock.elapsedTime;
+    // Subtle camera movement
+    state.camera.position.x = Math.sin(t * 0.1) * 0.5;
+    state.camera.position.y = Math.cos(t * 0.15) * 0.3;
+    state.camera.lookAt(0, 0, 0);
+  });
+  return null;
+};
+
 const Background3D = () => {
   return (
-    <div style={{ position: 'fixed', top: 0, left: 0, width: '100%', height: '100%', zIndex: 0 }}>
+    <div style={{ 
+      position: 'fixed', 
+      top: 0, 
+      left: 0, 
+      width: '100%', 
+      height: '100%', 
+      zIndex: 0,
+      pointerEvents: 'none'
+    }}>
       <Canvas
-        camera={{ position: [0, 0, 10], fov: 75 }}
+        camera={{ position: [0, 0, 15], fov: 75 }}
         style={{ background: 'transparent' }}
       >
+        <CameraRig />
         <MatrixRain />
       </Canvas>
     </div>
