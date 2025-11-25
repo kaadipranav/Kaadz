@@ -1,3 +1,4 @@
+import { useState } from 'react'
 import Background3D from './components/Background3D'
 import Hero from './components/Hero'
 import ProjectShowcase from './components/ProjectShowcase'
@@ -7,10 +8,14 @@ import GlitchOverlay from './components/GlitchOverlay'
 import WildBackground from './components/WildBackground'
 import HackerStatus from './components/HackerStatus'
 import ClickRipple from './components/ClickRipple'
-import { motion } from 'framer-motion'
+import LoadingScreen from './components/LoadingScreen'
+import InteractiveTerminal from './components/InteractiveTerminal'
+import AnimatedStats from './components/AnimatedStats'
+import { motion, AnimatePresence } from 'framer-motion'
 import './App.css'
 
 function App() {
+  const [isLoading, setIsLoading] = useState(true)
   const projects = [
     {
       title: "AuthorStack",
@@ -42,28 +47,45 @@ function App() {
   ];
 
   return (
-    <div className="relative min-h-screen bg-cyber-black overflow-x-hidden">
-      {/* Top status bar */}
-      <HackerStatus />
+    <>
+      {/* Loading Screen */}
+      <LoadingScreen onComplete={() => setIsLoading(false)} />
       
-      {/* Easter eggs and effects */}
-      <CursorTrail />
-      <KonamiCode />
-      <GlitchOverlay />
-      <ClickRipple />
-      
-      {/* Backgrounds */}
-      <Background3D />
-      <WildBackground />
-      
-      {/* Main content */}
-      <div className="relative z-10 pt-12">
-        <Hero />
-        
-        {/* Project Showcase Section */}
-        <div className="py-12 sm:py-20">
-          <ProjectShowcase projects={projects} delay={3.5} />
-        </div>
+      <AnimatePresence>
+        {!isLoading && (
+          <motion.div 
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.5 }}
+            className="relative min-h-screen bg-cyber-black overflow-x-hidden"
+          >
+            {/* Top status bar */}
+            <HackerStatus />
+            
+            {/* Easter eggs and effects */}
+            <CursorTrail />
+            <KonamiCode />
+            <GlitchOverlay />
+            <ClickRipple />
+            
+            {/* Interactive Terminal */}
+            <InteractiveTerminal />
+            
+            {/* Backgrounds */}
+            <Background3D />
+            <WildBackground />
+            
+            {/* Main content */}
+            <div className="relative z-10 pt-12">
+              <Hero />
+              
+              {/* Animated Stats Section */}
+              <AnimatedStats delay={3} />
+              
+              {/* Project Showcase Section */}
+              <div className="py-12 sm:py-20">
+                <ProjectShowcase projects={projects} delay={3.5} />
+              </div>
         
         {/* Footer */}
         <footer className="py-10 sm:py-16 text-center relative">
@@ -107,7 +129,10 @@ function App() {
           </motion.div>
         </footer>
       </div>
-    </div>
+    </motion.div>
+        )}
+      </AnimatePresence>
+    </>
   )
 }
 
