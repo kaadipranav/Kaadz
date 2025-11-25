@@ -154,3 +154,76 @@ body {
 html {
   scroll-behavior: smooth;
 }
+
+/* Text shadow glow utility */
+.text-shadow-glow {
+  text-shadow: 0 0 10px rgba(0, 255, 65, 0.8), 
+               0 0 20px rgba(0, 255, 65, 0.6),
+               0 0 30px rgba(0, 255, 65, 0.4);
+}
+
+/* Fast glitch for titles */
+@keyframes glitch-fast {
+  0%, 100% {
+    transform: translate(0);
+  }
+  20% {
+    transform: translate(-2px, 2px);
+  }
+  40% {
+    transform: translate(-2px, -2px);
+  }
+  60% {
+    transform: translate(2px, 2px);
+  }
+  80% {
+    transform: translate(2px, -2px);
+  }
+}
+
+.animate-glitch-fast {
+  animation: glitch-fast 0.15s linear;
+}
+
+/* Vertical scan animation */
+@keyframes scan-vertical {
+  0% {
+    top: -5%;
+  }
+  100% {
+    top: 105%;
+  }
+}
+
+.animate-scan-vertical {
+  animation: scan-vertical 2s linear infinite;
+}
+
+/* 3D perspective */
+.perspective-1000 {
+  perspective: 1000px;
+}
+
+/* Selection color */
+::selection {
+  background: rgba(0, 255, 65, 0.3);
+  color: #00ff41;
+}
+
+/* Scrollbar styling */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #0a0a0a;
+}
+
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, #00ff41 0%, #003b00 100%);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #00ff41;
+}

@@ -88,6 +88,13 @@ const Hero = () => {
     },
   ];
 
+  const socials = {
+    instagram: "https://instagram.com/kaad__zz",
+    twitter: "https://twitter.com/kaad__zz",
+    github: "https://github.com/kaadz",
+    linkedin: "https://linkedin.com/in/kaadz",
+  };
+
   // Avatar variants with pulse animation
   const avatarVariants = {
     hidden: { 
@@ -253,8 +260,7 @@ const Hero = () => {
         {/* Social Icons */}
         <div className="mb-6 sm:mb-10">
           <SocialIcons 
-            instagramUrl="https://instagram.com/kaad__zz"
-            twitterUrl="https://twitter.com/kaad__zz"
+            socials={socials}
             delay={2.0}
           />
         </div>
