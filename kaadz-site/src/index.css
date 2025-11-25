@@ -1,68 +1,177 @@
+@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
 :root {
-  font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
-  line-height: 1.5;
-  font-weight: 400;
-
-  color-scheme: light dark;
-  color: rgba(255, 255, 255, 0.87);
-  background-color: #242424;
-
-  font-synthesis: none;
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+  --matrix-green: #00ff41;
+  --dark-green: #003b00;
+  --cyber-black: #0a0a0a;
 }
 
-a {
-  font-weight: 500;
-  color: #646cff;
-  text-decoration: inherit;
-}
-a:hover {
-  color: #535bf2;
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
 body {
-  margin: 0;
-  display: flex;
-  place-items: center;
-  min-width: 320px;
+  font-family: 'JetBrains Mono', monospace;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
+}
+
+/* Cyberpunk gradient background */
+.cyber-gradient {
+  background: linear-gradient(180deg, 
+    #0a0a0a 0%, 
+    #0d1a0d 40%, 
+    #1a3d1a 70%, 
+    #00ff41 100%
+  );
   min-height: 100vh;
 }
 
-h1 {
-  font-size: 3.2em;
-  line-height: 1.1;
+/* Card glass morphism effect */
+.glass-card {
+  background: rgba(10, 10, 10, 0.7);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(0, 255, 65, 0.2);
+  box-shadow: 
+    0 8px 32px 0 rgba(0, 0, 0, 0.37),
+    0 0 40px rgba(0, 255, 65, 0.1);
 }
 
-button {
-  border-radius: 8px;
-  border: 1px solid transparent;
-  padding: 0.6em 1.2em;
-  font-size: 1em;
-  font-weight: 500;
-  font-family: inherit;
-  background-color: #1a1a1a;
-  cursor: pointer;
-  transition: border-color 0.25s;
-}
-button:hover {
-  border-color: #646cff;
-}
-button:focus,
-button:focus-visible {
-  outline: 4px auto -webkit-focus-ring-color;
+/* Avatar glow pulse animation */
+@keyframes pulse-glow {
+  0%, 100% {
+    filter: drop-shadow(0 0 20px rgba(0, 255, 65, 0.6));
+  }
+  50% {
+    filter: drop-shadow(0 0 40px rgba(0, 255, 65, 0.9));
+  }
 }
 
-@media (prefers-color-scheme: light) {
-  :root {
-    color: #213547;
-    background-color: #ffffff;
+.avatar-glow {
+  animation: pulse-glow 3s ease-in-out infinite;
+}
+
+/* Glitch text effect */
+@keyframes glitch {
+  0% {
+    text-shadow: 0.05em 0 0 rgba(255, 0, 0, 0.75),
+                 -0.05em -0.025em 0 rgba(0, 255, 0, 0.75),
+                 -0.025em 0.05em 0 rgba(0, 0, 255, 0.75);
   }
-  a:hover {
-    color: #747bff;
+  14% {
+    text-shadow: 0.05em 0 0 rgba(255, 0, 0, 0.75),
+                 -0.05em -0.025em 0 rgba(0, 255, 0, 0.75),
+                 -0.025em 0.05em 0 rgba(0, 0, 255, 0.75);
   }
-  button {
-    background-color: #f9f9f9;
+  15% {
+    text-shadow: -0.05em -0.025em 0 rgba(255, 0, 0, 0.75),
+                 0.025em 0.025em 0 rgba(0, 255, 0, 0.75),
+                 -0.05em -0.05em 0 rgba(0, 0, 255, 0.75);
   }
+  49% {
+    text-shadow: -0.05em -0.025em 0 rgba(255, 0, 0, 0.75),
+                 0.025em 0.025em 0 rgba(0, 255, 0, 0.75),
+                 -0.05em -0.05em 0 rgba(0, 0, 255, 0.75);
+  }
+  50% {
+    text-shadow: 0.025em 0.05em 0 rgba(255, 0, 0, 0.75),
+                 0.05em 0 0 rgba(0, 255, 0, 0.75),
+                 0 -0.05em 0 rgba(0, 0, 255, 0.75);
+  }
+  99% {
+    text-shadow: 0.025em 0.05em 0 rgba(255, 0, 0, 0.75),
+                 0.05em 0 0 rgba(0, 255, 0, 0.75),
+                 0 -0.05em 0 rgba(0, 0, 255, 0.75);
+  }
+  100% {
+    text-shadow: -0.025em 0 0 rgba(255, 0, 0, 0.75),
+                 -0.025em -0.025em 0 rgba(0, 255, 0, 0.75),
+                 -0.025em -0.05em 0 rgba(0, 0, 255, 0.75);
+  }
+}
+
+.glitch {
+  animation: glitch 0.5s;
+  animation-delay: 1s;
+}
+
+/* Scan lines overlay */
+.scanlines {
+  position: relative;
+}
+
+.scanlines::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: repeating-linear-gradient(
+    0deg,
+    rgba(0, 0, 0, 0.1) 0px,
+    rgba(0, 0, 0, 0.1) 1px,
+    transparent 1px,
+    transparent 2px
+  );
+  pointer-events: none;
+  z-index: 10;
+  opacity: 0.3;
+}
+
+/* Neon button hover effect */
+.neon-button {
+  position: relative;
+  overflow: hidden;
+  transition: all 0.3s ease;
+}
+
+.neon-button::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 0;
+  height: 0;
+  border-radius: 50%;
+  background: rgba(0, 255, 65, 0.3);
+  transform: translate(-50%, -50%);
+  transition: width 0.6s, height 0.6s;
+}
+
+.neon-button:hover::before {
+  width: 300px;
+  height: 300px;
+}
+
+.neon-button:hover {
+  box-shadow: 
+    0 0 20px rgba(0, 255, 65, 0.6),
+    0 0 40px rgba(0, 255, 65, 0.4),
+    inset 0 0 20px rgba(0, 255, 65, 0.1);
+  transform: scale(1.02);
+  border-color: var(--matrix-green);
+}
+
+/* Typing animation */
+@keyframes blink {
+  50% {
+    opacity: 0;
+  }
+}
+
+.typing-cursor {
+  animation: blink 1s step-end infinite;
+}
+
+/* Smooth scroll */
+html {
+  scroll-behavior: smooth;
 }
