@@ -2,77 +2,15 @@ import { motion, useAnimation } from 'framer-motion';
 import { useEffect, useState } from 'react';
 import SocialIcons from './SocialIcons';
 import LinkButton from './LinkButton';
+import HackerText from './HackerText';
+import TiltCard from './TiltCard';
 
 const Hero = () => {
-  const [displayedText, setDisplayedText] = useState('');
-  const [isTyping, setIsTyping] = useState(false);
-  const glitchControls = useAnimation();
-  
   const bio = [
     "solo founder · building in public · shipping fast",
     "AuthorStack · ScriptBoost · 7+ apps deployed",
     "AI-powered dev · TypeScript enjoyer · @kaad__zz"
   ];
-  const fullBio = bio.join('\n');
-
-  // Glitch animation sequence for the name
-  useEffect(() => {
-    const triggerGlitch = async () => {
-      await glitchControls.start({
-        x: [0, -2, 3, -1, 2, 0],
-        y: [0, 2, -3, 1, -2, 0],
-        textShadow: [
-          '0 0 0 rgba(255,0,0,0)',
-          '2px 2px 0 rgba(255,0,0,0.8), -2px -2px 0 rgba(0,255,0,0.8)',
-          '-2px 2px 0 rgba(255,0,0,0.8), 2px -2px 0 rgba(0,0,255,0.8)',
-          '0 0 0 rgba(255,0,0,0)',
-        ],
-        transition: {
-          duration: 0.5,
-          times: [0, 0.2, 0.5, 1],
-        }
-      });
-    };
-
-    // Initial glitch at 1.2s
-    const initialGlitch = setTimeout(() => {
-      triggerGlitch();
-    }, 1200);
-
-    // Random glitches every 10-15 seconds
-    const randomGlitch = setInterval(() => {
-      const randomDelay = Math.random() * 5000 + 10000; // 10-15 seconds
-      setTimeout(() => {
-        triggerGlitch();
-      }, randomDelay);
-    }, 15000);
-
-    return () => {
-      clearTimeout(initialGlitch);
-      clearInterval(randomGlitch);
-    };
-  }, [glitchControls]);
-
-  // Typing animation for bio
-  useEffect(() => {
-    const typingDelay = setTimeout(() => {
-      setIsTyping(true);
-      let index = 0;
-      const typingInterval = setInterval(() => {
-        if (index < fullBio.length) {
-          setDisplayedText(fullBio.slice(0, index + 1));
-          index++;
-        } else {
-          clearInterval(typingInterval);
-          setIsTyping(false);
-        }
-      }, 50);
-
-      return () => clearInterval(typingInterval);
-    }, 1500);
-
-    return () => clearTimeout(typingDelay);
-  }, [fullBio]);
 
   const links = [
     {
@@ -155,7 +93,7 @@ const Hero = () => {
 
   return (
     <div className="relative z-10 min-h-screen flex items-center justify-center p-4 sm:p-6 scanlines">
-      <div className="max-w-md w-full px-2 sm:px-0">
+      <TiltCard className="max-w-md w-full px-2 sm:px-0">
         {/* Avatar with glow pulse */}
         <motion.div
           variants={avatarVariants}
@@ -206,41 +144,37 @@ const Hero = () => {
           </motion.div>
         </motion.div>
 
-        {/* Name - clean and visible */}
-        <motion.h1
+        {/* Name - Hacker Scramble */}
+        <motion.div
           variants={nameVariants}
           initial="hidden"
           animate="visible"
-          className="text-5xl sm:text-6xl md:text-7xl font-bold text-center mb-4 sm:mb-6
-                     tracking-tight"
-          style={{
-            color: '#ffffff',
-            fontFamily: 'Space Grotesk, sans-serif',
-            textShadow: '0 0 30px hsla(var(--hue), 100%, 50%, 0.5), 0 0 60px hsla(var(--hue), 100%, 50%, 0.3)'
-          }}
+          className="text-center mb-4 sm:mb-6"
         >
-          KAADZ
-        </motion.h1>
+          <h1 
+            className="text-5xl sm:text-6xl md:text-7xl font-bold tracking-tight inline-block"
+            style={{
+              color: '#ffffff',
+              fontFamily: 'Space Grotesk, sans-serif',
+              textShadow: '0 0 30px hsla(var(--hue), 100%, 50%, 0.5), 0 0 60px hsla(var(--hue), 100%, 50%, 0.3)'
+            }}
+          >
+            <HackerText text="KAADZ" speed={50} />
+          </h1>
+        </motion.div>
 
-        {/* Bio with typing effect */}
+        {/* Bio */}
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 1.3, duration: 0.6 }}
-          className="text-center mb-6 sm:mb-8 min-h-[4.5rem] sm:min-h-[5rem] px-2 sm:px-4"
+          className="text-center mb-6 sm:mb-8 px-2 sm:px-4 flex flex-col items-center justify-center gap-1"
         >
-          <p className="text-sm sm:text-base md:text-lg text-gray-300 whitespace-pre-line leading-relaxed">
-            {displayedText}
-            {isTyping && (
-              <motion.span 
-                className="text-matrix-green ml-1"
-                animate={{ opacity: [1, 0] }}
-                transition={{ duration: 0.8, repeat: Infinity }}
-              >
-                █
-              </motion.span>
-            )}
-          </p>
+          {bio.map((line, index) => (
+            <p key={index} className="text-sm sm:text-base md:text-lg text-gray-300 leading-relaxed">
+              {line}
+            </p>
+          ))}
         </motion.div>
 
         {/* Social Icons */}
@@ -264,7 +198,7 @@ const Hero = () => {
             />
           ))}
         </div>
-      </div>
+      </TiltCard>
     </div>
   );
 };

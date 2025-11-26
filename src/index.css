@@ -5,15 +5,14 @@
 @tailwind components;
 @tailwind utilities;
 
-/* RGB Color Cycling Animation */
+/* RGB Color Cycling Animation - Light Colors Only */
 @keyframes rgb-cycle {
   0% { --hue: 120; } /* Green */
-  14% { --hue: 180; } /* Cyan */
-  28% { --hue: 240; } /* Blue */
-  42% { --hue: 280; } /* Purple */
-  57% { --hue: 320; } /* Pink */
-  71% { --hue: 360; } /* Red */
-  85% { --hue: 60; } /* Yellow */
+  16% { --hue: 180; } /* Cyan */
+  33% { --hue: 280; } /* Purple */
+  50% { --hue: 320; } /* Pink */
+  66% { --hue: 360; } /* Red */
+  83% { --hue: 60; } /* Yellow */
   100% { --hue: 120; } /* Back to Green */
 }
 
@@ -229,11 +228,12 @@ body::before {
 /* RGB colorize filter for white images */
 .avatar-rgb {
   filter: 
+    contrast(1.1)
     brightness(0.9)
     sepia(1)
     hue-rotate(calc((var(--hue) - 50) * 1deg))
-    saturate(5)
-    brightness(1.1);
+    saturate(3.5)
+    brightness(1.0);
   transition: filter 0.1s linear;
 }
 

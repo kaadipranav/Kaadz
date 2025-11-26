@@ -1,81 +1,95 @@
-import { useEffect, useState } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import { useEffect, useRef } from 'react';
 
 const CursorTrail = () => {
-  const [particles, setParticles] = useState([]);
-  const [isDesktop, setIsDesktop] = useState(true);
-  
+  const canvasRef = useRef(null);
+  const particles = useRef([]);
+  const mouse = useRef({ x: 0, y: 0 });
+  const isMoving = useRef(false);
+  const lastMoveTimeout = useRef(null);
+
   useEffect(() => {
-    // Only show on desktop
-    const checkDesktop = () => setIsDesktop(window.innerWidth > 768);
-    checkDesktop();
-    window.addEventListener('resize', checkDesktop);
-    return () => window.removeEventListener('resize', checkDesktop);
-  }, []);
-  
-  useEffect(() => {
-    if (!isDesktop) return;
-    
-    let particleId = 0;
-    
-    const handleMouseMove = (e) => {
-      // More aggressive throttle for better performance (only 20% of moves create particles)
-      if (Math.random() > 0.2) return;
-      
-      const newParticle = {
-        id: particleId++,
-        x: e.clientX,
-        y: e.clientY,
-        char: String.fromCharCode(0x30A0 + Math.random() * 96), // Random katakana
-        velocity: {
-          x: (Math.random() - 0.5) * 30,
-          y: Math.random() * -40 - 10
-        }
-      };
-      
-      // Keep max 12 particles for performance
-      setParticles(prev => [...prev.slice(-12), newParticle]);
-      
-      // Remove particle after animation
-      setTimeout(() => {
-        setParticles(prev => prev.filter(p => p.id !== newParticle.id));
-      }, 1000);
+    const canvas = canvasRef.current;
+    const ctx = canvas.getContext('2d');
+    let animationFrameId;
+
+    const resizeCanvas = () => {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
     };
-    
+
+    window.addEventListener('resize', resizeCanvas);
+    resizeCanvas();
+
+    const handleMouseMove = (e) => {
+      mouse.current = { x: e.clientX, y: e.clientY };
+      isMoving.current = true;
+      
+      // Create particles on move
+      for (let i = 0; i < 2; i++) {
+        particles.current.push({
+          x: e.clientX,
+          y: e.clientY,
+          vx: (Math.random() - 0.5) * 2,
+          vy: (Math.random() - 0.5) * 2,
+          size: Math.random() * 2 + 1,
+          life: 1,
+          decay: Math.random() * 0.02 + 0.01,
+          color: getComputedStyle(document.documentElement).getPropertyValue('--hue').trim() || '120'
+        });
+      }
+
+      clearTimeout(lastMoveTimeout.current);
+      lastMoveTimeout.current = setTimeout(() => {
+        isMoving.current = false;
+      }, 100);
+    };
+
     window.addEventListener('mousemove', handleMouseMove);
-    return () => window.removeEventListener('mousemove', handleMouseMove);
-  }, [isDesktop]);
-  
-  if (!isDesktop) return null;
-  
+
+    const animate = () => {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      
+      // Get current global hue
+      const currentHue = getComputedStyle(document.documentElement).getPropertyValue('--hue').trim() || '120';
+
+      particles.current.forEach((p, index) => {
+        p.x += p.vx;
+        p.y += p.vy;
+        p.life -= p.decay;
+        p.size *= 0.95;
+
+        if (p.life <= 0 || p.size < 0.1) {
+          particles.current.splice(index, 1);
+        } else {
+          ctx.beginPath();
+          ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
+          // Use the particle's creation hue or current hue? Let's use current for full RGB sync
+          ctx.fillStyle = `hsla(${currentHue}, 100%, 50%, ${p.life})`;
+          ctx.fill();
+          
+          // Glow
+          ctx.shadowBlur = 10;
+          ctx.shadowColor = `hsla(${currentHue}, 100%, 50%, 0.5)`;
+        }
+      });
+
+      animationFrameId = requestAnimationFrame(animate);
+    };
+
+    animate();
+
+    return () => {
+      window.removeEventListener('resize', resizeCanvas);
+      window.removeEventListener('mousemove', handleMouseMove);
+      cancelAnimationFrame(animationFrameId);
+    };
+  }, []);
+
   return (
-    <div className="fixed inset-0 pointer-events-none z-50 overflow-hidden">
-      <AnimatePresence>
-        {particles.map(particle => (
-          <motion.span
-            key={particle.id}
-            initial={{ 
-              x: particle.x, 
-              y: particle.y, 
-              opacity: 1, 
-              scale: 1 
-            }}
-            animate={{ 
-              x: particle.x + particle.velocity.x,
-              y: particle.y + particle.velocity.y,
-              opacity: 0,
-              scale: 0.5
-            }}
-            exit={{ opacity: 0 }}
-            transition={{ duration: 1, ease: "easeOut" }}
-            className="absolute text-matrix-green font-mono text-lg pointer-events-none"
-            style={{ textShadow: '0 0 10px hsla(var(--hue), 100%, 50%, 0.8)' }}
-          >
-            {particle.char}
-          </motion.span>
-        ))}
-      </AnimatePresence>
-    </div>
+    <canvas
+      ref={canvasRef}
+      className="fixed inset-0 pointer-events-none z-50 bg-transparent"
+    />
   );
 };
 

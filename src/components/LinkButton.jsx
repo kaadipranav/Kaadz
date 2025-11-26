@@ -1,5 +1,5 @@
-import { motion } from 'framer-motion';
-import { useState } from 'react';
+import { motion, useMotionValue, useSpring, useTransform } from 'framer-motion';
+import { useState, useRef } from 'react';
 import PropTypes from 'prop-types';
 import { Instagram, Github, Linkedin, Sparkles, Zap } from 'lucide-react';
 
@@ -37,14 +37,43 @@ const getIcon = (iconType, size = 20) => {
 
 const LinkButton = ({ title, url, icon, comingSoon = false, delay = 0 }) => {
   const [isHovered, setIsHovered] = useState(false);
+  const ref = useRef(null);
+  
+  const x = useMotionValue(0);
+  const y = useMotionValue(0);
+  
+  const mouseX = useSpring(x, { stiffness: 150, damping: 15 });
+  const mouseY = useSpring(y, { stiffness: 150, damping: 15 });
+
+  const handleMouseMove = (e) => {
+    if (!ref.current) return;
+    const rect = ref.current.getBoundingClientRect();
+    const width = rect.width;
+    const height = rect.height;
+    const mouseXFromCenter = e.clientX - rect.left - width / 2;
+    const mouseYFromCenter = e.clientY - rect.top - height / 2;
+    
+    x.set(mouseXFromCenter * 0.1); // Magnetic pull strength
+    y.set(mouseYFromCenter * 0.1);
+  };
+
+  const handleMouseLeave = () => {
+    setIsHovered(false);
+    x.set(0);
+    y.set(0);
+  };
 
   return (
     <motion.a
+      ref={ref}
       href={comingSoon ? undefined : url}
       target={comingSoon ? undefined : "_blank"}
       rel="noopener noreferrer"
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
+      style={{ x: mouseX, y: mouseY }}
+      onMouseMove={handleMouseMove}
+      onMouseLeave={handleMouseLeave}
       transition={{ 
         duration: 0.5, 
         delay: delay,
@@ -59,15 +88,16 @@ const LinkButton = ({ title, url, icon, comingSoon = false, delay = 0 }) => {
         transition: { duration: 0.1 }
       }}
       onHoverStart={() => setIsHovered(true)}
-      onHoverEnd={() => setIsHovered(false)}
       className={`relative block w-full px-5 sm:px-6 py-3.5 sm:py-4 min-h-[52px]
                  border border-matrix-green/30 rounded-xl
                  text-white font-medium text-center
                  bg-cyber-black/50 backdrop-blur-sm overflow-hidden
-                 transition-all duration-300 group
+                 transition-colors duration-300 group
                  touch-manipulation
                  ${comingSoon ? 'opacity-50 cursor-not-allowed' : 'hover:border-matrix-green/60 hover:bg-matrix-green/5'}`}
       style={{
+        x: mouseX, 
+        y: mouseY,
         boxShadow: isHovered && !comingSoon
           ? '0 0 30px hsla(var(--hue), 100%, 50%, 0.15), inset 0 0 30px hsla(var(--hue), 100%, 50%, 0.03)'
           : 'none'
