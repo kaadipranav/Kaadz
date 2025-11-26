@@ -26,10 +26,11 @@ const CountingNumber = ({ value, duration = 1.5 }) => {
   return <span ref={ref}>0</span>;
 };
 
-const GlitchyStat = ({ icon: Icon, value, label, suffix = '', delay = 0 }) => {
+const GlitchyStat = ({ icon: Icon, value, label, suffix = '', delay = 0, glitchDigit = false }) => {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: '-50px' });
   const [isGlitching, setIsGlitching] = useState(false);
+  const [glitchingOnesPlace, setGlitchingOnesPlace] = useState(0);
 
   // Random glitch effect
   useEffect(() => {
@@ -44,6 +45,17 @@ const GlitchyStat = ({ icon: Icon, value, label, suffix = '', delay = 0 }) => {
 
     return () => clearInterval(glitchInterval);
   }, [isInView]);
+
+  // Glitching ones place digit for lines of code
+  useEffect(() => {
+    if (!isInView || !glitchDigit) return;
+    
+    const digitInterval = setInterval(() => {
+      setGlitchingOnesPlace(Math.floor(Math.random() * 10));
+    }, 150 + Math.random() * 100);
+
+    return () => clearInterval(digitInterval);
+  }, [isInView, glitchDigit]);
 
   return (
     <motion.div
@@ -82,7 +94,16 @@ const GlitchyStat = ({ icon: Icon, value, label, suffix = '', delay = 0 }) => {
           transition={{ duration: 0.15 }}
           className="text-xl sm:text-2xl font-bold font-mono text-matrix-green"
         >
-          {isInView ? <CountingNumber value={value} /> : '0'}
+          {glitchDigit ? (
+            <>
+              {isInView ? <CountingNumber value={value} /> : '0'}
+              <span className="text-matrix-green" style={{ textShadow: '0 0 8px hsla(var(--hue), 100%, 50%, 0.8)' }}>
+                {glitchingOnesPlace}
+              </span>
+            </>
+          ) : (
+            <>{isInView ? <CountingNumber value={value} /> : '0'}</>
+          )}
           <span className="text-matrix-green/80">{suffix}</span>
         </motion.span>
         
@@ -124,16 +145,24 @@ const AnimatedStats = ({ delay = 0 }) => {
   const stats = [
     { icon: Rocket, value: 8, suffix: '+', label: 'apps shipped' },
     { icon: Coffee, value: 1000, suffix: '+', label: 'cups of coffee' },
-    { icon: GitCommit, value: 2500, suffix: '+', label: 'commits' },
-    { icon: Code2, value: 50, suffix: 'K', label: 'lines of code' },
+    { icon: GitCommit, value: 1000, suffix: '+', label: 'commits' },
+    { icon: Code2, value: 50, suffix: 'K', label: 'lines of code', glitchDigit: true },
   ];
 
   return (
     <motion.div
       ref={containerRef}
-      initial={{ opacity: 0 }}
-      animate={isInView ? { opacity: 1 } : {}}
-      transition={{ delay }}
+      initial={{ opacity: 0, x: -20, filter: 'blur(10px)' }}
+      animate={isInView ? { 
+        opacity: 1, 
+        x: 0,
+        filter: 'blur(0px)',
+      } : {}}
+      transition={{ 
+        delay,
+        duration: 0.4,
+        ease: [0.25, 0.46, 0.45, 0.94]
+      }}
       className="w-full max-w-xl mx-auto px-4 py-8"
     >
       {/* Terminal-style container */}

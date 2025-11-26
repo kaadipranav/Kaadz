@@ -11,6 +11,7 @@ import ClickRipple from './components/ClickRipple'
 import LoadingScreen from './components/LoadingScreen'
 import InteractiveTerminal from './components/InteractiveTerminal'
 import AnimatedStats from './components/AnimatedStats'
+import TechStack from './components/TechStack'
 import { motion, AnimatePresence } from 'framer-motion'
 import './App.css'
 
@@ -80,11 +81,14 @@ function App() {
               <Hero />
               
               {/* Animated Stats Section */}
-              <AnimatedStats delay={3} />
+              <AnimatedStats delay={1.5} />
+              
+              {/* Tech Stack Section */}
+              <TechStack delay={1.8} />
               
               {/* Project Showcase Section */}
               <div className="py-12 sm:py-20">
-                <ProjectShowcase projects={projects} delay={3.5} />
+                <ProjectShowcase projects={projects} delay={3.8} />
               </div>
         
         {/* Footer */}
