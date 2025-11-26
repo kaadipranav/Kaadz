@@ -64,7 +64,7 @@ const SocialIcons = ({ socials, delay = 0 }) => {
           whileHover={{ 
             scale: 1.2, 
             rotate: hoverRotate,
-            boxShadow: '0 0 30px rgba(0, 255, 65, 0.8)'
+            boxShadow: '0 0 30px hsla(var(--hue), 100%, 50%, 0.8)'
           }}
           whileTap={{ scale: 0.9 }}
           className="p-2.5 sm:p-3 rounded-full border-2 border-matrix-green/40 
@@ -75,7 +75,7 @@ const SocialIcons = ({ socials, delay = 0 }) => {
           aria-label={label}
         >
           <div className="text-matrix-green w-5 h-5 sm:w-6 sm:h-6 
-                          group-hover:drop-shadow-[0_0_8px_rgba(0,255,65,0.8)]
+                          group-hover:drop-shadow-[0_0_8px_hsla(var(--hue),100%,50%,0.8)]
                           transition-all duration-300">
             {key === 'twitter' ? <Icon /> : <Icon size={24} />}
           </div>

@@ -58,8 +58,8 @@ const HolographicCard = ({ project, index }) => {
         {/* Animated grid pattern */}
         <div className="absolute inset-0 opacity-10 group-hover:opacity-20 transition-opacity"
              style={{
-               backgroundImage: `linear-gradient(rgba(0,255,65,0.3) 1px, transparent 1px),
-                                 linear-gradient(90deg, rgba(0,255,65,0.3) 1px, transparent 1px)`,
+               backgroundImage: `linear-gradient(hsla(var(--hue), 100%, 50%, 0.3) 1px, transparent 1px),
+                                 linear-gradient(90deg, hsla(var(--hue), 100%, 50%, 0.3) 1px, transparent 1px)`,
                backgroundSize: '20px 20px'
              }} />
         
@@ -83,7 +83,7 @@ const HolographicCard = ({ project, index }) => {
               <motion.div 
                 className="p-2 rounded-lg bg-matrix-green/10 border border-matrix-green/30"
                 animate={isHovered ? { 
-                  boxShadow: ['0 0 10px rgba(0,255,65,0.3)', '0 0 20px rgba(0,255,65,0.6)', '0 0 10px rgba(0,255,65,0.3)']
+                  boxShadow: ['0 0 10px hsla(var(--hue), 100%, 50%, 0.3)', '0 0 20px hsla(var(--hue), 100%, 50%, 0.6)', '0 0 10px hsla(var(--hue), 100%, 50%, 0.3)']
                 } : {}}
                 transition={{ duration: 1.5, repeat: Infinity }}
               >

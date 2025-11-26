@@ -36,7 +36,7 @@ const ClickRipple = () => {
             style={{
               left: ripple.x - 40,
               top: ripple.y - 40,
-              boxShadow: '0 0 20px rgba(0, 255, 65, 0.5)'
+              boxShadow: '0 0 20px hsla(var(--hue), 100%, 50%, 0.5)'
             }}
           />
         ))}

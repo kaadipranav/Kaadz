@@ -62,7 +62,7 @@ const FloatingCode = ({ snippet, startPosition }) => {
       }}
       className="fixed font-mono text-xs sm:text-sm text-matrix-green/40 whitespace-nowrap pointer-events-none select-none"
       style={{ 
-        textShadow: '0 0 10px rgba(0, 255, 65, 0.3)',
+        textShadow: '0 0 10px hsla(var(--hue), 100%, 50%, 0.3)',
         left: startPosition.x,
         zIndex: 1
       }}

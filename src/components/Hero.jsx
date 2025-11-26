@@ -175,10 +175,10 @@ const Hero = () => {
             }}
           >
             <img 
-              src="/avatar.png" 
+              src="/avatar-white.png" 
               alt="Kaadz Avatar" 
               className="w-32 h-32 sm:w-40 sm:h-40 md:w-48 md:h-48 rounded-full object-cover
-                         border-2 sm:border-4 border-matrix-green/30 shadow-neon-green"
+                         border-2 sm:border-4 border-matrix-green/30 shadow-neon-green avatar-rgb"
             />
             {/* Rotating ring effect */}
             <motion.div
@@ -200,7 +200,7 @@ const Hero = () => {
                 }
               }}
               style={{
-                boxShadow: '0 0 20px rgba(0, 255, 65, 0.3)'
+                boxShadow: '0 0 20px hsla(var(--hue), 100%, 50%, 0.3)'
               }}
             />
           </motion.div>
@@ -216,7 +216,7 @@ const Hero = () => {
           style={{
             color: '#ffffff',
             fontFamily: 'Space Grotesk, sans-serif',
-            textShadow: '0 0 30px rgba(0, 255, 65, 0.5), 0 0 60px rgba(0, 255, 65, 0.3)'
+            textShadow: '0 0 30px hsla(var(--hue), 100%, 50%, 0.5), 0 0 60px hsla(var(--hue), 100%, 50%, 0.3)'
           }}
         >
           KAADZ

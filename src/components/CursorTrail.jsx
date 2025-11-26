@@ -69,7 +69,7 @@ const CursorTrail = () => {
             exit={{ opacity: 0 }}
             transition={{ duration: 1, ease: "easeOut" }}
             className="absolute text-matrix-green font-mono text-lg pointer-events-none"
-            style={{ textShadow: '0 0 10px rgba(0, 255, 65, 0.8)' }}
+            style={{ textShadow: '0 0 10px hsla(var(--hue), 100%, 50%, 0.8)' }}
           >
             {particle.char}
           </motion.span>

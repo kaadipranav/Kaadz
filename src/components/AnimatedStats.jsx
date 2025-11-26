@@ -77,7 +77,7 @@ const GlitchyStat = ({ icon: Icon, value, label, suffix = '', delay = 0 }) => {
               '0 0 0 transparent',
             ]
           } : {
-            textShadow: '0 0 10px rgba(0, 255, 65, 0.3)'
+            textShadow: '0 0 10px hsla(var(--hue), 100%, 50%, 0.3)'
           }}
           transition={{ duration: 0.15 }}
           className="text-xl sm:text-2xl font-bold font-mono text-matrix-green"

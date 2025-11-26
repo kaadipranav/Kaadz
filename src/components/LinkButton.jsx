@@ -69,7 +69,7 @@ const LinkButton = ({ title, url, icon, comingSoon = false, delay = 0 }) => {
                  ${comingSoon ? 'opacity-50 cursor-not-allowed' : 'hover:border-matrix-green/60 hover:bg-matrix-green/5'}`}
       style={{
         boxShadow: isHovered && !comingSoon
-          ? '0 0 30px rgba(0, 255, 65, 0.15), inset 0 0 30px rgba(0, 255, 65, 0.03)'
+          ? '0 0 30px hsla(var(--hue), 100%, 50%, 0.15), inset 0 0 30px hsla(var(--hue), 100%, 50%, 0.03)'
           : 'none'
       }}
     >

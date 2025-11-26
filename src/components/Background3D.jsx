@@ -2,14 +2,34 @@ import { Canvas, useFrame } from '@react-three/fiber';
 import { useRef, useMemo, useState, useEffect } from 'react';
 import * as THREE from 'three';
 
+// Helper to get current RGB hue from CSS
+const getRGBColor = () => {
+  const style = getComputedStyle(document.documentElement);
+  const hue = style.getPropertyValue('--hue') || '120';
+  return `hsl(${hue}, 100%, 50%)`;
+};
+
 const MatrixRain = () => {
   const [isMobile, setIsMobile] = useState(false);
+  const [currentColor, setCurrentColor] = useState(new THREE.Color('#00ff41'));
   
   useEffect(() => {
     const checkMobile = () => setIsMobile(window.innerWidth < 768);
     checkMobile();
     window.addEventListener('resize', checkMobile);
     return () => window.removeEventListener('resize', checkMobile);
+  }, []);
+  
+  // Update color based on CSS variable
+  useEffect(() => {
+    const updateColor = () => {
+      const color = getRGBColor();
+      setCurrentColor(new THREE.Color(color));
+    };
+    
+    // Update frequently to match CSS animation
+    const interval = setInterval(updateColor, 100);
+    return () => clearInterval(interval);
   }, []);
   
   const count = isMobile ? 30 : 70; // Optimized particle count for 60fps
@@ -86,9 +106,10 @@ const MatrixRain = () => {
       }
     }
     
-    // Update material opacity for fade effect
+    // Update material opacity for fade effect and color
     if (materialRef.current) {
       materialRef.current.opacity = 0.6 + Math.sin(state.clock.elapsedTime * 0.5) * 0.1;
+      materialRef.current.color = currentColor;
     }
   });
 
@@ -115,7 +136,7 @@ const MatrixRain = () => {
       <pointsMaterial
         ref={materialRef}
         size={0.5}
-        color="#00ff41"
+        color={currentColor}
         map={texture}
         transparent
         opacity={0.7}

@@ -64,7 +64,7 @@ const LoadingScreen = ({ onComplete }) => {
           <div 
             className="absolute inset-0 pointer-events-none opacity-10"
             style={{
-              background: 'repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(0,255,65,0.03) 2px, rgba(0,255,65,0.03) 4px)',
+              background: 'repeating-linear-gradient(0deg, transparent, transparent 2px, hsla(var(--hue), 100%, 50%, 0.03) 2px, hsla(var(--hue), 100%, 50%, 0.03) 4px)',
             }}
           />
 
@@ -128,7 +128,7 @@ const LoadingScreen = ({ onComplete }) => {
                   animate={{ width: `${progress}%` }}
                   transition={{ duration: 0.1 }}
                   style={{
-                    boxShadow: '0 0 10px rgba(0, 255, 65, 0.5)',
+                    boxShadow: '0 0 10px hsla(var(--hue), 100%, 50%, 0.5)',
                   }}
                 />
               </div>
