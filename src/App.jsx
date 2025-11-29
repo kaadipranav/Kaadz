@@ -9,6 +9,7 @@ import WildBackground from './components/WildBackground'
 import HackerStatus from './components/HackerStatus'
 import ClickRipple from './components/ClickRipple'
 import ScanlineEffect from './components/ScanlineEffect'
+import PerformanceToggle from './components/PerformanceToggle'
 import LoadingScreen from './components/LoadingScreen'
 import InteractiveTerminal from './components/InteractiveTerminal'
 import AnimatedStats from './components/AnimatedStats'
@@ -18,6 +19,7 @@ import './App.css'
 
 function App() {
   const [isLoading, setIsLoading] = useState(true)
+  const [isLowPerformance, setIsLowPerformance] = useState(false)
   const projects = [
     {
       title: "AuthorStack",
@@ -64,19 +66,22 @@ function App() {
             {/* Top status bar */}
             <HackerStatus />
 
-            {/* Easter eggs and effects */}
-            <CursorTrail />
+            {/* Easter eggs and effects - Disabled in potato mode */}
+            {!isLowPerformance && <CursorTrail />}
             <KonamiCode />
-            <GlitchOverlay />
-            <ClickRipple />
-            <ScanlineEffect />
+            {!isLowPerformance && <GlitchOverlay />}
+            {!isLowPerformance && <ClickRipple />}
+            {!isLowPerformance && <ScanlineEffect />}
 
             {/* Interactive Terminal */}
             <InteractiveTerminal />
 
-            {/* Backgrounds */}
-            <Background3D />
-            <WildBackground />
+            {/* Backgrounds - Simplified in potato mode */}
+            {!isLowPerformance && <Background3D />}
+            {!isLowPerformance && <WildBackground />}
+            {isLowPerformance && (
+              <div className="fixed inset-0 bg-gradient-to-b from-cyber-black via-[#0a0a0a] to-cyber-black" />
+            )}
 
             {/* Main content */}
             <div className="relative z-10 pt-12">
@@ -135,6 +140,12 @@ function App() {
                 </motion.div>
               </footer>
             </div>
+
+            {/* Performance Toggle Button */}
+            <PerformanceToggle
+              isLowPerf={isLowPerformance}
+              onToggle={() => setIsLowPerformance(!isLowPerformance)}
+            />
           </motion.div>
         )}
       </AnimatePresence>
