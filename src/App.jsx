@@ -1,13 +1,8 @@
 import { useState } from 'react'
-import Background3D from './components/Background3D'
 import Hero from './components/Hero'
 import ProjectShowcase from './components/ProjectShowcase'
-import CursorTrail from './components/CursorTrail'
 import KonamiCode from './components/KonamiCode'
-import GlitchOverlay from './components/GlitchOverlay'
-import WildBackground from './components/WildBackground'
 import HackerStatus from './components/HackerStatus'
-import ClickRipple from './components/ClickRipple'
 import ScanlineEffect from './components/ScanlineEffect'
 import PerformanceToggle from './components/PerformanceToggle'
 import LoadingScreen from './components/LoadingScreen'
@@ -17,6 +12,7 @@ import TechStack from './components/TechStack'
 import Services from './components/Services'
 import SpeedGuarantee from './components/SpeedGuarantee'
 import Process from './components/Process'
+import AvailabilityBadge from './components/AvailabilityBadge'
 import { motion, AnimatePresence } from 'framer-motion'
 import './App.css'
 
@@ -70,21 +66,17 @@ function App() {
             <HackerStatus />
 
             {/* Easter eggs and effects - Disabled in potato mode */}
-            {!isLowPerformance && <CursorTrail />}
             <KonamiCode />
-            {!isLowPerformance && <GlitchOverlay />}
-            {!isLowPerformance && <ClickRipple />}
             {!isLowPerformance && <ScanlineEffect />}
 
             {/* Interactive Terminal */}
             <InteractiveTerminal />
 
-            {/* Backgrounds - Simplified in potato mode */}
-            {!isLowPerformance && <Background3D />}
-            {!isLowPerformance && <WildBackground />}
-            {isLowPerformance && (
-              <div className="fixed inset-0 bg-gradient-to-b from-cyber-black via-[#0a0a0a] to-cyber-black" />
-            )}
+            {/* Availability Badge */}
+            <AvailabilityBadge />
+
+            {/* Simple gradient background - much faster */}
+            <div className="fixed inset-0 bg-gradient-to-b from-cyber-black via-[#0a0a0a] to-cyber-black" />
 
             {/* Main content */}
             <div className="relative z-10 pt-12">
@@ -142,7 +134,7 @@ function App() {
                   {/* Contact Links */}
                   <div className="flex flex-wrap justify-center gap-4 sm:gap-6 mb-10">
                     <motion.a
-                      href="mailto:your-email@example.com"
+                      href="mailto:kaadipranav@gmail.com"
                       whileHover={{ scale: 1.05 }}
                       className="text-matrix-green hover:text-white transition-colors font-mono text-sm sm:text-base"
                       style={{ textShadow: '0 0 10px hsla(var(--hue), 100%, 50%, 0.5)' }}

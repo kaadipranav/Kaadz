@@ -114,19 +114,21 @@ const ServiceCard = ({ title, price, features, icon: Icon, delay = 0, tier }) =>
                 </ul>
 
                 {/* CTA Button */}
-                <motion.button
-                    whileHover={{ scale: 1.02 }}
-                    whileTap={{ scale: 0.98 }}
-                    className="w-full mt-6 py-3 px-6 bg-matrix-green/10 border border-matrix-green/30
-                     hover:bg-matrix-green/20 hover:border-matrix-green/60
-                     text-matrix-green font-semibold rounded-lg transition-all duration-300
-                     font-mono text-sm"
-                    style={{
-                        textShadow: '0 0 10px hsla(var(--hue), 100%, 50%, 0.5)'
-                    }}
-                >
-                    GET STARTED →
-                </motion.button>
+                <a href={`mailto:kaadipranav@gmail.com?subject=Let's Build: ${title}&body=Hi! I'm interested in the ${title} package. Let's discuss my project.`}>
+                    <motion.button
+                        whileHover={{ scale: 1.02 }}
+                        whileTap={{ scale: 0.98 }}
+                        className="w-full mt-6 py-3 px-6 bg-matrix-green/10 border border-matrix-green/30
+                       hover:bg-matrix-green/20 hover:border-matrix-green/60
+                       text-matrix-green font-semibold rounded-lg transition-all duration-300
+                       font-mono text-sm cursor-pointer"
+                        style={{
+                            textShadow: '0 0 10px hsla(var(--hue), 100%, 50%, 0.5)'
+                        }}
+                    >
+                        GET STARTED →
+                    </motion.button>
+                </a>
             </div>
 
             {/* Corner decorations */}
@@ -195,7 +197,7 @@ const Services = ({ delay = 0 }) => {
     ];
 
     return (
-        <section id="services" className="py-12 sm:py-20 px-4 relative">
+        <section id="services" className="py-12 sm:py-20 px-4 relative scroll-mt-20">
             <div className="max-w-6xl mx-auto">
                 {/* Section Header */}
                 <motion.div

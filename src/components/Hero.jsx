@@ -26,7 +26,7 @@ const Hero = () => {
     },
     {
       title: "Get a Quote",
-      url: "mailto:your-email@example.com",
+      url: "mailto:kaadipranav@gmail.com",
       icon: "mail"
     },
     {
