@@ -152,46 +152,48 @@ ServiceCard.propTypes = {
 const Services = ({ delay = 0 }) => {
     const services = [
         {
-            title: "24-Hour Landing Page",
-            price: 199,
+            title: "Express",
+            subtitle: "24-Hour Landing",
+            price: 399,
             tier: 'basic',
             icon: Zap,
             features: [
-                "Fully responsive landing page",
-                "Modern UI with animations",
-                "Contact forms + email integration",
+                "Landing page + waitlist",
+                "Analytics integration",
+                "Vercel deployment",
+                "Mobile responsive",
                 "SEO optimized",
-                "Deployed to Vercel/Netlify",
                 "Source code included"
             ]
         },
         {
-            title: "48-Hour MVP Build",
-            price: 349,
+            title: "Launch MVP",
+            subtitle: "48-Hour Build",
+            price: 999,
             tier: 'pro',
             icon: Rocket,
             features: [
-                "Full-stack web app with auth",
-                "Database setup (Supabase/Firebase)",
-                "User dashboard + admin panel",
-                "Payment integration (Stripe)",
+                "Auth + Database setup",
+                "1 core feature built",
+                "Stripe test mode",
+                "User dashboard",
                 "API endpoints",
-                "Deployed + documented"
+                "Full documentation"
             ]
         },
         {
-            title: "72-Hour Full Mini-SaaS",
-            price: 699,
+            title: "Production-Ready",
+            subtitle: "72-Hour Full MVP",
+            price: 1999,
             tier: 'premium',
             icon: Sparkles,
             features: [
-                "Complete SaaS architecture",
-                "User authentication + roles",
-                "AI integration (OpenAI, Claude, etc.)",
-                "Analytics dashboard",
-                "Subscription billing",
+                "Full MVP architecture",
+                "Live Stripe payments",
                 "Email notifications",
-                "Production-ready deployment"
+                "Admin panel",
+                "SEO + Analytics",
+                "Production deployment"
             ]
         }
     ];
@@ -216,7 +218,7 @@ const Services = ({ delay = 0 }) => {
                         }}
                     >
                         <span className="text-matrix-green">&lt;</span>
-                        MY SERVICES
+                        SHIP YOUR MVP IN DAYS
                         <span className="text-matrix-green">/&gt;</span>
                     </motion.h2>
                     <motion.p
@@ -226,7 +228,7 @@ const Services = ({ delay = 0 }) => {
                         viewport={{ once: true }}
                         transition={{ duration: 0.6, delay: delay + 0.2 }}
                     >
-                        Fast execution. Fixed pricing. Zero bureaucracy.
+                        Agencies? $10K+ and 8 weeks. Me? Live revenue tomorrow.
                     </motion.p>
                 </motion.div>
 
