@@ -6,7 +6,7 @@ import PropTypes from 'prop-types';
 const GlitchBullet = () => {
   const [char, setChar] = useState('▸');
   const chars = ['▸', '▹', '►', '▻', '◆', '◇', '●', '○', '■', '□'];
-  
+
   useEffect(() => {
     const interval = setInterval(() => {
       if (Math.random() > 0.7) {
@@ -16,9 +16,9 @@ const GlitchBullet = () => {
     }, 500);
     return () => clearInterval(interval);
   }, []);
-  
+
   return (
-    <span 
+    <span
       className="text-matrix-green font-mono text-sm"
       style={{ textShadow: '0 0 8px hsla(var(--hue), 100%, 50%, 0.8)' }}
     >
@@ -35,12 +35,12 @@ const TechBadge = ({ name, delay = 0 }) => {
       initial={{ opacity: 0, scale: 0.8 }}
       whileInView={{ opacity: 1, scale: 1 }}
       viewport={{ once: true }}
-      transition={{ 
-        duration: 0.5, 
+      transition={{
+        duration: 0.5,
         delay,
         ease: [0.25, 0.46, 0.45, 0.94]
       }}
-      whileHover={{ 
+      whileHover={{
         scale: 1.1,
         transition: { duration: 0.2 }
       }}
@@ -59,7 +59,7 @@ const TechBadge = ({ name, delay = 0 }) => {
         <GlitchBullet />
         <span className="text-sm font-medium text-white/90">{name}</span>
       </div>
-      
+
       {/* Glow pulse on hover */}
       {isHovered && (
         <motion.div
@@ -79,16 +79,20 @@ TechBadge.propTypes = {
 
 const TechStack = ({ delay = 0 }) => {
   const techStack = [
-    'TypeScript',
-    'React',
     'Next.js',
+    'React',
     'Node.js',
+    'Express',
+    'TypeScript',
     'Python',
-    'AI/ML',
     'Tailwind',
+    'Three.js',
+    'Supabase',
+    'Firebase',
     'Prisma',
+    'Stripe',
+    'OpenAI',
     'Vercel',
-    'Git',
   ];
 
   return (
@@ -102,7 +106,7 @@ const TechStack = ({ delay = 0 }) => {
           transition={{ duration: 0.6, delay }}
           className="text-center mb-8 sm:mb-12"
         >
-          <motion.h2 
+          <motion.h2
             className="text-3xl sm:text-4xl font-bold mb-3"
             style={{
               color: '#ffffff',
@@ -114,14 +118,14 @@ const TechStack = ({ delay = 0 }) => {
             Tech Stack
             <span className="text-matrix-green">/&gt;</span>
           </motion.h2>
-          <motion.p 
+          <motion.p
             className="text-gray-400 text-sm sm:text-base"
             initial={{ opacity: 0 }}
             whileInView={{ opacity: 1 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6, delay: delay + 0.2 }}
           >
-            Tools I use to ship fast and break things
+            You bring the idea. I bring the execution.
           </motion.p>
         </motion.div>
 
@@ -137,7 +141,7 @@ const TechStack = ({ delay = 0 }) => {
         </div>
 
         {/* Decorative line */}
-        <motion.div 
+        <motion.div
           className="w-32 h-px bg-gradient-to-r from-transparent via-matrix-green/30 to-transparent mx-auto mt-12"
           initial={{ scaleX: 0 }}
           whileInView={{ scaleX: 1 }}

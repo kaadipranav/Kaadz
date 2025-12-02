@@ -7,31 +7,27 @@ import TiltCard from './TiltCard';
 
 const Hero = () => {
   const bio = [
-    "solo founder · building in public · shipping fast",
-    "AuthorStack · ScriptBoost · 7+ apps deployed",
-    "AI-powered dev · TypeScript enjoyer · @kaad__zz"
+    "I ship MVPs in 24–72 hours. Zero delays. Zero bureaucracy.",
+    "Landing pages · Dashboards · AI-integrated apps",
+    "Next.js · Node.js · AI APIs · Stripe · Supabase"
   ];
 
   const links = [
     {
-      title: "Instagram",
-      url: "https://instagram.com/k.aadz",
-      icon: "instagram"
+      title: "Build Your MVP Fast →",
+      url: "#services",
+      icon: "rocket",
+      primary: true
     },
     {
-      title: "X (Twitter)",
-      url: "https://x.com/kaad_zz",
-      icon: "x"
-    },
-    {
-      title: "AuthorStack",
-      url: "https://authorstack.vercel.app",
+      title: "View Services & Pricing",
+      url: "#services",
       icon: "app"
     },
     {
-      title: "ScriptBoost",
-      url: "https://scriptboost.vercel.app",
-      icon: "app"
+      title: "Get a Quote",
+      url: "mailto:your-email@example.com",
+      icon: "mail"
     },
     {
       title: "GitHub",
@@ -39,10 +35,9 @@ const Hero = () => {
       icon: "github"
     },
     {
-      title: "LinkedIn",
-      url: "#",
-      icon: "linkedin",
-      comingSoon: true
+      title: "X (Twitter)",
+      url: "https://x.com/kaad_zz",
+      icon: "x"
     },
   ];
 
@@ -54,13 +49,13 @@ const Hero = () => {
 
   // Avatar variants with pulse animation
   const avatarVariants = {
-    hidden: { 
-      opacity: 0, 
+    hidden: {
+      opacity: 0,
       scale: 0.5,
       filter: 'blur(10px)'
     },
-    visible: { 
-      opacity: 1, 
+    visible: {
+      opacity: 1,
       scale: 1,
       filter: 'blur(0px)',
       transition: {
@@ -74,13 +69,13 @@ const Hero = () => {
 
   // Name glitch variants
   const nameVariants = {
-    hidden: { 
-      opacity: 0, 
+    hidden: {
+      opacity: 0,
       y: 20,
       filter: 'blur(10px)'
     },
-    visible: { 
-      opacity: 1, 
+    visible: {
+      opacity: 1,
       y: 0,
       filter: 'blur(0px)',
       transition: {
@@ -101,7 +96,7 @@ const Hero = () => {
           animate="visible"
           className="flex justify-center mb-8"
         >
-          <motion.div 
+          <motion.div
             className="avatar-glow relative"
             animate={{
               scale: [1, 1.02, 1],
@@ -112,9 +107,9 @@ const Hero = () => {
               ease: "easeInOut"
             }}
           >
-            <img 
-              src="/avatar-white.png" 
-              alt="Kaadz Avatar" 
+            <img
+              src="/avatar-white.png"
+              alt="Kaadz Avatar"
               className="w-32 h-32 sm:w-40 sm:h-40 md:w-48 md:h-48 rounded-full object-cover
                          border-2 sm:border-4 border-matrix-green/30 shadow-neon-green avatar-rgb"
             />
@@ -151,7 +146,7 @@ const Hero = () => {
           animate="visible"
           className="text-center mb-4 sm:mb-6"
         >
-          <h1 
+          <h1
             className="text-5xl sm:text-6xl md:text-7xl font-bold tracking-tight inline-block"
             style={{
               color: '#ffffff',
@@ -179,7 +174,7 @@ const Hero = () => {
 
         {/* Social Icons */}
         <div className="mb-6 sm:mb-10">
-          <SocialIcons 
+          <SocialIcons
             socials={socials}
             delay={2.0}
           />

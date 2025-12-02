@@ -14,6 +14,9 @@ import LoadingScreen from './components/LoadingScreen'
 import InteractiveTerminal from './components/InteractiveTerminal'
 import AnimatedStats from './components/AnimatedStats'
 import TechStack from './components/TechStack'
+import Services from './components/Services'
+import SpeedGuarantee from './components/SpeedGuarantee'
+import Process from './components/Process'
 import { motion, AnimatePresence } from 'framer-motion'
 import './App.css'
 
@@ -22,31 +25,31 @@ function App() {
   const [isLowPerformance, setIsLowPerformance] = useState(false)
   const projects = [
     {
-      title: "AuthorStack",
-      description: "The ultimate platform for indie authors to discover tools, share resources, and build their writing empire. Like Product Hunt, but for writers.",
-      url: "https://authorstack.vercel.app",
-      type: "SaaS Platform",
-      icon: "sparkles",
-      tech: ["TypeScript", "Next.js", "AI", "Prisma"],
-      status: "Live"
-    },
-    {
-      title: "ScriptBoost",
-      description: "AI-powered script generator for content creators. Generate video scripts, hooks, and storylines in seconds. A fun hobby project that actually works!",
-      url: "https://scriptboost.vercel.app",
+      title: "Demo Project A — AI Notepad",
+      description: "Intelligent note-taking app with AI-powered summarization and tagging. Turns messy notes into structured knowledge. No more lost ideas.",
+      url: "#",
       type: "AI Tool",
-      icon: "zap",
-      tech: ["React", "OpenAI", "Vercel"],
-      status: "Hobby Project"
+      icon: "sparkles",
+      tech: ["Next.js", "OpenAI", "Supabase", "Tailwind"],
+      status: "Demo"
     },
     {
-      title: "More Projects",
-      description: "7+ apps shipped and counting. Building in public, breaking things in private. Each failure is just a feature in disguise.",
-      url: "https://github.com/kaadz",
-      type: "Portfolio",
+      title: "Demo Project B — Micro-CRM",
+      description: "Lightweight CRM for freelancers and small teams. Track clients and deals without enterprise bloat. Simple, fast, effective.",
+      url: "#",
+      type: "SaaS",
+      icon: "zap",
+      tech: ["React", "Node.js", "Firebase", "Stripe"],
+      status: "Demo"
+    },
+    {
+      title: "Demo Project C — Dashboard Analytics",
+      description: "Real-time analytics dashboard with custom metrics. See your data clearly. Make decisions faster.",
+      url: "#",
+      type: "Dashboard",
       icon: "code",
-      tech: ["TypeScript", "AI", "Ship Fast"],
-      status: "Always Building"
+      tech: ["Next.js", "Prisma", "PostgreSQL"],
+      status: "Demo"
     }
   ];
 
@@ -90,15 +93,24 @@ function App() {
               {/* Animated Stats Section */}
               <AnimatedStats delay={1.5} />
 
+              {/* Services Section */}
+              <Services delay={2.0} />
+
+              {/* Speed Guarantee */}
+              <SpeedGuarantee delay={2.5} />
+
               {/* Tech Stack Section */}
-              <TechStack delay={1.8} />
+              <TechStack delay={3.0} />
+
+              {/* Process Section */}
+              <Process delay={3.5} />
 
               {/* Project Showcase Section */}
               <div className="py-12 sm:py-20">
-                <ProjectShowcase projects={projects} delay={3.8} />
+                <ProjectShowcase projects={projects} delay={4.0} />
               </div>
 
-              {/* Footer */}
+              {/* Footer / CTA Section */}
               <footer className="py-10 sm:py-16 text-center relative">
                 {/* Decorative line */}
                 <motion.div
@@ -113,20 +125,54 @@ function App() {
                   whileInView={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.5 }}
                 >
-                  <p className="text-white/30 text-sm mb-4">
-                    Made with{' '}
-                    <motion.span
-                      className="text-matrix-green inline-block"
-                      animate={{ opacity: [0.5, 1, 0.5] }}
-                      transition={{ duration: 2, repeat: Infinity }}
-                    >
-                      passion
-                    </motion.span>
-                    {' '}by{' '}
-                    <span className="text-white/60 font-semibold">Kaadz</span>
+                  {/* Main CTA Headline */}
+                  <h2
+                    className="text-4xl sm:text-5xl font-bold mb-4 text-white font-mono"
+                    style={{
+                      textShadow: '0 0 30px hsla(var(--hue), 100%, 50%, 0.4)'
+                    }}
+                  >
+                    Let's build.
+                  </h2>
+
+                  <p className="text-gray-400 text-lg mb-8">
+                    Got an idea? Need it built fast?
                   </p>
 
-                  <p className="text-white/20 text-xs">
+                  {/* Contact Links */}
+                  <div className="flex flex-wrap justify-center gap-4 sm:gap-6 mb-10">
+                    <motion.a
+                      href="mailto:your-email@example.com"
+                      whileHover={{ scale: 1.05 }}
+                      className="text-matrix-green hover:text-white transition-colors font-mono text-sm sm:text-base"
+                      style={{ textShadow: '0 0 10px hsla(var(--hue), 100%, 50%, 0.5)' }}
+                    >
+                      → Email
+                    </motion.a>
+                    <motion.a
+                      href="https://github.com/kaadipranav"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      whileHover={{ scale: 1.05 }}
+                      className="text-matrix-green hover:text-white transition-colors font-mono text-sm sm:text-base"
+                      style={{ textShadow: '0 0 10px hsla(var(--hue), 100%, 50%, 0.5)' }}
+                    >
+                      → GitHub
+                    </motion.a>
+                    <motion.a
+                      href="https://x.com/kaad_zz"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      whileHover={{ scale: 1.05 }}
+                      className="text-matrix-green hover:text-white transition-colors font-mono text-sm sm:text-base"
+                      style={{ textShadow: '0 0 10px hsla(var(--hue), 100%, 50%, 0.5)' }}
+                    >
+                      → X (Twitter)
+                    </motion.a>
+                    {/* Add Discord/Telegram when ready */}
+                  </div>
+
+                  <p className="text-white/20 text-xs mb-4">
                     © {new Date().getFullYear()} · All rights reserved
                   </p>
 
