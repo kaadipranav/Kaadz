@@ -4,7 +4,6 @@ import ProjectShowcase from './components/ProjectShowcase'
 import KonamiCode from './components/KonamiCode'
 import HackerStatus from './components/HackerStatus'
 import ScanlineEffect from './components/ScanlineEffect'
-import PerformanceToggle from './components/PerformanceToggle'
 import LoadingScreen from './components/LoadingScreen'
 import InteractiveTerminal from './components/InteractiveTerminal'
 import AnimatedStats from './components/AnimatedStats'
@@ -18,7 +17,6 @@ import './App.css'
 
 function App() {
   const [isLoading, setIsLoading] = useState(true)
-  const [isLowPerformance, setIsLowPerformance] = useState(false)
   const projects = [
     {
       title: "Demo Project A — AI Notepad",
@@ -65,9 +63,9 @@ function App() {
             {/* Top status bar */}
             <HackerStatus />
 
-            {/* Easter eggs and effects - Disabled in potato mode */}
+            {/* Easter eggs and effects */}
             <KonamiCode />
-            {!isLowPerformance && <ScanlineEffect />}
+            <ScanlineEffect />
 
             {/* Interactive Terminal */}
             <InteractiveTerminal />
@@ -134,7 +132,7 @@ function App() {
                   {/* Contact Links */}
                   <div className="flex flex-wrap justify-center gap-4 sm:gap-6 mb-10">
                     <motion.a
-                      href="mailto:kaadipranav@gmail.com"
+                      href="mailto:kiwi092020@gmail.com"
                       whileHover={{ scale: 1.05 }}
                       className="text-matrix-green hover:text-white transition-colors font-mono text-sm sm:text-base"
                       style={{ textShadow: '0 0 10px hsla(var(--hue), 100%, 50%, 0.5)' }}
@@ -178,12 +176,6 @@ function App() {
                 </motion.div>
               </footer>
             </div>
-
-            {/* Performance Toggle Button */}
-            <PerformanceToggle
-              isLowPerf={isLowPerformance}
-              onToggle={() => setIsLowPerformance(!isLowPerformance)}
-            />
           </motion.div>
         )}
       </AnimatePresence>

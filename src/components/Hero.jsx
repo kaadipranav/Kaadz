@@ -15,7 +15,7 @@ const Hero = () => {
   const links = [
     {
       title: "Build Your MVP Fast →",
-      url: "#services",
+      url: "https://whop.com/mvpflow",
       icon: "rocket",
       primary: true
     },
@@ -26,7 +26,7 @@ const Hero = () => {
     },
     {
       title: "Get a Quote",
-      url: "mailto:kaadipranav@gmail.com",
+      url: "mailto:kiwi092020@gmail.com",
       icon: "mail"
     },
     {

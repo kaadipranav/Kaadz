@@ -114,7 +114,7 @@ const ServiceCard = ({ title, price, features, icon: Icon, delay = 0, tier }) =>
                 </ul>
 
                 {/* CTA Button */}
-                <a href={`mailto:kaadipranav@gmail.com?subject=Let's Build: ${title}&body=Hi! I'm interested in the ${title} package. Let's discuss my project.`}>
+                <a href={`mailto:kiwi092020@gmail.com?subject=Let's Build: ${title}&body=Hi! I'm interested in the ${title} package. Let's discuss my project.`}>
                     <motion.button
                         whileHover={{ scale: 1.02 }}
                         whileTap={{ scale: 0.98 }}

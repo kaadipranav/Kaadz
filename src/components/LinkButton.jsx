@@ -6,15 +6,15 @@ import { Instagram, Github, Linkedin, Sparkles, Zap } from 'lucide-react';
 // X/Twitter Icon
 const XIcon = ({ size = 20 }) => (
   <svg viewBox="0 0 24 24" width={size} height={size} fill="currentColor">
-    <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
+    <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
   </svg>
 );
 
 // App Icon for custom apps
 const AppIcon = ({ size = 20 }) => (
   <svg viewBox="0 0 24 24" width={size} height={size} fill="none" stroke="currentColor" strokeWidth="2">
-    <rect x="3" y="3" width="18" height="18" rx="4"/>
-    <path d="M12 8v8M8 12h8"/>
+    <rect x="3" y="3" width="18" height="18" rx="4" />
+    <path d="M12 8v8M8 12h8" />
   </svg>
 );
 
@@ -38,10 +38,10 @@ const getIcon = (iconType, size = 20) => {
 const LinkButton = ({ title, url, icon, comingSoon = false, delay = 0 }) => {
   const [isHovered, setIsHovered] = useState(false);
   const ref = useRef(null);
-  
+
   const x = useMotionValue(0);
   const y = useMotionValue(0);
-  
+
   const mouseX = useSpring(x, { stiffness: 150, damping: 15 });
   const mouseY = useSpring(y, { stiffness: 150, damping: 15 });
 
@@ -52,7 +52,7 @@ const LinkButton = ({ title, url, icon, comingSoon = false, delay = 0 }) => {
     const height = rect.height;
     const mouseXFromCenter = e.clientX - rect.left - width / 2;
     const mouseYFromCenter = e.clientY - rect.top - height / 2;
-    
+
     x.set(mouseXFromCenter * 0.1); // Magnetic pull strength
     y.set(mouseYFromCenter * 0.1);
   };
@@ -63,27 +63,45 @@ const LinkButton = ({ title, url, icon, comingSoon = false, delay = 0 }) => {
     y.set(0);
   };
 
+  // Handle smooth scrolling for hash links
+  const handleClick = (e) => {
+    if (url.startsWith('#')) {
+      e.preventDefault();
+      const targetId = url.substring(1);
+      const targetElement = document.getElementById(targetId);
+      if (targetElement) {
+        targetElement.scrollIntoView({
+          behavior: 'smooth',
+          block: 'start'
+        });
+      }
+    }
+  };
+
+  // Determine if link should open in new tab
+  const isExternalLink = !url.startsWith('#') && !url.startsWith('mailto:');
+
   return (
     <motion.a
       ref={ref}
       href={comingSoon ? undefined : url}
-      target={comingSoon ? undefined : "_blank"}
-      rel="noopener noreferrer"
+      target={comingSoon ? undefined : (isExternalLink ? "_blank" : undefined)}
+      rel={isExternalLink ? "noopener noreferrer" : undefined}
+      onClick={comingSoon ? undefined : handleClick}
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
-      style={{ x: mouseX, y: mouseY }}
       onMouseMove={handleMouseMove}
       onMouseLeave={handleMouseLeave}
-      transition={{ 
-        duration: 0.5, 
+      transition={{
+        duration: 0.5,
         delay: delay,
         ease: [0.25, 0.46, 0.45, 0.94]
       }}
-      whileHover={{ 
+      whileHover={{
         scale: comingSoon ? 1 : 1.02,
         transition: { duration: 0.2 }
       }}
-      whileTap={{ 
+      whileTap={{
         scale: comingSoon ? 1 : 0.98,
         transition: { duration: 0.1 }
       }}
@@ -96,7 +114,7 @@ const LinkButton = ({ title, url, icon, comingSoon = false, delay = 0 }) => {
                  touch-manipulation
                  ${comingSoon ? 'opacity-50 cursor-not-allowed' : 'hover:border-matrix-green/60 hover:bg-matrix-green/5'}`}
       style={{
-        x: mouseX, 
+        x: mouseX,
         y: mouseY,
         boxShadow: isHovered && !comingSoon
           ? '0 0 30px hsla(var(--hue), 100%, 50%, 0.15), inset 0 0 30px hsla(var(--hue), 100%, 50%, 0.03)'
@@ -114,19 +132,19 @@ const LinkButton = ({ title, url, icon, comingSoon = false, delay = 0 }) => {
       {/* Content */}
       <span className="relative z-10 flex items-center justify-center gap-3">
         {/* Icon */}
-        <motion.span 
+        <motion.span
           className="text-matrix-green"
           animate={isHovered && !comingSoon ? { scale: [1, 1.1, 1] } : {}}
           transition={{ duration: 0.3 }}
         >
           {getIcon(icon, 20)}
         </motion.span>
-        
+
         {/* Title */}
         <span className="font-semibold tracking-wide text-sm sm:text-base">
           {title}
         </span>
-        
+
         {/* Coming Soon Badge */}
         {comingSoon && (
           <span className="ml-2 px-2 py-0.5 text-[10px] font-medium uppercase tracking-wider 
