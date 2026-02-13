@@ -5,18 +5,18 @@ import TypingText from "./TypingText";
 import StatusPulse from "./StatusPulse";
 
 const metrics = [
-  { label: "Active Projects", value: "3" },
-  { label: "Experiments Run", value: "12+" },
+  { label: "Active Projects", value: "4" },
+  { label: "Shipped", value: "6+" },
   { label: "Lines Shipped", value: "50k+" },
 ];
 
 export default function Hero() {
   return (
     <section className="relative min-h-screen flex items-center justify-center px-6">
-      <div className="max-w-5xl w-full mx-auto pt-24">
-        <div className="grid md:grid-cols-5 gap-12 items-center">
+      <div className="max-w-6xl w-full mx-auto pt-32">
+        <div className="grid md:grid-cols-5 gap-16 items-center">
           {/* Left — Main content */}
-          <div className="md:col-span-3 space-y-8">
+          <div className="md:col-span-3 space-y-10">
             {/* Status bar */}
             <motion.div
               initial={{ opacity: 0, x: -20 }}

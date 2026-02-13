@@ -38,26 +38,26 @@ const activeWork: ActiveItem[] = [
     updated: "Now",
   },
   {
-    title: "Prompt Forge — Prototype",
+    title: "Ghostwriter — Client Work",
     description:
-      "Early experiments with version-controlled prompt chains. Testing scoring algorithms.",
-    status: "experiment",
-    progress: 20,
-    updated: "3 days ago",
+      "Active ghostwriting engagements for startup founders. Technical content and landing pages.",
+    status: "live",
+    progress: 75,
+    updated: "This week",
   },
 ];
 
 export default function CurrentlyBuilding() {
   return (
-    <section id="building" className="relative px-6 py-24 md:py-32">
-      <div className="max-w-5xl mx-auto">
+    <section id="building" className="relative px-6 py-32 md:py-44">
+      <div className="max-w-6xl mx-auto">
         <SectionHeader
           command="ps aux | grep active"
           title="Currently Building"
           subtitle="Live work. Updated as things ship."
         />
 
-        <div className="space-y-4">
+        <div className="space-y-5">
           {activeWork.map((item, i) => (
             <motion.div
               key={item.title}
@@ -65,7 +65,7 @@ export default function CurrentlyBuilding() {
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.4, delay: i * 0.1 }}
-              className="group border border-card-border rounded-xl bg-card/60 backdrop-blur-sm p-5 hover:border-accent/20 transition-all"
+              className="group border border-card-border rounded-xl bg-card/60 backdrop-blur-sm p-6 hover:border-accent/20 transition-all"
             >
               <div className="flex items-start justify-between gap-4 mb-3">
                 <div className="space-y-1 flex-1">

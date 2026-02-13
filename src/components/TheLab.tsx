@@ -35,45 +35,45 @@ const projects: Project[] = [
     ],
   },
   {
-    name: "ShipKit",
-    tagline: "Boilerplate Killer",
-    problem: "Starting new projects wastes hours on the same setup every time.",
-    solution: "CLI tool that scaffolds production-ready full-stack apps with auth, DB, and deployment in one command.",
-    impact: "0 to deployed in under 5 minutes.",
-    status: "experiment",
-    tech: ["Node.js", "CLI", "Templates"],
-  },
-  {
-    name: "Prompt Forge",
-    tagline: "Prompt Engineering Toolkit",
-    problem: "Prompt iteration is manual and results aren't tracked.",
-    solution: "Version-controlled prompt testing with A/B comparison, scoring, and reusable chains.",
-    impact: "Ship better prompts, faster. Every iteration logged.",
-    status: "experiment",
-    tech: ["TypeScript", "LangChain", "Redis"],
-  },
-  {
-    name: "DevPulse",
-    tagline: "Developer Activity Dashboard",
-    problem: "Hard to track shipping velocity and coding patterns across tools.",
-    solution: "Aggregates GitHub commits, PRs, and deploy data into a single dashboard with streaks and insights.",
-    impact: "Know exactly how much you shipped this week.",
+    name: "AuthorStack",
+    tagline: "Unified Author Dashboard",
+    problem: "Authors selling on multiple platforms have no single source of truth for sales, royalties, and analytics.",
+    solution: "Unified dashboard pulling from KDP and other platforms — sales data, royalty tracking, and performance analytics in one place.",
+    impact: "One dashboard to rule all publishing platforms.",
     status: "shipped",
-    tech: ["React", "GitHub API", "Vercel"],
+    tech: ["React", "Node.js", "KDP API", "PostgreSQL"],
+  },
+  {
+    name: "Ghostwriter",
+    tagline: "Ghostwriting for Startups",
+    problem: "Startups need content that sounds like them — not generic AI slop or overpriced agencies.",
+    solution: "Ghostwriting service tailored for startup founders. Technical content, landing pages, and thought leadership.",
+    impact: "Shipped content for real startups. Words that convert.",
+    status: "live",
+    tech: ["Content", "Startups", "Copywriting"],
+  },
+  {
+    name: "Freelance Engineering",
+    tagline: "Upwork — Full-Stack",
+    problem: "Businesses need fast, reliable devs who actually ship — not agencies with 6-week timelines.",
+    solution: "Full-stack freelancing on Upwork. Quick turnarounds on web apps, automations, and integrations.",
+    impact: "Real clients, real deadlines, real code in production.",
+    status: "live",
+    tech: ["Next.js", "Python", "Automation", "APIs"],
   },
 ];
 
 export default function TheLab() {
   return (
-    <section id="lab" className="relative px-6 py-24 md:py-32">
-      <div className="max-w-5xl mx-auto">
+    <section id="lab" className="relative px-6 py-32 md:py-44">
+      <div className="max-w-6xl mx-auto">
         <SectionHeader
           command="ls ~/lab"
           title="The Lab"
           subtitle="Products and experiments. Each one started with a real problem."
         />
 
-        <div className="grid md:grid-cols-2 gap-4">
+        <div className="grid md:grid-cols-2 gap-6">
           {projects.map((project) => (
             <GlowCard
               key={project.name}
@@ -88,7 +88,7 @@ export default function TheLab() {
                   : "rgba(168, 85, 247, 0.12)"
               }
             >
-              <div className="space-y-4">
+              <div className="space-y-5">
                 {/* Header */}
                 <div className="flex items-start justify-between">
                   <div>
@@ -101,7 +101,7 @@ export default function TheLab() {
                 </div>
 
                 {/* Problem → Solution → Impact */}
-                <div className="space-y-3 text-sm">
+                <div className="space-y-4 text-sm">
                   <div>
                     <span className="text-accent font-mono text-xs">
                       PROBLEM

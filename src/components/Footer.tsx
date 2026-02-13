@@ -26,7 +26,7 @@ export default function Footer() {
               GitHub
             </a>
             <a
-              href="https://twitter.com/kaadipranav"
+              href="https://x.com/kaad_zz"
               target="_blank"
               rel="noopener noreferrer"
               className="text-muted hover:text-accent text-sm font-mono transition-colors"

@@ -5,21 +5,21 @@ import SectionHeader from "./SectionHeader";
 
 export default function About() {
   return (
-    <section id="about" className="relative px-6 py-24 md:py-32">
-      <div className="max-w-5xl mx-auto">
+    <section id="about" className="relative px-6 py-32 md:py-44">
+      <div className="max-w-6xl mx-auto">
         <SectionHeader
           command="whoami"
           title="About"
         />
 
-        <div className="grid md:grid-cols-2 gap-12 items-start">
+        <div className="grid md:grid-cols-2 gap-16 items-start">
           {/* Text */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.5 }}
-            className="space-y-5"
+            className="space-y-6"
           >
             <p className="text-muted-light text-base leading-relaxed">
               I build products. Not tutorials, not clones — real tools that solve
@@ -59,7 +59,7 @@ export default function About() {
               </span>
             </div>
 
-            <div className="p-5 font-mono text-sm space-y-3">
+            <div className="p-6 font-mono text-sm space-y-4">
               <div>
                 <span className="text-accent">→</span>{" "}
                 <span className="text-muted">focus:</span>{" "}

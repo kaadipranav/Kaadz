@@ -15,7 +15,7 @@ export default function SectionHeader({ command, title, subtitle }: SectionHeade
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
       transition={{ duration: 0.5 }}
-      className="mb-12"
+      className="mb-16"
     >
       <div className="flex items-center gap-3 mb-3">
         <span className="text-accent font-mono text-sm">{">"}</span>

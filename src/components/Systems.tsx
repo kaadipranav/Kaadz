@@ -54,15 +54,15 @@ const itemVariants = {
 
 export default function Systems() {
   return (
-    <section id="systems" className="relative px-6 py-24 md:py-32">
-      <div className="max-w-5xl mx-auto">
+    <section id="systems" className="relative px-6 py-32 md:py-44">
+      <div className="max-w-6xl mx-auto">
         <SectionHeader
           command="cat systems.yml"
           title="Systems I Use"
           subtitle="How I move fast. Opinionated stack, zero friction."
         />
 
-        <div className="grid md:grid-cols-3 gap-6">
+        <div className="grid md:grid-cols-3 gap-10">
           {systems.map((category) => (
             <motion.div
               key={category.title}
