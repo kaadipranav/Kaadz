@@ -31,7 +31,7 @@ export default function Navbar() {
           : "bg-transparent"
       }`}
     >
-      <div className="max-w-5xl mx-auto px-6 h-16 flex items-center justify-between">
+      <div className="max-w-5xl mx-auto px-8 md:px-12 h-16 flex items-center justify-between">
         {/* Logo */}
         <a href="#" className="flex items-center gap-1 group">
           <span className="text-lg font-bold tracking-tighter text-foreground group-hover:text-accent transition-colors">
@@ -99,7 +99,7 @@ export default function Navbar() {
             exit={{ opacity: 0, height: 0 }}
             className="md:hidden bg-background/95 backdrop-blur-md border-b border-card-border overflow-hidden"
           >
-            <div className="px-6 py-4 space-y-3">
+            <div className="px-8 md:px-12 py-4 space-y-3">
               {navItems.map((item) => (
                 <a
                   key={item.label}
