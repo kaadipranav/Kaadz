@@ -53,7 +53,7 @@ export default function TypingText({
       {currentText}
       <motion.span
         animate={{ opacity: [1, 0] }}
-        transition={{ duration: 0.5, repeat: Infinity, ease: "steps(1)" }}
+        transition={{ duration: 0.5, repeat: Infinity, ease: "linear" }}
         className="text-accent"
       >
         _
