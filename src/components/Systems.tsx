@@ -54,8 +54,8 @@ const itemVariants = {
 
 export default function Systems() {
   return (
-    <section id="systems" className="relative px-8 md:px-12 py-32 md:py-44">
-      <div className="max-w-5xl mx-auto">
+    <section id="systems" className="relative py-32 md:py-44">
+      <div className="max-w-5xl mx-auto px-8 md:px-12">
         <SectionHeader
           command="cat systems.yml"
           title="Systems I Use"

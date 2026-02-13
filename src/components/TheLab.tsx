@@ -65,8 +65,8 @@ const projects: Project[] = [
 
 export default function TheLab() {
   return (
-    <section id="lab" className="relative px-8 md:px-12 py-32 md:py-44">
-      <div className="max-w-5xl mx-auto">
+    <section id="lab" className="relative py-32 md:py-44">
+      <div className="max-w-5xl mx-auto px-8 md:px-12">
         <SectionHeader
           command="ls ~/lab"
           title="The Lab"
