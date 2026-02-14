@@ -66,7 +66,7 @@ export default function GitHubStats() {
   if (loading) {
     return (
       <section id="github" className="relative w-full py-32 md:py-44">
-        <div className="max-w-5xl mx-auto px-8 md:px-12">
+        <div className="max-w-5xl w-full mx-auto px-8 md:px-12">
           <SectionHeader command="curl api.github.com/users/kaadipranav" title="GitHub" subtitle="Fetching stats..." />
         </div>
       </section>
@@ -100,7 +100,7 @@ export default function GitHubStats() {
 
   return (
     <section id="github" className="relative w-full py-32 md:py-44">
-      <div className="max-w-5xl mx-auto px-8 md:px-12">
+      <div className="max-w-5xl w-full mx-auto px-8 md:px-12">
         <SectionHeader
           command="curl api.github.com/users/kaadipranav"
           title="GitHub"

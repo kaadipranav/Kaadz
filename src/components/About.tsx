@@ -6,7 +6,7 @@ import SectionHeader from "./SectionHeader";
 export default function About() {
   return (
     <section id="about" className="relative w-full py-32 md:py-44">
-      <div className="max-w-5xl mx-auto px-8 md:px-12">
+      <div className="max-w-5xl w-full mx-auto px-8 md:px-12">
         <SectionHeader
           command="whoami"
           title="About"
