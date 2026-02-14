@@ -49,7 +49,7 @@ const activeWork: ActiveItem[] = [
 
 export default function CurrentlyBuilding() {
   return (
-    <section id="building" className="relative py-32 md:py-44">
+    <section id="building" className="relative w-full py-32 md:py-44">
       <div className="max-w-5xl mx-auto px-8 md:px-12">
         <SectionHeader
           command="ps aux | grep active"

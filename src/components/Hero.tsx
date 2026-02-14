@@ -12,7 +12,7 @@ const metrics = [
 
 export default function Hero() {
   return (
-    <section className="relative min-h-screen flex items-center justify-center">
+    <section className="relative w-full min-h-screen flex items-center justify-center">
       <div className="max-w-5xl w-full mx-auto px-8 md:px-12 pt-32">
         <div className="grid md:grid-cols-5 gap-16 items-center">
           {/* Left — Main content */}
