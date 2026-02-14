@@ -1,27 +1,23 @@
-import GridBackground from "@/components/GridBackground";
-import Navbar from "@/components/Navbar";
-import Hero from "@/components/Hero";
-import TheLab from "@/components/TheLab";
-import Systems from "@/components/Systems";
-import CurrentlyBuilding from "@/components/CurrentlyBuilding";
-import GitHubStats from "@/components/GitHubStats";
-import About from "@/components/About";
-import Footer from "@/components/Footer";
+﻿import { HeroControlRoom } from "@/components/HeroControlRoom";
+import { LabGrid } from "@/components/LabGrid";
+import { SystemsStrip } from "@/components/SystemsStrip";
+import { CurrentlyBuilding } from "@/components/CurrentlyBuilding";
+import { GithubIntel } from "@/components/GithubIntel";
+import { AboutMinimal } from "@/components/AboutMinimal";
 
 export default function Home() {
   return (
-    <>
-      <GridBackground />
-      <Navbar />
-      <main className="relative z-10 w-full">
-        <Hero />
-        <TheLab />
-        <Systems />
-        <CurrentlyBuilding />
-        <GitHubStats />
-        <About />
-      </main>
-      <Footer />
-    </>
+    <main className="site-shell">
+      <div className="ambient-grid" aria-hidden="true" />
+      <div className="ambient-glow ambient-glow-a" aria-hidden="true" />
+      <div className="ambient-glow ambient-glow-b" aria-hidden="true" />
+
+      <HeroControlRoom />
+      <LabGrid />
+      <SystemsStrip />
+      <CurrentlyBuilding />
+      <GithubIntel />
+      <AboutMinimal />
+    </main>
   );
 }
