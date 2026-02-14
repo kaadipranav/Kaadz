@@ -1,4 +1,4 @@
-﻿const labProjects = [
+const labProjects = [
   {
     name: "WatchLLM",
     stage: "Active",

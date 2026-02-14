@@ -1,4 +1,4 @@
-﻿export function GithubIntel() {
+export function GithubIntel() {
   return (
     <section className="section" id="github">
       <div className="section-head">

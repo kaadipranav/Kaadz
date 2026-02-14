@@ -1,4 +1,4 @@
-﻿export function AboutMinimal() {
+export function AboutMinimal() {
   return (
     <section className="section" id="about">
       <div className="card about-card">

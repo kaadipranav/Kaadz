@@ -1,4 +1,4 @@
-﻿const systems = [
+const systems = [
   "Idea -> prototype in 24 hours",
   "Telemetry first, features second",
   "Automated checks before every push",

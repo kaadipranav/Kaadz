@@ -1,4 +1,4 @@
-﻿const missionSignals = [
+const missionSignals = [
   "Ship weekly experiments",
   "Deploy product-grade telemetry",
   "Validate with live user behavior"

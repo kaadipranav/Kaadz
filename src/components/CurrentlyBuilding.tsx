@@ -1,4 +1,4 @@
-﻿const activeWork = [
+const activeWork = [
   "WatchLLM event correlation UX",
   "Provider-level reliability scoring",
   "Self-serve experiment console"

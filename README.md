@@ -1,4 +1,4 @@
-﻿# Kaadz
+# Kaadz
 
 Dark, immersive founder operating lab built with Next.js.
 

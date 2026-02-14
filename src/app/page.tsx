@@ -1,4 +1,4 @@
-﻿import { HeroControlRoom } from "@/components/HeroControlRoom";
+import { HeroControlRoom } from "@/components/HeroControlRoom";
 import { LabGrid } from "@/components/LabGrid";
 import { SystemsStrip } from "@/components/SystemsStrip";
 import { CurrentlyBuilding } from "@/components/CurrentlyBuilding";
