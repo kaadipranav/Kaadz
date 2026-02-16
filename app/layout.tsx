@@ -2,8 +2,14 @@ import type { Metadata } from "next";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "kaadz.me — Personal Lab",
-  description: "Founder + hacker operating system. Real products, real experiments.",
+  title: "kaadz — builder, hacker, founder",
+  description: "Shipping real products. Not tutorials. Building the future one experiment at a time.",
+  keywords: ["developer", "founder", "hacker", "portfolio", "AI", "full-stack"],
+  openGraph: {
+    title: "kaadz — builder, hacker, founder",
+    description: "Shipping real products. Not tutorials.",
+    type: "website",
+  },
 };
 
 export default function RootLayout({
@@ -13,8 +19,15 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body>{children}</body>
+      <head>
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
+        <link
+          href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&family=JetBrains+Mono:wght@300;400;500&display=swap"
+          rel="stylesheet"
+        />
+      </head>
+      <body className="antialiased">{children}</body>
     </html>
   );
 }
-

@@ -6,6 +6,7 @@ import { ExternalLink, Activity, BookOpen, PenTool } from 'lucide-react';
 const projects = [
   {
     name: 'WatchLLM',
+    tagline: 'AI Observability Platform',
     status: 'Active',
     problem: 'AI observability is fragmented and expensive',
     solution: 'Unified monitoring platform for LLM applications',
@@ -13,11 +14,11 @@ const projects = [
     link: '#',
     featured: true,
     icon: Activity,
-    accent: 'blue',
-    layout: 'wide',
+    number: '01',
   },
   {
     name: 'AuthorStack',
+    tagline: 'Book Sales Dashboard',
     status: 'Archived',
     problem: 'Authors struggle managing sales across platforms',
     solution: 'Unified dashboard for multi-platform book sales',
@@ -25,11 +26,11 @@ const projects = [
     link: '#',
     featured: false,
     icon: BookOpen,
-    accent: 'purple',
-    layout: 'tall',
+    number: '02',
   },
   {
     name: 'Ghostwriter',
+    tagline: 'Technical Content Service',
     status: 'Active',
     problem: 'Startups need quality content fast',
     solution: 'Ghostwriting service for technical content',
@@ -37,160 +38,156 @@ const projects = [
     link: '#',
     featured: false,
     icon: PenTool,
-    accent: 'green',
-    layout: 'compact',
+    number: '03',
   },
 ];
 
 export default function TheLab() {
   return (
     <section className="py-32 px-4 relative">
-      <div className="max-w-7xl mx-auto">
+      {/* Section divider */}
+      <div className="section-divider mb-32" />
+
+      <div className="max-w-6xl mx-auto">
+        {/* Section header */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
-          className="mb-16"
+          transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+          className="mb-20"
         >
-          <h2 className="text-5xl md:text-6xl font-bold mb-4">The Lab</h2>
-          <p className="text-gray-400 text-lg">Products and experiments in production</p>
+          <span className="label-gold block mb-4">PORTFOLIO</span>
+          <h2 className="text-headline">The Lab</h2>
+          <p className="text-body-lg mt-4 max-w-md">
+            Products and experiments that made it to production.
+          </p>
         </motion.div>
 
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 auto-rows-fr">
-          {projects.map((project, index) => {
-            const Icon = project.icon;
-            const isWide = project.layout === 'wide';
-            const isTall = project.layout === 'tall';
-            const isCompact = project.layout === 'compact';
+        {/* Featured project — full width */}
+        {projects.filter(p => p.featured).map((project) => {
+          const Icon = project.icon;
+          return (
+            <motion.div
+              key={project.name}
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+              className="card-premium p-8 md:p-12 mb-8 hover-lift group cursor-pointer"
+            >
+              <div className="flex flex-col md:flex-row md:items-start md:justify-between gap-8">
+                <div className="flex-1">
+                  <div className="flex items-center gap-4 mb-6">
+                    <span className="text-mono text-[var(--gold)] opacity-40">{project.number}</span>
+                    <div className="w-8 h-px bg-[var(--border-hover)]" />
+                    <span className="text-mono text-xs text-[var(--gold)] tracking-[0.15em] uppercase px-2.5 py-1 rounded-full border border-[var(--gold)] border-opacity-20 bg-[rgba(201,169,110,0.05)]">
+                      {project.status}
+                    </span>
+                  </div>
 
+                  <h3 className="text-4xl md:text-5xl font-light tracking-[-0.03em] mb-2 text-[var(--text-primary)] group-hover:text-[var(--gold-light)] transition-colors duration-500">
+                    {project.name}
+                  </h3>
+                  <p className="text-sm text-[var(--text-muted)] tracking-wide mb-8">
+                    {project.tagline}
+                  </p>
+
+                  <div className="grid md:grid-cols-3 gap-8">
+                    {[
+                      { label: 'Problem', text: project.problem },
+                      { label: 'Solution', text: project.solution },
+                      { label: 'Impact', text: project.impact },
+                    ].map((item) => (
+                      <div key={item.label}>
+                        <p className="label-gold mb-2">{item.label}</p>
+                        <p className="text-sm text-[var(--text-secondary)] leading-relaxed font-light">
+                          {item.text}
+                        </p>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+
+                <div className="flex-shrink-0">
+                  <div className="w-16 h-16 rounded-2xl bg-[rgba(201,169,110,0.05)] border border-[var(--border)] flex items-center justify-center group-hover:bg-[rgba(201,169,110,0.1)] group-hover:border-[var(--border-hover)] transition-all duration-500">
+                    <Icon className="w-7 h-7 text-[var(--gold)] opacity-60 group-hover:opacity-100 transition-opacity duration-500" />
+                  </div>
+                </div>
+              </div>
+
+              <div className="mt-8 pt-6 border-t border-[var(--border)]">
+                <a
+                  href={project.link}
+                  className="inline-flex items-center gap-2.5 text-sm text-[var(--gold)] opacity-60 hover:opacity-100 transition-opacity duration-300"
+                >
+                  <ExternalLink className="w-3.5 h-3.5" />
+                  <span className="text-mono tracking-wider">VIEW PROJECT</span>
+                </a>
+              </div>
+            </motion.div>
+          );
+        })}
+
+        {/* Other projects — two column grid */}
+        <div className="grid md:grid-cols-2 gap-6">
+          {projects.filter(p => !p.featured).map((project, index) => {
+            const Icon = project.icon;
             return (
               <motion.div
                 key={project.name}
                 initial={{ opacity: 0, y: 30 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
-                transition={{ delay: index * 0.1, duration: 0.5 }}
-                whileHover={{ y: -8, scale: 1.02, transition: { duration: 0.2 } }}
-                className={`group relative ${
-                  isWide ? 'md:col-span-2 lg:col-span-2' : ''
-                } ${
-                  isTall ? 'md:row-span-1' : ''
-                } ${
-                  project.featured
-                    ? 'border-blue-500/50 bg-gradient-to-br from-blue-950/20 via-blue-950/10 to-gray-900/50'
-                    : project.accent === 'purple'
-                    ? 'border-purple-500/30 bg-gradient-to-br from-purple-950/10 to-gray-900/30'
-                    : project.accent === 'green'
-                    ? 'border-green-500/30 bg-gradient-to-br from-green-950/10 to-gray-900/30'
-                    : 'border-gray-800 bg-gray-900/30'
-                } ${
-                  isWide ? 'rounded-xl' : isCompact ? 'rounded-2xl' : 'rounded-lg'
-                } border backdrop-blur-sm hover:border-gray-600 transition-all duration-300 overflow-hidden`}
+                transition={{ delay: index * 0.1, duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+                className="card-premium p-6 md:p-8 hover-lift group cursor-pointer"
               >
-                {/* Background accent */}
-                {project.featured && (
-                  <div className="absolute inset-0 bg-gradient-to-br from-blue-500/5 to-transparent pointer-events-none" />
-                )}
-
-                {/* Corner accent for featured */}
-                {project.featured && (
-                  <div className="absolute top-0 right-0 w-32 h-32 bg-blue-500/10 rounded-full blur-3xl" />
-                )}
-
-                {/* Different padding based on layout */}
-                <div className={`relative ${isWide ? 'p-8' : isCompact ? 'p-5' : 'p-6'} h-full flex flex-col`}>
-                  {project.featured && (
-                    <div className="absolute -top-3 left-6 px-3 py-1 bg-blue-500 text-white text-xs font-semibold rounded-full z-10">
-                      FEATURED
-                    </div>
-                  )}
-
-                  {/* Header with icon */}
-                  <div className={`flex items-start justify-between ${isCompact ? 'mb-3' : 'mb-4'}`}>
-                    <div className="flex items-center gap-3">
-                      <div className={`p-2 rounded-lg ${
-                        project.accent === 'blue' ? 'bg-blue-500/20 text-blue-400' :
-                        project.accent === 'purple' ? 'bg-purple-500/20 text-purple-400' :
-                        project.accent === 'green' ? 'bg-green-500/20 text-green-400' :
-                        'bg-gray-800 text-gray-400'
-                      }`}>
-                        <Icon className="w-5 h-5" />
-                      </div>
-                      <h3 className={`${isWide ? 'text-3xl' : 'text-2xl'} font-bold`}>{project.name}</h3>
-                    </div>
-                    <span
-                      className={`text-xs px-2 py-1 rounded ${
-                        project.status === 'Active'
-                          ? 'bg-green-500/20 text-green-400 border border-green-500/30'
-                          : 'bg-gray-500/20 text-gray-400 border border-gray-500/30'
-                      }`}
-                    >
-                      {project.status}
-                    </span>
-                  </div>
-
-                  {/* Content layout variations */}
-                  {isWide ? (
-                    <div className="grid md:grid-cols-3 gap-6 mb-6 flex-grow">
-                      <div>
-                        <p className="text-xs text-gray-500 mb-2 font-medium uppercase tracking-wide">Problem</p>
-                        <p className="text-sm text-gray-300 leading-relaxed">{project.problem}</p>
-                      </div>
-                      <div>
-                        <p className="text-xs text-gray-500 mb-2 font-medium uppercase tracking-wide">Solution</p>
-                        <p className="text-sm text-gray-300 leading-relaxed">{project.solution}</p>
-                      </div>
-                      <div>
-                        <p className="text-xs text-gray-500 mb-2 font-medium uppercase tracking-wide">Impact</p>
-                        <p className="text-sm text-gray-300 leading-relaxed">{project.impact}</p>
-                      </div>
-                    </div>
-                  ) : isCompact ? (
-                    <div className="space-y-2.5 mb-4 flex-grow">
-                      <div>
-                        <p className="text-xs text-gray-500 mb-1">Problem</p>
-                        <p className="text-sm text-gray-300">{project.problem}</p>
-                      </div>
-                      <div>
-                        <p className="text-xs text-gray-500 mb-1">Solution</p>
-                        <p className="text-sm text-gray-300">{project.solution}</p>
-                      </div>
-                      <div>
-                        <p className="text-xs text-gray-500 mb-1">Impact</p>
-                        <p className="text-sm text-gray-300">{project.impact}</p>
-                      </div>
-                    </div>
-                  ) : (
-                    <div className="space-y-4 mb-6 flex-grow">
-                      <div className="border-l-2 border-purple-500/30 pl-4">
-                        <p className="text-xs text-gray-500 mb-1.5 font-medium">Problem</p>
-                        <p className="text-sm text-gray-300">{project.problem}</p>
-                      </div>
-                      <div className="border-l-2 border-purple-500/30 pl-4">
-                        <p className="text-xs text-gray-500 mb-1.5 font-medium">Solution</p>
-                        <p className="text-sm text-gray-300">{project.solution}</p>
-                      </div>
-                      <div className="border-l-2 border-purple-500/30 pl-4">
-                        <p className="text-xs text-gray-500 mb-1.5 font-medium">Impact</p>
-                        <p className="text-sm text-gray-300">{project.impact}</p>
-                      </div>
-                    </div>
-                  )}
-
-                  <a
-                    href={project.link}
-                    className={`inline-flex items-center gap-2 text-sm ${
-                      project.accent === 'blue' ? 'text-blue-400 hover:text-blue-300' :
-                      project.accent === 'purple' ? 'text-purple-400 hover:text-purple-300' :
-                      project.accent === 'green' ? 'text-green-400 hover:text-green-300' :
-                      'text-gray-400 hover:text-white'
-                    } transition-colors mt-auto`}
-                  >
-                    <ExternalLink className="w-4 h-4" />
-                    <span>View project</span>
-                  </a>
+                <div className="flex items-center gap-4 mb-5">
+                  <span className="text-mono text-[var(--gold)] opacity-40">{project.number}</span>
+                  <div className="w-6 h-px bg-[var(--border-hover)]" />
+                  <span className={`text-mono text-xs tracking-[0.15em] uppercase ${project.status === 'Active'
+                      ? 'text-[var(--gold)]'
+                      : 'text-[var(--text-muted)]'
+                    }`}>
+                    {project.status}
+                  </span>
                 </div>
+
+                <div className="flex items-start justify-between mb-6">
+                  <div>
+                    <h3 className="text-2xl md:text-3xl font-light tracking-[-0.02em] mb-1 text-[var(--text-primary)] group-hover:text-[var(--gold-light)] transition-colors duration-500">
+                      {project.name}
+                    </h3>
+                    <p className="text-xs text-[var(--text-muted)] tracking-wide">
+                      {project.tagline}
+                    </p>
+                  </div>
+                  <div className="w-10 h-10 rounded-xl bg-[rgba(201,169,110,0.04)] border border-[var(--border)] flex items-center justify-center flex-shrink-0">
+                    <Icon className="w-4 h-4 text-[var(--gold)] opacity-50" />
+                  </div>
+                </div>
+
+                <div className="space-y-4 mb-6">
+                  {[
+                    { label: 'Problem', text: project.problem },
+                    { label: 'Solution', text: project.solution },
+                  ].map((item) => (
+                    <div key={item.label}>
+                      <p className="label-gold mb-1">{item.label}</p>
+                      <p className="text-sm text-[var(--text-secondary)] leading-relaxed font-light">
+                        {item.text}
+                      </p>
+                    </div>
+                  ))}
+                </div>
+
+                <a
+                  href={project.link}
+                  className="inline-flex items-center gap-2 text-sm text-[var(--gold)] opacity-50 hover:opacity-100 transition-opacity duration-300"
+                >
+                  <ExternalLink className="w-3 h-3" />
+                  <span className="text-mono text-xs tracking-wider">VIEW</span>
+                </a>
               </motion.div>
             );
           })}
@@ -199,4 +196,3 @@ export default function TheLab() {
     </section>
   );
 }
-

@@ -4,27 +4,25 @@ import { useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
 import { Github } from 'lucide-react';
 
-interface GitHubStats {
+interface GitHubStatsData {
   stars: number;
   contributions: number;
   repos: number;
 }
 
 export default function GitHubStats() {
-  const [stats, setStats] = useState<GitHubStats | null>(null);
+  const [stats, setStats] = useState<GitHubStatsData | null>(null);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    // Fetch GitHub stats
     const fetchStats = async () => {
       try {
-        // Using GitHub API for basic stats
         const response = await fetch('https://api.github.com/users/kaadipranav');
         const data = await response.json();
-        
+
         setStats({
-          stars: 0, // Would need to aggregate from repos
-          contributions: 0, // Would need GitHub API v4 GraphQL
+          stars: 0,
+          contributions: 0,
           repos: data.public_repos || 0,
         });
       } catch (error) {
@@ -38,74 +36,74 @@ export default function GitHubStats() {
   }, []);
 
   return (
-    <div className="mt-12">
-      <div className="flex items-center gap-3 mb-6">
-        <Github className="w-6 h-6 text-blue-400" />
-        <h3 className="text-2xl font-bold">GitHub Activity</h3>
+    <div className="mt-8">
+      <div className="flex items-center gap-3 mb-8">
+        <Github className="w-4 h-4 text-[var(--gold)] opacity-50" />
+        <span className="label-gold">GITHUB</span>
       </div>
 
       <div className="grid md:grid-cols-2 gap-6">
-        {/* GitHub Stats Card */}
+        {/* Stats Card */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
-          className="p-6 rounded-lg border border-gray-800 bg-gray-900/30 backdrop-blur-sm"
+          transition={{ duration: 0.7 }}
+          className="card-premium p-6 hover-lift"
         >
-          <div className="flex items-center justify-between mb-4">
-            <h4 className="text-lg font-semibold">Stats</h4>
+          <div className="flex items-center justify-between mb-6">
+            <span className="label-gold">STATS</span>
             <a
               href="https://github.com/kaadipranav"
               target="_blank"
               rel="noopener noreferrer"
-              className="text-sm text-blue-400 hover:text-blue-300"
+              className="text-mono text-xs text-[var(--gold)] opacity-40 hover:opacity-80 transition-opacity"
             >
-              View Profile →
+              VIEW →
             </a>
           </div>
           {loading ? (
-            <div className="text-gray-500">Loading...</div>
+            <div className="text-[var(--text-muted)] text-sm font-light">Loading...</div>
           ) : (
-            <div className="space-y-3">
-              <div>
-                <p className="text-sm text-gray-500">Public Repositories</p>
-                <p className="text-2xl font-bold">{stats?.repos || 0}</p>
-              </div>
+            <div>
+              <p className="label-gold mb-1.5">PUBLIC REPOS</p>
+              <p className="text-4xl font-extralight text-[var(--text-primary)] tracking-tight">
+                {stats?.repos || 0}
+              </p>
             </div>
           )}
         </motion.div>
 
-        {/* Contribution Heatmap */}
+        {/* Activity Graph */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          transition={{ delay: 0.2, duration: 0.6 }}
-          className="p-6 rounded-lg border border-gray-800 bg-gray-900/30 backdrop-blur-sm"
+          transition={{ delay: 0.1, duration: 0.7 }}
+          className="card-premium p-6 hover-lift"
         >
-          <div className="flex items-center justify-between mb-4">
-            <h4 className="text-lg font-semibold">Contribution Graph</h4>
+          <div className="flex items-center justify-between mb-6">
+            <span className="label-gold">ACTIVITY</span>
             <a
               href="https://github.com/kaadipranav"
               target="_blank"
               rel="noopener noreferrer"
-              className="text-sm text-blue-400 hover:text-blue-300"
+              className="text-mono text-xs text-[var(--gold)] opacity-40 hover:opacity-80 transition-opacity"
             >
-              View →
+              VIEW →
             </a>
           </div>
           <a
             href="https://github.com/kaadipranav"
             target="_blank"
             rel="noopener noreferrer"
-            className="block"
+            className="block opacity-80 hover:opacity-100 transition-opacity duration-300"
           >
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
-              src="https://github-readme-activity-graph.vercel.app/graph?username=kaadipranav&theme=github-dark&hide_border=true&bg_color=0a0a0a&color=60a5fa&line=60a5fa&point=ffffff"
+              src="https://github-readme-activity-graph.vercel.app/graph?username=kaadipranav&theme=github-dark&hide_border=true&bg_color=0a0a0a&color=c9a96e&line=c9a96e&point=f0ece4&area=true&area_color=c9a96e"
               alt="GitHub Activity Graph"
-              className="w-full h-auto rounded"
+              className="w-full h-auto rounded-lg"
             />
           </a>
         </motion.div>
@@ -116,19 +114,19 @@ export default function GitHubStats() {
         initial={{ opacity: 0, y: 20 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
-        transition={{ delay: 0.4, duration: 0.6 }}
+        transition={{ delay: 0.2, duration: 0.7 }}
         className="mt-6"
       >
-        <div className="p-6 rounded-lg border border-gray-800 bg-gray-900/30 backdrop-blur-sm">
-          <div className="flex items-center justify-between mb-4">
-            <h4 className="text-lg font-semibold">GitHub Statistics</h4>
+        <div className="card-premium p-6">
+          <div className="flex items-center justify-between mb-6">
+            <span className="label-gold">OVERVIEW</span>
             <a
               href="https://github.com/kaadipranav"
               target="_blank"
               rel="noopener noreferrer"
-              className="text-sm text-blue-400 hover:text-blue-300"
+              className="text-mono text-xs text-[var(--gold)] opacity-40 hover:opacity-80 transition-opacity"
             >
-              View Profile →
+              PROFILE →
             </a>
           </div>
           <div className="flex flex-col md:flex-row gap-4">
@@ -136,63 +134,63 @@ export default function GitHubStats() {
               href="https://github.com/kaadipranav"
               target="_blank"
               rel="noopener noreferrer"
-              className="flex-1 hover:opacity-90 transition-opacity"
+              className="flex-1 opacity-80 hover:opacity-100 transition-opacity duration-300"
             >
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img
-                src="https://github-readme-stats.vercel.app/api?username=kaadipranav&show_icons=true&theme=dark&hide_border=true&bg_color=0a0a0a&title_color=ffffff&text_color=ededed&icon_color=60a5fa&border_color=1a1a1a"
+                src="https://github-readme-stats.vercel.app/api?username=kaadipranav&show_icons=true&theme=dark&hide_border=true&bg_color=0a0a0a&title_color=c9a96e&text_color=8a8578&icon_color=c9a96e&border_color=1a1a1a"
                 alt="GitHub Stats"
-                className="w-full h-auto rounded"
+                className="w-full h-auto rounded-lg"
               />
             </a>
             <a
               href="https://github.com/kaadipranav"
               target="_blank"
               rel="noopener noreferrer"
-              className="flex-1 hover:opacity-90 transition-opacity"
+              className="flex-1 opacity-80 hover:opacity-100 transition-opacity duration-300"
             >
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img
-                src="https://github-readme-stats.vercel.app/api/top-langs/?username=kaadipranav&layout=compact&theme=dark&hide_border=true&bg_color=0a0a0a&title_color=ffffff&text_color=ededed&border_color=1a1a1a"
+                src="https://github-readme-stats.vercel.app/api/top-langs/?username=kaadipranav&layout=compact&theme=dark&hide_border=true&bg_color=0a0a0a&title_color=c9a96e&text_color=8a8578&border_color=1a1a1a"
                 alt="Top Languages"
-                className="w-full h-auto rounded"
+                className="w-full h-auto rounded-lg"
               />
             </a>
           </div>
         </div>
       </motion.div>
 
-      {/* Contribution Calendar */}
+      {/* Streak Stats */}
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
-        transition={{ delay: 0.6, duration: 0.6 }}
+        transition={{ delay: 0.3, duration: 0.7 }}
         className="mt-6"
       >
-        <div className="p-6 rounded-lg border border-gray-800 bg-gray-900/30 backdrop-blur-sm">
-          <div className="flex items-center justify-between mb-4">
-            <h4 className="text-lg font-semibold">Contribution Heatmap</h4>
+        <div className="card-premium p-6">
+          <div className="flex items-center justify-between mb-6">
+            <span className="label-gold">STREAK</span>
             <a
               href="https://github.com/kaadipranav"
               target="_blank"
               rel="noopener noreferrer"
-              className="text-sm text-blue-400 hover:text-blue-300"
+              className="text-mono text-xs text-[var(--gold)] opacity-40 hover:opacity-80 transition-opacity"
             >
-              View Calendar →
+              CALENDAR →
             </a>
           </div>
           <a
             href="https://github.com/kaadipranav"
             target="_blank"
             rel="noopener noreferrer"
-            className="block hover:opacity-90 transition-opacity"
+            className="block opacity-80 hover:opacity-100 transition-opacity duration-300"
           >
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
-              src="https://github-readme-streak-stats.demolab.com/?user=kaadipranav&theme=dark&hide_border=true&background=0a0a0a&ring=60a5fa&fire=60a5fa&currStreakLabel=60a5fa"
+              src="https://github-readme-streak-stats.demolab.com/?user=kaadipranav&theme=dark&hide_border=true&background=0a0a0a&ring=c9a96e&fire=c9a96e&currStreakLabel=c9a96e&sideLabels=8a8578&dates=504b42"
               alt="GitHub Streak Stats"
-              className="w-full h-auto rounded"
+              className="w-full h-auto rounded-lg"
             />
           </a>
         </div>
@@ -200,4 +198,3 @@ export default function GitHubStats() {
     </div>
   );
 }
-

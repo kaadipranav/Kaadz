@@ -1,86 +1,137 @@
 'use client';
 
-import { motion } from 'framer-motion';
-import { Terminal, Zap } from 'lucide-react';
+import { motion, useScroll, useTransform } from 'framer-motion';
+import { useRef } from 'react';
+
+const tickerItems = [
+  'FULL-STACK',
+  'AI SYSTEMS',
+  'NEXT.JS',
+  'TYPESCRIPT',
+  'REACT',
+  'NODE.JS',
+  'CLOUDFLARE',
+  'MONITORING',
+  'LLM OPS',
+  'SHIP FAST',
+  'FOUNDER',
+  'HACKER',
+];
 
 export default function Hero() {
+  const sectionRef = useRef<HTMLElement>(null);
+  const { scrollYProgress } = useScroll({
+    target: sectionRef,
+    offset: ['start start', 'end start'],
+  });
+
+  const titleY = useTransform(scrollYProgress, [0, 1], [0, 100]);
+  const titleOpacity = useTransform(scrollYProgress, [0, 0.5], [1, 0]);
+  const tickerOpacity = useTransform(scrollYProgress, [0, 0.3], [1, 0]);
+
   return (
-    <section className="min-h-screen flex items-center justify-center px-4 relative">
-      <div className="max-w-6xl w-full">
+    <section ref={sectionRef} className="relative min-h-screen flex flex-col justify-center items-center overflow-hidden">
+      {/* Giant ambient spotlight */}
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] rounded-full bg-[radial-gradient(circle,rgba(201,169,110,0.06)_0%,transparent_70%)] pointer-events-none" />
+
+      {/* Top horizontal line */}
+      <motion.div
+        initial={{ scaleX: 0 }}
+        animate={{ scaleX: 1 }}
+        transition={{ duration: 1.5, delay: 0.5, ease: [0.16, 1, 0.3, 1] }}
+        className="absolute top-[15%] left-0 right-0 h-px bg-gradient-to-r from-transparent via-[rgba(201,169,110,0.12)] to-transparent origin-center"
+      />
+
+      {/* Main content */}
+      <motion.div
+        style={{ y: titleY, opacity: titleOpacity }}
+        className="relative z-10 text-center px-4"
+      >
+        {/* Label */}
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
+          initial={{ opacity: 0, y: 10 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8 }}
-          className="text-center"
+          transition={{ duration: 0.8, delay: 0.3 }}
+          className="mb-8"
         >
-          <motion.div
-            initial={{ opacity: 0, scale: 0.9 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ delay: 0.2, duration: 0.6 }}
-            className="inline-flex items-center gap-2 mb-6 px-4 py-2 rounded-full border border-gray-800 bg-gray-900/50 backdrop-blur-sm"
-          >
-            <Terminal className="w-4 h-4 text-blue-400" />
-            <span className="text-sm text-gray-400">SYSTEM ACTIVE</span>
-          </motion.div>
-
-          <motion.h1
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.3, duration: 0.6 }}
-            className="text-6xl md:text-8xl font-bold mb-6 bg-gradient-to-r from-white via-gray-200 to-gray-400 bg-clip-text text-transparent"
-          >
-            kaadz.me
-          </motion.h1>
-
-          <motion.p
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.4, duration: 0.6 }}
-            className="text-xl md:text-2xl text-gray-400 mb-8 max-w-2xl mx-auto"
-          >
-            Founder + hacker operating system
-            <br />
-            <span className="text-gray-500">Real products, real experiments</span>
-          </motion.p>
-
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.5, duration: 0.6 }}
-            className="flex items-center justify-center gap-4 text-sm text-gray-500"
-          >
-            <div className="flex items-center gap-2">
-              <div className="w-2 h-2 bg-green-500 rounded-full animate-pulse" />
-              <span>Building</span>
-            </div>
-            <span>•</span>
-            <div className="flex items-center gap-2">
-              <Zap className="w-4 h-4" />
-              <span>Shipping fast</span>
-            </div>
-          </motion.div>
+          <span className="label-gold">PERSONAL OPERATING SYSTEM</span>
         </motion.div>
 
+        {/* Name — massive, light-weight */}
+        <motion.h1
+          initial={{ opacity: 0, y: 30 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 1, delay: 0.4, ease: [0.16, 1, 0.3, 1] }}
+          className="text-display tracking-[-0.05em] mb-6"
+        >
+          <span className="font-extralight text-[var(--text-primary)]">kaa</span>
+          <span className="shimmer-text font-light">dz</span>
+        </motion.h1>
+
+        {/* Subtitle */}
+        <motion.p
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, delay: 0.6 }}
+          className="text-body-lg max-w-lg mx-auto mb-10"
+        >
+          Builder. Hacker. Founder.
+          <br />
+          <span className="text-[var(--text-muted)]">
+            Shipping real products — not tutorials.
+          </span>
+        </motion.p>
+
+        {/* Status indicators */}
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
-          transition={{ delay: 0.8, duration: 1 }}
-          className="absolute bottom-10 left-1/2 transform -translate-x-1/2"
+          transition={{ duration: 0.8, delay: 0.8 }}
+          className="flex items-center justify-center gap-8 text-mono"
         >
-          <motion.div
-            animate={{ y: [0, 10, 0] }}
-            transition={{ duration: 2, repeat: Infinity }}
-            className="w-6 h-10 border-2 border-gray-700 rounded-full flex justify-center"
-          >
-            <motion.div
-              animate={{ y: [0, 12, 0] }}
-              transition={{ duration: 2, repeat: Infinity }}
-              className="w-1.5 h-3 bg-gray-600 rounded-full mt-2"
-            />
-          </motion.div>
+          <div className="flex items-center gap-2.5">
+            <div className="status-dot" />
+            <span className="text-[var(--text-secondary)] text-xs tracking-[0.15em] uppercase">Building</span>
+          </div>
+          <div className="w-px h-3 bg-[var(--border)]" />
+          <div className="flex items-center gap-2.5">
+            <span className="text-[var(--gold)] text-xs">⚡</span>
+            <span className="text-[var(--text-secondary)] text-xs tracking-[0.15em] uppercase">Shipping</span>
+          </div>
         </motion.div>
-      </div>
+      </motion.div>
+
+      {/* Infinite scroll ticker at bottom */}
+      <motion.div
+        style={{ opacity: tickerOpacity }}
+        className="absolute bottom-16 left-0 right-0 overflow-hidden"
+      >
+        <div className="ticker-track flex whitespace-nowrap">
+          {[...tickerItems, ...tickerItems, ...tickerItems, ...tickerItems].map((item, i) => (
+            <span
+              key={i}
+              className="inline-flex items-center gap-6 mx-6 text-[0.65rem] tracking-[0.3em] font-light text-[var(--text-muted)] uppercase select-none"
+            >
+              {item}
+              <span className="text-[var(--gold)] opacity-30">◆</span>
+            </span>
+          ))}
+        </div>
+      </motion.div>
+
+      {/* Scroll indicator */}
+      <motion.div
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ delay: 1.5, duration: 1 }}
+        className="absolute bottom-6 left-1/2 -translate-x-1/2"
+      >
+        <motion.div
+          animate={{ y: [0, 6, 0] }}
+          transition={{ duration: 2.5, repeat: Infinity, ease: 'easeInOut' }}
+          className="w-px h-8 bg-gradient-to-b from-[var(--gold)] to-transparent opacity-30"
+        />
+      </motion.div>
     </section>
   );
 }
-
