@@ -11,7 +11,7 @@ const projects = [
     problem: 'AI observability is fragmented and expensive',
     solution: 'Unified monitoring platform for LLM applications',
     impact: 'Real-time insights, cost tracking, performance optimization',
-    link: '#',
+    link: 'https://watchllm.dev',
     featured: true,
     icon: Activity,
     number: '01',
@@ -146,8 +146,8 @@ export default function TheLab() {
                   <span className="text-mono text-[var(--gold)] opacity-40">{project.number}</span>
                   <div className="w-6 h-px bg-[var(--border-hover)]" />
                   <span className={`text-mono text-xs tracking-[0.15em] uppercase ${project.status === 'Active'
-                      ? 'text-[var(--gold)]'
-                      : 'text-[var(--text-muted)]'
+                    ? 'text-[var(--gold)]'
+                    : 'text-[var(--text-muted)]'
                     }`}>
                     {project.status}
                   </span>

@@ -39,13 +39,15 @@ export default function CurrentlyBuilding() {
                   <Activity className="w-4.5 h-4.5 text-[var(--gold)] opacity-60" />
                 </div>
                 <div>
-                  <h3 className="text-2xl font-light tracking-[-0.02em] text-[var(--text-primary)]">WatchLLM</h3>
+                  <a href="https://watchllm.dev" target="_blank" rel="noopener noreferrer" className="hover:text-[var(--gold-light)] transition-colors duration-300">
+                    <h3 className="text-2xl font-light tracking-[-0.02em] text-[var(--text-primary)]">WatchLLM</h3>
+                  </a>
                 </div>
               </div>
-              <div className="flex items-center gap-2">
+              <a href="https://watchllm.dev" target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 hover:opacity-80 transition-opacity">
                 <div className="status-dot" />
                 <span className="text-mono text-xs text-[var(--gold)] opacity-60">LIVE</span>
-              </div>
+              </a>
             </div>
 
             <div className="space-y-6">
@@ -62,6 +64,15 @@ export default function CurrentlyBuilding() {
                   Enhanced analytics dashboard, alerting system, team collaboration features.
                 </p>
               </div>
+              <div className="w-full h-px bg-[var(--border)]" />
+              <a
+                href="https://watchllm.dev"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 text-sm text-[var(--gold)] opacity-50 hover:opacity-100 transition-opacity duration-300"
+              >
+                <span className="text-mono text-xs tracking-wider">VIEW PROJECT →</span>
+              </a>
             </div>
           </motion.div>
 
