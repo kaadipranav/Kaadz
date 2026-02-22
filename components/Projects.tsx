@@ -259,7 +259,7 @@ export default function Projects() {
               Want to see more?
             </h3>
             <p className="text-[var(--text-secondary)] mb-6">
-              I've shipped 50+ projects. Let's discuss how I can help build your next product.
+              I&apos;ve shipped 50+ projects. Let&apos;s discuss how I can help build your next product.
             </p>
             <motion.a
               href="#contact"
@@ -267,7 +267,7 @@ export default function Projects() {
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
             >
-              <span className="font-medium tracking-wider">LET'S COLLABORATE</span>
+              <span className="font-medium tracking-wider">LET&apos;S COLLABORATE</span>
               <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform duration-300" />
             </motion.a>
           </div>
