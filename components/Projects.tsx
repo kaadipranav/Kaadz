@@ -92,6 +92,7 @@ const statusColors: Record<string, string> = {
 export default function Projects() {
   const [activeCategory, setActiveCategory] = useState('all');
   const [hoveredProject, setHoveredProject] = useState<string | null>(null);
+  const [selectedProject, setSelectedProject] = useState<string | null>(null);
 
   const filteredProjects = activeCategory === 'all' 
     ? projects 
@@ -99,8 +100,12 @@ export default function Projects() {
     ? projects.filter(p => p.featured)
     : projects.filter(project => project.category === activeCategory);
 
+  const handleProjectClick = (projectTitle: string) => {
+    setSelectedProject(selectedProject === projectTitle ? null : projectTitle);
+  };
+
   return (
-    <section className="py-32 px-4 relative">
+    <section id="projects" className="py-32 px-4 relative">
       <div className="section-divider mb-32" />
 
       <div className="max-w-7xl mx-auto">
@@ -151,6 +156,7 @@ export default function Projects() {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {filteredProjects.map((project, index) => {
             const Icon = project.icon;
+            const isSelected = selectedProject === project.title;
             return (
               <motion.div
                 key={project.title}
@@ -162,30 +168,54 @@ export default function Projects() {
                   duration: 0.8, 
                   ease: [0.16, 1, 0.3, 1] 
                 }}
+                onClick={() => handleProjectClick(project.title)}
                 onHoverStart={() => setHoveredProject(project.title)}
                 onHoverEnd={() => setHoveredProject(null)}
-                className="group"
+                className={`group relative cursor-pointer transition-all duration-500 ${
+                  isSelected ? 'scale-105 z-10' : ''
+                }`}
               >
-                <div className="card-premium p-8 hover-lift h-full flex flex-col">
+                <div className={`card-premium p-8 h-full flex flex-col transition-all duration-500 ${
+                  isSelected ? 'ring-2 ring-[var(--gold)] bg-[var(--surface-elevated)]' : 'hover-lift'
+                }`}>
                   {/* Header */}
                   <div className="flex items-start justify-between mb-6">
-                    <div className="w-14 h-14 rounded-xl bg-[var(--surface-elevated)] flex items-center justify-center group-hover:bg-[var(--gold)] transition-all duration-500">
-                      <Icon className="w-7 h-7 text-[var(--gold)] group-hover:text-[var(--background)] transition-colors duration-500" />
-                    </div>
+                    <motion.div 
+                      className={`w-14 h-14 rounded-xl flex items-center justify-center transition-all duration-500 ${
+                        isSelected ? 'bg-[var(--gold)]' : 'bg-[var(--surface-elevated)]'
+                      }`}
+                      whileHover={{ scale: 1.1, rotate: 5 }}
+                      whileTap={{ scale: 0.95 }}
+                    >
+                      <Icon className={`w-7 h-7 transition-colors duration-500 ${
+                        isSelected ? 'text-[var(--background)]' : 'text-[var(--gold)]'
+                      }`} />
+                    </motion.div>
                     <div className="flex items-center gap-2">
                       {project.featured && (
-                        <span className="px-2 py-1 rounded-full bg-[var(--gold)]/10 text-[var(--gold)] text-mono text-xs tracking-wider">
+                        <motion.span 
+                          className="px-2 py-1 rounded-full bg-[var(--gold)]/10 text-[var(--gold)] text-mono text-xs tracking-wider"
+                          animate={{ 
+                            scale: isSelected ? 1.1 : 1,
+                            opacity: isSelected ? 1 : 0.8
+                          }}
+                          transition={{ duration: 0.3 }}
+                        >
                           FEATURED
-                        </span>
+                        </motion.span>
                       )}
-                      <span className={`px-2 py-1 rounded-full border text-mono text-xs tracking-wider ${statusColors[project.status]}`}>
+                      <span className={`px-2 py-1 rounded-full border text-mono text-xs tracking-wider transition-all duration-500 ${
+                        isSelected ? 'border-[var(--gold)] text-[var(--gold)]' : statusColors[project.status]
+                      }`}>
                         {project.status.toUpperCase()}
                       </span>
                     </div>
                   </div>
 
                   {/* Content */}
-                  <h3 className="text-xl font-light text-[var(--text-primary)] mb-3 group-hover:text-[var(--gold)] transition-colors duration-500">
+                  <h3 className={`text-xl font-light mb-3 transition-colors duration-500 ${
+                    isSelected ? 'text-[var(--gold)]' : 'text-[var(--text-primary)]'
+                  }`}>
                     {project.title}
                   </h3>
                   <p className="text-[var(--text-secondary)] mb-6 leading-relaxed flex-grow">
@@ -195,51 +225,122 @@ export default function Projects() {
                   {/* Tech Stack */}
                   <div className="flex flex-wrap gap-2 mb-6">
                     {project.tech.map((tech) => (
-                      <span
+                      <motion.span
                         key={tech}
-                        className="px-3 py-1 rounded-lg bg-[var(--surface)] border border-[var(--border)] text-mono text-xs text-[var(--text-muted)]"
+                        className="px-3 py-1 rounded-lg bg-[var(--surface)] border text-mono text-xs transition-all duration-500"
+                        animate={{
+                          borderColor: isSelected ? 'var(--gold)' : 'var(--border)',
+                          color: isSelected ? 'var(--gold)' : 'var(--text-muted)'
+                        }}
                       >
                         {tech}
-                      </span>
+                      </motion.span>
                     ))}
                   </div>
 
                   {/* Actions */}
                   <div className="flex items-center gap-3 mt-auto">
                     {project.link && (
-                      <a
+                      <motion.a
                         href={project.link}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="flex items-center gap-2 px-4 py-2 rounded-lg bg-[var(--surface)] border border-[var(--border)] hover:border-[var(--gold)] hover:bg-[var(--surface-elevated)] transition-all duration-500 group/btn"
+                        className="flex items-center gap-2 px-4 py-2 rounded-lg bg-[var(--surface)] border transition-all duration-500 group/btn"
+                        animate={{
+                          borderColor: isSelected ? 'var(--gold)' : 'var(--border)',
+                          backgroundColor: isSelected ? 'var(--surface-elevated)' : 'var(--surface)'
+                        }}
+                        whileHover={{ scale: 1.05 }}
+                        whileTap={{ scale: 0.95 }}
+                        onClick={(e) => e.stopPropagation()}
                       >
-                        <span className="text-mono text-xs text-[var(--text-secondary)] group-hover/btn:text-[var(--gold)] transition-colors duration-500">
+                        <span className="text-mono text-xs transition-colors duration-500"
+                              style={{
+                                color: isSelected ? 'var(--gold)' : 'var(--text-secondary)'
+                              }}>
                           VIEW LIVE
                         </span>
-                        <ExternalLink className="w-3 h-3 text-[var(--text-muted)] group-hover/btn:text-[var(--gold)] transition-colors duration-500" />
-                      </a>
+                        <ExternalLink className="w-3 h-3 transition-colors duration-500"
+                                      style={{
+                                        color: isSelected ? 'var(--gold)' : 'var(--text-muted)'
+                                      }} />
+                      </motion.a>
                     )}
                     {project.github && (
-                      <a
+                      <motion.a
                         href={project.github}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="flex items-center gap-2 px-4 py-2 rounded-lg bg-[var(--surface)] border border-[var(--border)] hover:border-[var(--gold)] hover:bg-[var(--surface-elevated)] transition-all duration-500 group/btn"
+                        className="flex items-center gap-2 px-4 py-2 rounded-lg bg-[var(--surface)] border transition-all duration-500 group/btn"
+                        animate={{
+                          borderColor: isSelected ? 'var(--gold)' : 'var(--border)',
+                          backgroundColor: isSelected ? 'var(--surface-elevated)' : 'var(--surface)'
+                        }}
+                        whileHover={{ scale: 1.05 }}
+                        whileTap={{ scale: 0.95 }}
+                        onClick={(e) => e.stopPropagation()}
                       >
-                        <Github className="w-4 h-4 text-[var(--text-muted)] group-hover/btn:text-[var(--gold)] transition-colors duration-500" />
-                      </a>
+                        <Github className="w-4 h-4 transition-colors duration-500"
+                                style={{
+                                  color: isSelected ? 'var(--gold)' : 'var(--text-muted)'
+                                }} />
+                      </motion.a>
                     )}
                   </div>
 
-                  {/* Hover Effect Overlay */}
+                  {/* Expanded Details */}
                   <motion.div
-                    initial={{ opacity: 0 }}
+                    initial={{ opacity: 0, height: 0 }}
                     animate={{ 
-                      opacity: hoveredProject === project.title ? 1 : 0 
+                      opacity: isSelected ? 1 : 0,
+                      height: isSelected ? 'auto' : 0
                     }}
                     transition={{ duration: 0.3 }}
-                    className="absolute inset-0 rounded-xl bg-gradient-to-br from-[var(--gold)]/5 to-transparent pointer-events-none"
-                  />
+                    className="overflow-hidden mt-6 pt-6 border-t border-[var(--border)]"
+                  >
+                    <div className="space-y-4">
+                      <div className="flex items-center justify-between">
+                        <span className="text-mono text-xs text-[var(--text-muted)]">
+                          PROJECT DETAILS
+                        </span>
+                        <motion.div
+                          animate={{ rotate: isSelected ? 180 : 0 }}
+                          transition={{ duration: 0.3 }}
+                        >
+                          <ArrowRight className="w-4 h-4 text-[var(--gold)]" />
+                        </motion.div>
+                      </div>
+                      <div className="space-y-2">
+                        <div className="flex items-center gap-2">
+                          <div className="w-2 h-2 rounded-full bg-[var(--gold)]" />
+                          <span className="text-xs text-[var(--text-secondary)]">
+                            Click to explore this project in detail
+                          </span>
+                        </div>
+                        <motion.button
+                          whileHover={{ scale: 1.05 }}
+                          whileTap={{ scale: 0.95 }}
+                          className="w-full py-2 rounded-lg bg-[var(--gold)] text-[var(--background)] text-mono text-xs font-medium transition-all duration-500"
+                          onClick={(e) => {
+                            e.stopPropagation();
+                            // Open project modal or navigate
+                          }}
+                        >
+                          EXPLORE PROJECT →
+                        </motion.button>
+                      </div>
+                    </div>
+                  </motion.div>
+
+                  {/* Hover Effect Overlay */}
+                  {hoveredProject === project.title && !isSelected && (
+                    <motion.div
+                      initial={{ opacity: 0 }}
+                      animate={{ opacity: 1 }}
+                      exit={{ opacity: 0 }}
+                      className="absolute inset-0 rounded-xl bg-gradient-to-br from-[var(--gold)]/5 to-transparent pointer-events-none"
+                    />
+                  )}
                 </div>
               </motion.div>
             );

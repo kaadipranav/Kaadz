@@ -2,7 +2,7 @@
 
 import { motion } from 'framer-motion';
 import { useState } from 'react';
-import { Mail, MessageSquare, Send, Github, Twitter, Linkedin, Calendar } from 'lucide-react';
+import { Mail, MessageSquare, Send, Github, Twitter, Linkedin } from 'lucide-react';
 
 const contactMethods = [
   {
@@ -36,33 +36,6 @@ const contactMethods = [
     value: 'kaadz',
     action: 'https://linkedin.com/in/kaadz',
     color: 'bg-cyan-500/10 text-cyan-400 border-cyan-500/20'
-  }
-];
-
-const collaborationTypes = [
-  {
-    title: 'Product Development',
-    description: 'Full-stack development from concept to launch',
-    timeline: '3-6 months',
-    icon: '🚀'
-  },
-  {
-    title: 'AI/ML Consulting',
-    description: 'LLM integration and custom model development',
-    timeline: '1-3 months',
-    icon: '🤖'
-  },
-  {
-    title: 'Technical Advisory',
-    description: 'Architecture reviews and strategic guidance',
-    timeline: 'Ongoing',
-    icon: '🎯'
-  },
-  {
-    title: 'Team Training',
-    description: 'Modern development practices and AI workflows',
-    timeline: '2-4 weeks',
-    icon: '📚'
   }
 ];
 
@@ -149,62 +122,69 @@ export default function Contact() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: 0.3 + index * 0.1, duration: 0.8 }}
-                whileHover={{ scale: 1.05 }}
+                whileHover={{ 
+                  scale: 1.05,
+                  boxShadow: '0 20px 40px rgba(201, 169, 110, 0.1)'
+                }}
                 whileTap={{ scale: 0.95 }}
-                className="card-premium p-6 hover-lift cursor-pointer group"
+                className="card-premium p-6 cursor-pointer group relative overflow-hidden"
               >
-                <div className={`w-12 h-12 rounded-lg ${method.color} flex items-center justify-center mb-4 group-hover:scale-110 transition-transform duration-300`}>
+                {/* Animated Background */}
+                <motion.div
+                  className="absolute inset-0 bg-gradient-to-br from-[var(--gold)]/5 to-transparent"
+                  initial={{ opacity: 0 }}
+                  whileHover={{ opacity: 1 }}
+                  transition={{ duration: 0.3 }}
+                />
+                
+                {/* Icon with rotation */}
+                <motion.div 
+                  className={`w-12 h-12 rounded-lg ${method.color} flex items-center justify-center mb-4 relative z-10`}
+                  whileHover={{ 
+                    scale: 1.1, 
+                    rotate: 360,
+                    transition: { duration: 0.6, ease: "easeInOut" }
+                  }}
+                >
                   <Icon className="w-6 h-6" />
+                </motion.div>
+                
+                {/* Content */}
+                <div className="relative z-10">
+                  <h3 className="text-lg font-light text-[var(--text-primary)] mb-2 group-hover:text-[var(--gold)] transition-colors duration-500">
+                    {method.title}
+                  </h3>
+                  <p className="text-sm text-[var(--text-secondary)] mb-3">
+                    {method.description}
+                  </p>
+                  <motion.span 
+                    className="text-mono text-xs inline-block"
+                    whileHover={{ x: 5 }}
+                    transition={{ duration: 0.2 }}
+                  >
+                    <span className="text-[var(--gold)]">{method.value}</span>
+                    <motion.span 
+                      className="inline-block ml-1"
+                      animate={{ x: [0, 3, 0] }}
+                      transition={{ duration: 1, repeat: Infinity, repeatDelay: 2 }}
+                    >
+                      →
+                    </motion.span>
+                  </motion.span>
                 </div>
-                <h3 className="text-lg font-light text-[var(--text-primary)] mb-2 group-hover:text-[var(--gold)] transition-colors duration-500">
-                  {method.title}
-                </h3>
-                <p className="text-sm text-[var(--text-secondary)] mb-3">
-                  {method.description}
-                </p>
-                <span className="text-mono text-xs text-[var(--gold)]">
-                  {method.value}
-                </span>
+
+                {/* Particle effect on hover */}
+                <motion.div
+                  className="absolute top-2 right-2 w-2 h-2 rounded-full bg-[var(--gold)] opacity-0"
+                  whileHover={{ 
+                    opacity: [0, 1, 0],
+                    scale: [1, 2, 1],
+                    transition: { duration: 0.5 }
+                  }}
+                />
               </motion.a>
             );
           })}
-        </motion.div>
-
-        {/* Collaboration Types */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ delay: 0.4, duration: 0.8 }}
-          className="mb-20"
-        >
-          <h3 className="text-2xl font-light text-[var(--text-primary)] text-center mb-12">
-            How we can work together
-          </h3>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-            {collaborationTypes.map((type, index) => (
-              <motion.div
-                key={type.title}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: 0.5 + index * 0.1, duration: 0.8 }}
-                className="card-glass p-6 text-center hover-lift"
-              >
-                <div className="text-3xl mb-4">{type.icon}</div>
-                <h4 className="text-lg font-light text-[var(--text-primary)] mb-3">
-                  {type.title}
-                </h4>
-                <p className="text-sm text-[var(--text-secondary)] mb-4">
-                  {type.description}
-                </p>
-                <div className="flex items-center justify-center gap-2 text-mono text-xs text-[var(--gold)]">
-                  <Calendar className="w-3 h-3" />
-                  <span>{type.timeline}</span>
-                </div>
-              </motion.div>
-            ))}
-          </div>
         </motion.div>
 
         {/* Contact Form */}
@@ -212,7 +192,7 @@ export default function Contact() {
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          transition={{ delay: 0.6, duration: 0.8 }}
+          transition={{ delay: 0.4, duration: 0.8 }}
           className="max-w-2xl mx-auto"
         >
           <div className="card-premium p-8">

@@ -7,7 +7,6 @@ import CurrentlyBuilding from '@/components/CurrentlyBuilding';
 import About from '@/components/About';
 import Skills from '@/components/Skills';
 import Projects from '@/components/Projects';
-import Timeline from '@/components/Timeline';
 import Contact from '@/components/Contact';
 import AnimatedBackground from '@/components/AnimatedBackground';
 import FloatingNav from '@/components/FloatingNav';
@@ -21,7 +20,6 @@ export default function Home() {
         <Hero />
         <Skills />
         <Projects />
-        <Timeline />
         <TheLab />
         <Systems />
         <CurrentlyBuilding />

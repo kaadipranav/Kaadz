@@ -73,11 +73,16 @@ const categories = [
 
 export default function Skills() {
   const [activeCategory, setActiveCategory] = useState('all');
+  const [selectedSkill, setSelectedSkill] = useState<string | null>(null);
   const [hoveredSkill, setHoveredSkill] = useState<string | null>(null);
 
   const filteredSkills = activeCategory === 'all' 
     ? skills 
     : skills.filter(skill => skill.category === activeCategory);
+
+  const handleSkillClick = (skillTitle: string) => {
+    setSelectedSkill(selectedSkill === skillTitle ? null : skillTitle);
+  };
 
   return (
     <section className="py-32 px-4 relative">
@@ -131,6 +136,7 @@ export default function Skills() {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
           {filteredSkills.map((skill, index) => {
             const Icon = skill.icon;
+            const isSelected = selectedSkill === skill.title;
             return (
               <motion.div
                 key={skill.title}
@@ -142,41 +148,114 @@ export default function Skills() {
                   duration: 0.8, 
                   ease: [0.16, 1, 0.3, 1] 
                 }}
+                onClick={() => handleSkillClick(skill.title)}
                 onHoverStart={() => setHoveredSkill(skill.title)}
                 onHoverEnd={() => setHoveredSkill(null)}
-                className="card-premium p-6 hover-lift cursor-pointer group"
+                className={`card-premium p-6 cursor-pointer transition-all duration-500 ${
+                  isSelected ? 'ring-2 ring-[var(--gold)] bg-[var(--surface-elevated)]' : 'hover-lift'
+                }`}
               >
                 {/* Icon */}
                 <div className="mb-4">
-                  <div className="w-12 h-12 rounded-lg bg-[var(--surface-elevated)] flex items-center justify-center group-hover:bg-[var(--gold)] transition-all duration-500">
-                    <Icon className="w-6 h-6 text-[var(--gold)] group-hover:text-[var(--background)] transition-colors duration-500" />
-                  </div>
+                  <motion.div 
+                    className={`w-12 h-12 rounded-lg flex items-center justify-center transition-all duration-500 ${
+                      isSelected ? 'bg-[var(--gold)]' : 'bg-[var(--surface-elevated)]'
+                    }`}
+                    whileHover={{ scale: 1.1, rotate: 5 }}
+                    whileTap={{ scale: 0.95 }}
+                  >
+                    <Icon className={`w-6 h-6 transition-colors duration-500 ${
+                      isSelected ? 'text-[var(--background)]' : 'text-[var(--gold)]'
+                    }`} />
+                  </motion.div>
                 </div>
 
                 {/* Content */}
-                <h3 className="text-lg font-light text-[var(--text-primary)] mb-2 group-hover:text-[var(--gold)] transition-colors duration-500">
+                <h3 className={`text-lg font-light mb-2 transition-colors duration-500 ${
+                  isSelected ? 'text-[var(--gold)]' : 'text-[var(--text-primary)]'
+                }`}>
                   {skill.title}
                 </h3>
                 <p className="text-sm text-[var(--text-secondary)] mb-4 leading-relaxed">
                   {skill.description}
                 </p>
 
-                {/* Progress Bar */}
+                {/* Interactive Progress Bar */}
                 <div className="relative">
-                  <div className="h-1 bg-[var(--surface)] rounded-full overflow-hidden">
+                  <div className="h-1 bg-[var(--surface)] rounded-full overflow-hidden cursor-pointer"
+                       onClick={(e) => e.stopPropagation()}>
                     <motion.div
                       initial={{ width: 0 }}
                       animate={{ 
-                        width: hoveredSkill === skill.title ? `${skill.level}%` : '0%' 
+                        width: isSelected || hoveredSkill === skill.title ? `${skill.level}%` : '20%'
                       }}
                       transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
                       className="h-full bg-gradient-to-r from-[var(--gold)] to-[var(--gold-light)] rounded-full"
                     />
                   </div>
-                  <span className="text-mono text-xs text-[var(--text-muted)] mt-2 inline-block">
-                    {skill.level}%
-                  </span>
+                  <motion.div 
+                    className="flex items-center justify-between mt-2"
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    transition={{ delay: 0.5 }}
+                  >
+                    <span className="text-mono text-xs text-[var(--text-muted)]">
+                      EXPERTISE
+                    </span>
+                    <motion.span 
+                      className="text-mono text-xs font-bold"
+                      animate={{ 
+                        color: isSelected ? 'var(--gold)' : 'var(--text-muted)'
+                      }}
+                      transition={{ duration: 0.3 }}
+                    >
+                      {skill.level}%
+                    </motion.span>
+                  </motion.div>
                 </div>
+
+                {/* Expanded Details */}
+                <motion.div
+                  initial={{ opacity: 0, height: 0 }}
+                  animate={{ 
+                    opacity: isSelected ? 1 : 0,
+                    height: isSelected ? 'auto' : 0
+                  }}
+                  transition={{ duration: 0.3 }}
+                  className="overflow-hidden mt-4 pt-4 border-t border-[var(--border)]"
+                >
+                  <div className="space-y-2">
+                    <div className="flex items-center gap-2">
+                      <div className="w-2 h-2 rounded-full bg-[var(--gold)]" />
+                      <span className="text-xs text-[var(--text-secondary)]">
+                        Click to explore projects using this skill
+                      </span>
+                    </div>
+                    <motion.button
+                      whileHover={{ scale: 1.05 }}
+                      whileTap={{ scale: 0.95 }}
+                      className="w-full py-2 rounded-lg bg-[var(--surface)] border border-[var(--border)] hover:border-[var(--gold)] text-mono text-xs text-[var(--text-secondary)] hover:text-[var(--gold)] transition-all duration-500"
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        // Navigate to projects filtered by this skill
+                        const projectsSection = document.getElementById('projects');
+                        projectsSection?.scrollIntoView({ behavior: 'smooth' });
+                      }}
+                    >
+                      VIEW RELATED PROJECTS →
+                    </motion.button>
+                  </div>
+                </motion.div>
+
+                {/* Hover Effect Overlay */}
+                {hoveredSkill === skill.title && !isSelected && (
+                  <motion.div
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    exit={{ opacity: 0 }}
+                    className="absolute inset-0 rounded-xl bg-gradient-to-br from-[var(--gold)]/5 to-transparent pointer-events-none"
+                  />
+                )}
               </motion.div>
             );
           })}
