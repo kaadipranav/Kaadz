@@ -5,6 +5,10 @@ import TheLab from '@/components/TheLab';
 import Systems from '@/components/Systems';
 import CurrentlyBuilding from '@/components/CurrentlyBuilding';
 import About from '@/components/About';
+import Skills from '@/components/Skills';
+import Projects from '@/components/Projects';
+import Timeline from '@/components/Timeline';
+import Contact from '@/components/Contact';
 import AnimatedBackground from '@/components/AnimatedBackground';
 import FloatingNav from '@/components/FloatingNav';
 
@@ -15,9 +19,13 @@ export default function Home() {
       <FloatingNav />
       <div className="relative z-10">
         <Hero />
+        <Skills />
+        <Projects />
+        <Timeline />
         <TheLab />
         <Systems />
         <CurrentlyBuilding />
+        <Contact />
         <About />
       </div>
     </main>
