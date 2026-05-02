@@ -22,7 +22,8 @@ const config: Config = {
         },
       },
       fontFamily: {
-        sans: ['Inter', '-apple-system', 'BlinkMacSystemFont', 'sans-serif'],
+        sans: ['Work Sans', 'Manrope', 'Sora', '-apple-system', 'BlinkMacSystemFont', 'sans-serif'],
+        heading: ['Switzer', '-apple-system', 'BlinkMacSystemFont', 'sans-serif'],
         mono: ['JetBrains Mono', 'monospace'],
       },
       animation: {
