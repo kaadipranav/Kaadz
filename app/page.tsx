@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import FlowingCard from '@/components/FlowingCard';
 import {
   ExternalLink,
   Shield,
@@ -128,34 +129,44 @@ export default function Home() {
         </div>
 
         <div className="grid gap-8 md:grid-cols-2">
-          <ProductCard
-            label="Observability"
-            icon={Activity}
-            title="WatchLLM"
-            description="The chaos and observability layer for AI agents. Stress-test and actively break agents before they reach production. Separate critical failures from noise with severity scoring."
-            details={[
-              'Edge-native architecture built for Cloudflare Workers',
-              'Zero cold starts — monitors spin up instantly',
-              'Severity scoring filters signal from noise',
-            ]}
-            cta="Explore WatchLLM"
-            ctaHref="https://watchllm.dev"
-            external
-          />
+          <FlowingCard
+            marqueeText="Explore WatchLLM"
+            className="rounded-2xl"
+          >
+            <ProductCard
+              label="Observability"
+              icon={Activity}
+              title="WatchLLM"
+              description="The chaos and observability layer for AI agents. Stress-test and actively break agents before they reach production. Separate critical failures from noise with severity scoring."
+              details={[
+                'Edge-native architecture built for Cloudflare Workers',
+                'Zero cold starts — monitors spin up instantly',
+                'Severity scoring filters signal from noise',
+              ]}
+              cta="Explore WatchLLM"
+              ctaHref="https://watchllm.dev"
+              external
+            />
+          </FlowingCard>
 
-          <ProductCard
-            label="Memory"
-            icon={BrainCircuit}
-            title="Klyd"
-            description="An open-source decision memory harness that stops terminal coding agents from silently ruining your codebase architecture. Prevent slop fortresses before they form."
-            details={[
-              'Maximum 2 LLM calls per commit',
-              'BYOK — Bring Your Own Key',
-              'Zero infrastructure — all state lives locally in .klyd/',
-            ]}
-            cta="Read the Docs"
-            ctaHref="/klyd"
-          />
+          <FlowingCard
+            marqueeText="Read the Docs"
+            className="rounded-2xl"
+          >
+            <ProductCard
+              label="Memory"
+              icon={BrainCircuit}
+              title="Klyd"
+              description="An open-source decision memory harness that stops terminal coding agents from silently ruining your codebase architecture. Prevent slop fortresses before they form."
+              details={[
+                'Maximum 2 LLM calls per commit',
+                'BYOK — Bring Your Own Key',
+                'Zero infrastructure — all state lives locally in .klyd/',
+              ]}
+              cta="Read the Docs"
+              ctaHref="/klyd"
+            />
+          </FlowingCard>
         </div>
       </section>
 
