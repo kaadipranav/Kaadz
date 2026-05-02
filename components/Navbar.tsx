@@ -7,26 +7,26 @@ export default function Navbar() {
   const pathname = usePathname();
 
   return (
-    <nav className="fixed top-0 left-0 right-0 z-50 border-b border-[rgba(201,169,110,0.08)] bg-[rgba(5,5,5,0.8)] backdrop-blur-xl">
-      <div className="mx-auto flex max-w-6xl items-center justify-between px-6 py-4">
+    <nav className="fixed top-0 left-0 right-0 z-50 border-b border-[rgba(255,255,255,0.06)] bg-[rgba(0,0,0,0.8)] backdrop-blur-xl">
+      <div className="mx-auto flex max-w-7xl items-center justify-between px-6 py-5">
         <Link
           href="/"
-          className="font-mono text-sm font-medium tracking-tight text-[var(--foreground)] transition-colors hover:text-[var(--gold)]"
+          className="text-mono text-[var(--foreground)] transition-opacity hover:opacity-60"
         >
-          kaadz<span className="text-[var(--gold)]">.</span>me
+          KAADZ<span className="text-[var(--text-muted)]">.ME</span>
         </Link>
-        <div className="flex items-center gap-6">
+        <div className="flex items-center gap-8">
           <Link
             href="/"
-            className={`text-sm transition-colors ${pathname === '/' ? 'text-[var(--gold)]' : 'text-[var(--text-secondary)] hover:text-[var(--foreground)]'}`}
+            className={`text-mono transition-colors ${pathname === '/' ? 'text-[var(--foreground)]' : 'text-[var(--text-muted)] hover:text-[var(--foreground)]'}`}
           >
-            Home
+            HOME
           </Link>
           <Link
             href="/klyd"
-            className={`text-sm transition-colors ${pathname === '/klyd' ? 'text-[var(--gold)]' : 'text-[var(--text-secondary)] hover:text-[var(--foreground)]'}`}
+            className={`text-mono transition-colors ${pathname === '/klyd' ? 'text-[var(--foreground)]' : 'text-[var(--text-muted)] hover:text-[var(--foreground)]'}`}
           >
-            Klyd
+            KLYD
           </Link>
         </div>
       </div>
