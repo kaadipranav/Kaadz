@@ -102,11 +102,11 @@ export default function Home() {
   return (
     <main className="relative min-h-screen">
       {/* Hero */}
-      <section className="relative flex flex-col items-center justify-center px-6 pb-24 pt-40 text-center md:pt-48">
-        <div className="mx-auto max-w-4xl">
+      <section className="relative flex flex-col items-center justify-center px-6 pb-24 pt-36 text-center md:pt-44">
+        <div className="mx-auto max-w-6xl">
           <SectionLabel>Infrastructure</SectionLabel>
-          <h1 className="text-headline mb-6 text-[var(--foreground)]">
-            Reliability and Memory Infrastructure for AI Agents
+          <h1 className="text-display mb-8 text-[var(--foreground)]">
+            Reliability and<br />Memory Infrastructure<br />for AI Agents
           </h1>
           <p className="text-body-lg mx-auto max-w-2xl">
             Catch silent agent failures before they cascade. Prevent architectural drift
@@ -123,7 +123,7 @@ export default function Home() {
       <section className="mx-auto max-w-6xl px-6 py-24">
         <div className="mb-16">
           <SectionLabel>Products</SectionLabel>
-          <h2 className="text-3xl font-light tracking-tight text-[var(--foreground)] md:text-4xl">
+          <h2 className="text-headline text-[var(--foreground)]">
             Tools for the agentic era
           </h2>
         </div>
@@ -177,8 +177,8 @@ export default function Home() {
         <div className="grid gap-16 md:grid-cols-2">
           <div>
             <SectionLabel>Philosophy</SectionLabel>
-            <h2 className="mb-6 text-3xl font-light tracking-tight text-[var(--foreground)] md:text-4xl">
-              Agents fail silently. We make them loud.
+            <h2 className="text-headline mb-6 text-[var(--foreground)]">
+              Agents fail silently.<br />We make them loud.
             </h2>
             <p className="text-body-lg">
               As coding agents become autonomous, the risk is not that they break things
