@@ -56,7 +56,7 @@ export default function KlydPage() {
   return (
     <main className="relative min-h-screen">
       {/* Back link */}
-      <div className="mx-auto max-w-4xl px-6 pt-28">
+      <div className="mx-auto max-w-6xl px-6 pt-28">
         <Link
           href="/"
           className="text-mono inline-flex items-center text-[var(--text-muted)] transition-colors hover:text-[var(--foreground)]"
@@ -67,7 +67,7 @@ export default function KlydPage() {
       </div>
 
       {/* Hero */}
-      <section className="mx-auto max-w-4xl px-6 pb-20 pt-10">
+      <section className="mx-auto max-w-6xl px-6 pb-20 pt-10">
         <Eyebrow>Documentation // Klyd</Eyebrow>
         <h1 className="text-headline mb-8 text-[var(--foreground)]">
           The harness that stops terminal coding agents from silently drifting your architecture.
@@ -79,10 +79,10 @@ export default function KlydPage() {
         </p>
       </section>
 
-      <div className="section-divider mx-auto max-w-4xl" />
+      <div className="section-divider mx-auto max-w-6xl" />
 
       {/* Problem / Solution */}
-      <section className="mx-auto max-w-4xl px-6 py-20">
+      <section className="mx-auto max-w-6xl px-6 py-20">
         <div className="mb-16">
           <Eyebrow>The Problem</Eyebrow>
           <h2 className="text-subhead mb-6 text-[var(--foreground)]">
@@ -111,10 +111,10 @@ export default function KlydPage() {
         </div>
       </section>
 
-      <div className="section-divider mx-auto max-w-4xl" />
+      <div className="section-divider mx-auto max-w-6xl" />
 
       {/* Installation */}
-      <section className="mx-auto max-w-4xl px-6 py-20">
+      <section className="mx-auto max-w-6xl px-6 py-20">
         <div className="mb-20 flex items-end justify-between">
           <Eyebrow>Installation & Setup</Eyebrow>
           <span className="text-mono text-[var(--text-muted)]">01</span>
@@ -162,10 +162,10 @@ export default function KlydPage() {
         </div>
       </section>
 
-      <div className="section-divider mx-auto max-w-4xl" />
+      <div className="section-divider mx-auto max-w-6xl" />
 
       {/* Command Reference */}
-      <section className="mx-auto max-w-4xl px-6 py-20">
+      <section className="mx-auto max-w-6xl px-6 py-20">
         <div className="mb-20 flex items-end justify-between">
           <Eyebrow>Command Reference</Eyebrow>
           <span className="text-mono text-[var(--text-muted)]">02</span>
@@ -187,17 +187,17 @@ export default function KlydPage() {
         </div>
       </section>
 
-      <div className="section-divider mx-auto max-w-4xl" />
+      <div className="section-divider mx-auto max-w-6xl" />
 
       {/* How it Works */}
-      <section className="mx-auto max-w-4xl px-6 py-20 pb-32">
+      <section className="mx-auto max-w-6xl px-6 py-20 pb-32">
         <div className="mb-20 flex items-end justify-between">
           <Eyebrow>Under the Hood</Eyebrow>
           <span className="text-mono text-[var(--text-muted)]">03</span>
         </div>
 
         <h2 className="text-headline mb-20 text-[var(--foreground)]">
-          Two hooks.<br />One harness.
+          Two hooks. One harness.
         </h2>
 
         <div className="grid gap-px bg-[rgba(255,255,255,0.06)] md:grid-cols-3">

@@ -74,12 +74,10 @@ export default function Home() {
 
       {/* Hero — Asymmetric editorial layout */}
       <section className="relative mx-auto flex max-w-7xl flex-col gap-16 px-6 pb-32 pt-32 md:flex-row md:items-end md:justify-between md:pt-44">
-        <div className="max-w-4xl">
+        <div className="flex-1">
           <Eyebrow>AI Infrastructure // Founded by Kaadz</Eyebrow>
           <h1 className="text-display text-[var(--foreground)]">
-            Reliability &amp;<br />
-            Memory<br />
-            for Agents.
+            Reliability &amp; Memory for Agents.
           </h1>
         </div>
 
@@ -104,8 +102,8 @@ export default function Home() {
           <span className="text-mono text-[var(--text-muted)]">02</span>
         </div>
 
-        <h2 className="text-headline mb-20 max-w-4xl text-[var(--foreground)]">
-          Tools for the<br />agentic era.
+        <h2 className="text-headline mb-20 text-[var(--foreground)]">
+          Tools for the agentic era.
         </h2>
 
         <div className="grid gap-6 md:grid-cols-2">
@@ -152,7 +150,7 @@ export default function Home() {
         <div className="grid gap-16 lg:grid-cols-12">
           <div className="lg:col-span-7">
             <h2 className="text-headline mb-12 text-[var(--foreground)]">
-              Agents fail<br />silently.<br />We make them<br />loud.
+              Agents fail silently. We make them loud.
             </h2>
           </div>
           <div className="flex flex-col justify-end lg:col-span-5">
