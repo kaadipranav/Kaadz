@@ -5,6 +5,8 @@ import {
   GitCommit,
   Database,
   ArrowLeft,
+  Settings,
+  FileCode,
 } from 'lucide-react';
 
 export const metadata: Metadata = {
@@ -74,7 +76,7 @@ export default function KlydPage() {
         </h1>
         <p className="text-body-lg max-w-2xl">
           Klyd is an open-source decision memory harness for terminal coding agents like
-          Aider and Claude Code. It extracts architectural decisions at commit time and
+          Aider, OpenCode, and Claude Code. It extracts architectural decisions at commit time and
           reinjects them into the agent&apos;s context when files are written.
         </p>
       </section>
@@ -122,12 +124,22 @@ export default function KlydPage() {
 
         <div className="grid gap-16 lg:grid-cols-12">
           <div className="lg:col-span-5">
-            <h3 className="text-subhead mb-6 text-[var(--foreground)]">Requirements</h3>
+            <h3 className="text-subhead mb-6 text-[var(--foreground)]">Installation</h3>
+            <p className="text-body-lg mb-4">
+              Install from PyPI:
+            </p>
+            <CodeBlock>pip install klyd</CodeBlock>
+            <p className="text-body-lg mb-8">
+              Verify installation:
+            </p>
+            <CodeBlock>kl --help</CodeBlock>
+
+            <h3 className="text-subhead mb-6 mt-16 text-[var(--foreground)]">Requirements</h3>
             <ul className="flex flex-col gap-3">
               {[
                 'Python 3.11+',
                 'Click',
-                'Anthropic SDK',
+                'Anthropic',
                 'Git repository',
               ].map((req) => (
                 <li key={req} className="text-mono text-[var(--text-secondary)]">
@@ -150,14 +162,59 @@ export default function KlydPage() {
           </div>
 
           <div className="lg:col-span-7">
-            <h3 className="text-subhead mb-6 text-[var(--foreground)]">Setup</h3>
+            <h3 className="text-subhead mb-6 text-[var(--foreground)]">Quickstart</h3>
             <p className="text-body-lg mb-4">
-              Run the initialization command inside your Git repository:
+              Initialize in your project repository:
             </p>
             <CodeBlock>kl init</CodeBlock>
+            <p className="text-body-lg mb-4">
+              Configure your API key:
+            </p>
+            <CodeBlock>kl config --api-key sk-ant-...</CodeBlock>
+            <p className="text-body-lg mb-4">
+              Make commits with architectural decisions, then check status:
+            </p>
+            <CodeBlock>kl status</CodeBlock>
+            <p className="text-body-lg mb-4">
+              Run your agent with injected memory:
+            </p>
+            <CodeBlock>kl run aider</CodeBlock>
             <p className="text-body-lg">
               This creates a local <code className="text-[var(--foreground)]">.klyd/memory.db</code> SQLite database and installs <code className="text-[var(--foreground)]">post-commit</code> and <code className="text-[var(--foreground)]">pre-commit</code> Git hooks.
             </p>
+          </div>
+        </div>
+      </section>
+
+      <div className="section-divider mx-auto max-w-6xl" />
+
+      {/* Configuration */}
+      <section className="mx-auto max-w-6xl px-6 py-20">
+        <div className="mb-20 flex items-end justify-between">
+          <Eyebrow>Configuration</Eyebrow>
+          <span className="text-mono text-[var(--text-muted)]">02</span>
+        </div>
+
+        <h2 className="text-subhead mb-12 text-[var(--foreground)]">
+          BYOK — Bring Your Own Key
+        </h2>
+
+        <div className="grid gap-px bg-[rgba(255,255,255,0.06)] md:grid-cols-2">
+          <div className="bg-[var(--background)] p-8 md:p-12">
+            <h3 className="text-subhead mb-4 text-[var(--foreground)]">Anthropic (Default)</h3>
+            <CodeBlock>kl config --api-key sk-ant-... --model claude-sonnet-4-6</CodeBlock>
+          </div>
+          <div className="bg-[var(--background)] p-8 md:p-12">
+            <h3 className="text-subhead mb-4 text-[var(--foreground)]">OpenAI</h3>
+            <CodeBlock>kl config --openai-key sk-proj-... --model gpt-4o</CodeBlock>
+          </div>
+          <div className="bg-[var(--background)] p-8 md:p-12">
+            <h3 className="text-subhead mb-4 text-[var(--foreground)]">OpenRouter</h3>
+            <CodeBlock>kl config --openrouter-key sk-or-... --model openrouter/free</CodeBlock>
+          </div>
+          <div className="bg-[var(--background)] p-8 md:p-12">
+            <h3 className="text-subhead mb-4 text-[var(--foreground)]">View Config</h3>
+            <CodeBlock>kl config --show</CodeBlock>
           </div>
         </div>
       </section>
@@ -168,7 +225,7 @@ export default function KlydPage() {
       <section className="mx-auto max-w-6xl px-6 py-20">
         <div className="mb-20 flex items-end justify-between">
           <Eyebrow>Command Reference</Eyebrow>
-          <span className="text-mono text-[var(--text-muted)]">02</span>
+          <span className="text-mono text-[var(--text-muted)]">03</span>
         </div>
 
         <div className="grid gap-px bg-[rgba(255,255,255,0.06)] md:grid-cols-3">
@@ -184,6 +241,18 @@ export default function KlydPage() {
             command="kl review"
             description="Interactive command to accept, reject, edit, or skip flagged conflicts. Manual override for incorrect LLM extractions."
           />
+          <CommandItem
+            command="kl config"
+            description="Configure API keys and model settings. Supports Anthropic, OpenAI, OpenRouter, Gemini, and Groq providers."
+          />
+          <CommandItem
+            command="kl extract-commit"
+            description="Manually trigger decision extraction for the last commit. Usually called automatically by the post-commit hook."
+          />
+          <CommandItem
+            command="kl prepare-injection"
+            description="Generate the injection file for agent sessions. Usually called automatically by the pre-commit hook. Outputs to .klyd/injection.txt."
+          />
         </div>
       </section>
 
@@ -193,7 +262,7 @@ export default function KlydPage() {
       <section className="mx-auto max-w-6xl px-6 py-20 pb-32">
         <div className="mb-20 flex items-end justify-between">
           <Eyebrow>Under the Hood</Eyebrow>
-          <span className="text-mono text-[var(--text-muted)]">03</span>
+          <span className="text-mono text-[var(--text-muted)]">04</span>
         </div>
 
         <h2 className="text-headline mb-20 text-[var(--foreground)]">
@@ -204,7 +273,7 @@ export default function KlydPage() {
           {[
             {
               label: 'post-commit',
-              desc: 'After every commit, the hook sends the diff to an LLM and extracts architectural decisions. Scored for confidence and stored in .klyd/memory.db. Conflicts are flagged for review.',
+              desc: 'After every commit, the hook sends the diff to an LLM and extracts architectural decisions. Stored in .klyd/memory.db with confidence scores. Conflicts are flagged for review.',
             },
             {
               label: 'pre-commit',
@@ -223,6 +292,42 @@ export default function KlydPage() {
               <p className="text-body-lg">{item.desc}</p>
             </div>
           ))}
+        </div>
+
+        <div className="mt-20">
+          <h3 className="text-subhead mb-8 text-[var(--foreground)]">Extraction Flow</h3>
+          <ol className="flex flex-col gap-4">
+            {[
+              'Get diff: git diff HEAD~1 HEAD',
+              'Get commit message: git log -1 --format=%B',
+              'Get touched files',
+              'Query existing decisions for those files',
+              'Call LLM with prompt',
+              'Store results: NEW, REINFORCE, or CONTRADICT',
+            ].map((step, i) => (
+              <li key={i} className="text-body-lg flex items-start gap-4">
+                <span className="text-mono text-[var(--text-muted)] shrink-0">{String(i + 1).padStart(2, '0')}</span>
+                <span>{step}</span>
+              </li>
+            ))}
+          </ol>
+        </div>
+
+        <div className="mt-20">
+          <h3 className="text-subhead mb-8 text-[var(--foreground)]">Injection Flow</h3>
+          <ol className="flex flex-col gap-4">
+            {[
+              'Get staged files: git diff --cached --name-only',
+              'Query top-k decisions for those files (excludes flagged, archived)',
+              'Format as injection message',
+              'Write to .klyd/injection.txt',
+            ].map((step, i) => (
+              <li key={i} className="text-body-lg flex items-start gap-4">
+                <span className="text-mono text-[var(--text-muted)] shrink-0">{String(i + 1).padStart(2, '0')}</span>
+                <span>{step}</span>
+              </li>
+            ))}
+          </ol>
         </div>
       </section>
     </main>

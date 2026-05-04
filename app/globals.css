@@ -281,29 +281,29 @@ body::after {
   .text-display {
     font-size: clamp(4rem, 10vw, 10rem);
     font-weight: 100;
-    line-height: 0.85;
-    letter-spacing: -0.05em;
+    line-height: 0.95;
+    letter-spacing: -0.02em;
   }
 
   .text-headline {
     font-size: clamp(2.5rem, 6vw, 7rem);
     font-weight: 200;
-    line-height: 0.9;
-    letter-spacing: -0.04em;
+    line-height: 1;
+    letter-spacing: -0.01em;
   }
 
   .text-subhead {
     font-size: clamp(1.5rem, 3vw, 3rem);
     font-weight: 300;
-    line-height: 1.1;
-    letter-spacing: -0.02em;
+    line-height: 1.2;
+    letter-spacing: 0;
   }
 
   .text-body-lg {
     font-size: clamp(0.9rem, 1.1vw, 1.1rem);
     font-weight: 400;
-    line-height: 1.6;
-    letter-spacing: 0.01em;
+    line-height: 1.7;
+    letter-spacing: 0.02em;
     color: var(--text-secondary);
     text-transform: uppercase;
   }
