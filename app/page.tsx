@@ -76,7 +76,7 @@ export default function Home() {
       <section className="relative mx-auto flex max-w-7xl flex-col gap-16 px-6 pb-32 pt-32 md:flex-row md:items-end md:justify-between md:pt-44">
         <div className="flex-1">
           <Eyebrow>AI Infrastructure // Founded by Kaadz</Eyebrow>
-          <h1 className="text-display text-[var(--foreground)]">
+          <h1 className="hero-display text-[var(--foreground)]">
             Reliability &amp; Memory for Agents.
           </h1>
         </div>

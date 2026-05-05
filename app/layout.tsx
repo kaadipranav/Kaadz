@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import "./globals.css";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
-import SplashCursor from "@/components/SplashCursor";
+import MouseSpotlight from "@/components/MouseSpotlight";
 
 export const metadata: Metadata = {
   title: "kaadz — Reliability & Memory Infrastructure for AI Agents",
@@ -36,7 +36,7 @@ export default function RootLayout({
         />
       </head>
       <body className="antialiased">
-        <SplashCursor RAINBOW_MODE={false} COLOR="#c9a96e" />
+        <MouseSpotlight />
         <div className="relative z-10">
           <Navbar />
           {children}
