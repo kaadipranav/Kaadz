@@ -23,6 +23,12 @@ export default function Navbar() {
             HOME
           </Link>
           <Link
+            href="/watchllm"
+            className={`text-mono transition-colors ${pathname === '/watchllm' ? 'text-[var(--foreground)]' : 'text-[var(--text-muted)] hover:text-[var(--foreground)]'}`}
+          >
+            WATCHLLM
+          </Link>
+          <Link
             href="/klyd"
             className={`text-mono transition-colors ${pathname === '/klyd' ? 'text-[var(--foreground)]' : 'text-[var(--text-muted)] hover:text-[var(--foreground)]'}`}
           >

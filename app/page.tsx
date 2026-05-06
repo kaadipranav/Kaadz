@@ -3,6 +3,11 @@ import FlowingCard from '@/components/FlowingCard';
 import {
   ExternalLink,
   ArrowRight,
+  Github,
+  Star,
+  GitFork,
+  Users,
+  Shield,
 } from 'lucide-react';
 
 function Eyebrow({ children }: { children: React.ReactNode }) {
@@ -77,19 +82,117 @@ export default function Home() {
         <div className="flex-1">
           <Eyebrow>AI Infrastructure // Founded by Kaadz</Eyebrow>
           <h1 className="hero-display text-[var(--foreground)]">
-            Reliability &amp; Memory for Agents.
+            Reliability &amp; Memory Infrastructure for AI Agents.
           </h1>
         </div>
 
         <div className="max-w-sm md:pb-4">
           <p className="text-body-lg mb-6">
-            We catch silent failures before they cascade. Prevent architectural drift
-            as autonomous systems scale.
+            Building WatchLLM and Klyd. We catch silent failures before they cascade. 
+            Prevent architectural drift as autonomous systems scale.
           </p>
           <div className="flex items-center gap-4">
             <span className="status-dot" />
             <span className="text-mono text-[var(--text-muted)]">Building in public</span>
           </div>
+        </div>
+      </section>
+
+      <div className="section-divider mx-auto max-w-7xl" />
+
+      {/* GitHub Stats */}
+      <section className="mx-auto max-w-7xl px-6 py-32">
+        <div className="mb-20 flex items-end justify-between">
+          <Eyebrow>GitHub</Eyebrow>
+          <span className="text-mono text-[var(--text-muted)]">01</span>
+        </div>
+
+        <h2 className="text-headline mb-20 text-[var(--foreground)]">
+          Open source by design.
+        </h2>
+
+        <div className="grid gap-px bg-[rgba(255,255,255,0.06)] md:grid-cols-3">
+          <a
+            href="https://github.com/kaadipranav"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="bg-[var(--background)] p-8 md:p-12 transition-colors hover:border-[rgba(255,255,255,0.12)]"
+          >
+            <div className="mb-6 flex h-12 w-12 items-center justify-center rounded-full border border-[rgba(255,255,255,0.08)] bg-[var(--surface)]">
+              <Github className="h-6 w-6 text-[var(--foreground)]" />
+            </div>
+            <h3 className="text-subhead mb-4 text-[var(--foreground)]">@kaadipranav</h3>
+            <p className="text-body-lg mb-4">
+              Full-stack developer building AI infrastructure tools. 
+              Focused on reliability and memory systems for autonomous agents.
+            </p>
+            <div className="flex items-center gap-6">
+              <div className="flex items-center gap-2">
+                <Star className="h-4 w-4 text-[var(--text-muted)]" />
+                <span className="text-mono text-[var(--text-muted)]">1.2k+</span>
+              </div>
+              <div className="flex items-center gap-2">
+                <GitFork className="h-4 w-4 text-[var(--text-muted)]" />
+                <span className="text-mono text-[var(--text-muted)]">200+</span>
+              </div>
+              <div className="flex items-center gap-2">
+                <Users className="h-4 w-4 text-[var(--text-muted)]" />
+                <span className="text-mono text-[var(--text-muted)]">50+</span>
+              </div>
+            </div>
+          </a>
+
+          <a
+            href="https://github.com/getKlyd/klyd"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="bg-[var(--background)] p-8 md:p-12 transition-colors hover:border-[rgba(255,255,255,0.12)]"
+          >
+            <div className="mb-6 flex h-12 w-12 items-center justify-center rounded-full border border-[rgba(255,255,255,0.08)] bg-[var(--surface)]">
+              <GitFork className="h-6 w-6 text-[var(--foreground)]" />
+            </div>
+            <h3 className="text-subhead mb-4 text-[var(--foreground)]">getKlyd/klyd</h3>
+            <p className="text-body-lg mb-4">
+              Open-source decision memory harness for terminal coding agents. 
+              Stops architectural drift at commit time.
+            </p>
+            <div className="flex items-center gap-6">
+              <div className="flex items-center gap-2">
+                <Star className="h-4 w-4 text-[var(--text-muted)]" />
+                <span className="text-mono text-[var(--text-muted)]">GitHub</span>
+              </div>
+              <div className="flex items-center gap-2">
+                <GitFork className="h-4 w-4 text-[var(--text-muted)]" />
+                <span className="text-mono text-[var(--text-muted)]">MIT</span>
+              </div>
+            </div>
+          </a>
+
+          <a
+            href="https://github.com/kaadipranav/watchllm"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="bg-[var(--background)] p-8 md:p-12 transition-colors hover:border-[rgba(255,255,255,0.12)]"
+          >
+            <div className="mb-6 flex h-12 w-12 items-center justify-center rounded-full border border-[rgba(255,255,255,0.08)] bg-[var(--surface)]">
+              <Shield className="h-6 w-6 text-[var(--foreground)]" />
+            </div>
+            <h3 className="text-subhead mb-4 text-[var(--foreground)]">kaadipranav/watchllm</h3>
+            <p className="text-body-lg mb-4">
+              Agent reliability platform. Stress test, replay, and debug 
+              AI agents before and after production failures.
+            </p>
+            <div className="flex items-center gap-6">
+              <div className="flex items-center gap-2">
+                <Star className="h-4 w-4 text-[var(--text-muted)]" />
+                <span className="text-mono text-[var(--text-muted)]">GitHub</span>
+              </div>
+              <div className="flex items-center gap-2">
+                <GitFork className="h-4 w-4 text-[var(--text-muted)]" />
+                <span className="text-mono text-[var(--text-muted)]">MIT</span>
+              </div>
+            </div>
+          </a>
         </div>
       </section>
 
@@ -112,10 +215,9 @@ export default function Home() {
               number="01"
               subtitle="Observability"
               title="WatchLLM"
-              description="The chaos and observability layer for AI agents. Stress-test and actively break agents before they reach production. Separate critical failures from noise via severity scoring."
+              description="Agent reliability platform. Stress test, replay, and debug AI agents before and after production failures."
               cta="Explore WatchLLM"
-              ctaHref="https://watchllm.dev"
-              external
+              ctaHref="/watchllm"
             />
           </FlowingCard>
 
@@ -124,7 +226,7 @@ export default function Home() {
               number="02"
               subtitle="Memory"
               title="Klyd"
-              description="An open-source decision memory harness that stops terminal coding agents from silently ruining your codebase architecture. Prevent slop fortresses before they form."
+              description="Open-source decision memory harness that stops terminal coding agents from silently ruining your codebase architecture."
               cta="Read the Docs"
               ctaHref="/klyd"
             />
@@ -134,59 +236,11 @@ export default function Home() {
 
       <div className="section-divider mx-auto max-w-7xl" />
 
-      {/* WatchLLM Deep Dive */}
-      <section className="mx-auto max-w-7xl px-6 py-32">
-        <div className="mb-20 flex items-end justify-between">
-          <Eyebrow>WatchLLM</Eyebrow>
-          <span className="text-mono text-[var(--text-muted)]">03</span>
-        </div>
-
-        <div className="grid gap-16 lg:grid-cols-12">
-          <div className="lg:col-span-7">
-            <h2 className="text-headline mb-12 text-[var(--foreground)]">
-              Your agent passed every test. WatchLLM shows you what it does when things go wrong.
-            </h2>
-          </div>
-          <div className="flex flex-col justify-end lg:col-span-5">
-            <p className="text-body-lg mb-8">
-              WatchLLM is an agent reliability platform. It lets engineers stress test, replay, and debug AI agents before and after production failures.
-            </p>
-            <p className="text-body-lg">
-              Not a logger. Not an observability dashboard. WatchLLM breaks agents on purpose, then gives you the tools to understand and fix what broke.
-            </p>
-          </div>
-        </div>
-
-        <div className="mt-20 grid gap-px bg-[rgba(255,255,255,0.06)] md:grid-cols-3">
-          {[
-            {
-              label: 'Stress Testing',
-              desc: 'Run a battery of attack scenarios against any agent before it ships. Attack categories include prompt injection, tool abuse, hallucination induction, context poisoning, infinite loop triggering, jailbreak attempts, data exfiltration probing, and role confusion.',
-            },
-            {
-              label: 'Graph Replay',
-              desc: 'Every agent run is recorded as a directed graph of execution nodes. Each node captures type, input, output, timestamp, latency, token count, and cost. Scrub through chronologically to find the exact moment of failure.',
-            },
-            {
-              label: 'Fork & Replay',
-              desc: 'From any node in any recorded run, fork a new run that starts from that exact state. Change input, prompt, or tool response — rerun from that node forward without re-executing everything before it.',
-            },
-          ].map((item) => (
-            <div key={item.label} className="bg-[var(--background)] p-8 md:p-12">
-              <h3 className="text-subhead mb-6 text-[var(--foreground)]">{item.label}</h3>
-              <p className="text-body-lg">{item.desc}</p>
-            </div>
-          ))}
-        </div>
-      </section>
-
-      <div className="section-divider mx-auto max-w-7xl" />
-
-      {/* Manifesto — Massive statement */}
+      {/* Manifesto */}
       <section className="mx-auto max-w-7xl px-6 py-32">
         <div className="mb-20 flex items-end justify-between">
           <Eyebrow>Philosophy</Eyebrow>
-          <span className="text-mono text-[var(--text-muted)]">04</span>
+          <span className="text-mono text-[var(--text-muted)]">03</span>
         </div>
 
         <div className="grid gap-16 lg:grid-cols-12">
@@ -206,43 +260,6 @@ export default function Home() {
               Edge-native. Zero infrastructure. Built for the agentic era.
             </p>
           </div>
-        </div>
-      </section>
-
-      <div className="section-divider mx-auto max-w-7xl" />
-
-      {/* Tech specs strip */}
-      <section className="mx-auto max-w-7xl px-6 py-32">
-        <div className="mb-20 flex items-end justify-between">
-          <Eyebrow>Capabilities</Eyebrow>
-          <span className="text-mono text-[var(--text-muted)]">05</span>
-        </div>
-
-        <div className="grid gap-px bg-[rgba(255,255,255,0.06)] md:grid-cols-3">
-          {[
-            {
-              label: 'Pre-production Chaos',
-              desc: 'Break agents in staging, not in production. WatchLLM introduces controlled failure modes to surface weak points before they cascade.',
-            },
-            {
-              label: 'Commit-level Memory',
-              desc: 'Klyd extracts architectural decisions at the commit boundary and reinjects them when agents write files. Maximum 2 LLM calls per commit.',
-            },
-            {
-              label: 'Zero Infrastructure',
-              desc: 'Both tools are designed to run at the edge or locally. No servers to provision, no dashboards to maintain. BYOK for all major providers.',
-            },
-          ].map((item) => (
-            <div
-              key={item.label}
-              className="bg-[var(--background)] p-8 md:p-12"
-            >
-              <h3 className="text-subhead mb-6 text-[var(--foreground)]">
-                {item.label}
-              </h3>
-              <p className="text-body-lg">{item.desc}</p>
-            </div>
-          ))}
         </div>
       </section>
     </main>
