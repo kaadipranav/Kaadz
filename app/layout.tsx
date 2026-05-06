@@ -3,6 +3,7 @@ import "./globals.css";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import SplashCursor from "@/components/SplashCursor";
+import CustomCursor from "@/components/CustomCursor";
 
 export const metadata: Metadata = {
   title: "kaadz — Reliability & Memory Infrastructure for AI Agents",
@@ -36,7 +37,8 @@ export default function RootLayout({
         />
       </head>
       <body className="antialiased">
-        <SplashCursor RAINBOW_MODE={false} COLOR="#c9a96e" />
+        <CustomCursor />
+        <SplashCursor RAINBOW_MODE={false} COLOR="#00d4ff" />
         <div className="relative z-10">
           <Navbar />
           {children}

@@ -33,6 +33,12 @@ html {
   cursor: default;
 }
 
+@media (min-width: 768px) {
+  html {
+    cursor: none;
+  }
+}
+
 body {
   color: var(--foreground);
   background: var(--background);
